@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile {
+  version     2.0;
+  format      ascii;
+  class       dictionary;
+  object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes {
+  default Euler;
+}
+
+gradSchemes {
+  default            none;
+  grad(U)            cellMDLimited Gauss linear 0.333;
+  grad(cellMotionU)  cellMDLimited Gauss linear 0;
+  grad(p_rgh)        cellMDLimited Gauss linear 0;
+  grad(rho)          cellMDLimited Gauss linear 0;
+  grad(h)            cellMDLimited Gauss linear 0;
+  grad(N2)           cellMDLimited Gauss linear 0;
+  grad(O2)           cellMDLimited Gauss linear 0;
+  grad(CO)           cellMDLimited Gauss linear 0;
+  grad(CO2)          cellMDLimited Gauss linear 0;
+}
+
+divSchemes {
+  default         none;
+  div(phi,U)      Gauss linearUpwind grad(U);
+  div(phi,K)      Gauss linear;
+  //div(phi,h)      Gauss linearUpwind default;
+  div(phi,h)      Gauss linearUpwind grad(h);
+  div(phi,Yi)     Gauss limitedLinear 1;
+  // div(phi,k)      Gauss upwind;
+  // div(phi,epsilon) Gauss upwind;
+  // div(phi,R)      Gauss upwind;
+  // div(R)          Gauss linear;
+  // div((muEff*dev2(T(grad(U))))) Gauss linear;
+  div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes {
+  default         none;
+  //default        Gauss linear limited 1.0;
+  laplacian(diffusivity,cellMotionU)   Gauss linear corrected;
+  laplacian((rho*nuEff),U)             Gauss linear corrected;
+  laplacian(((rho*nut)+thermo:mu),N2)  Gauss linear corrected;
+  laplacian(((rho*nut)+thermo:mu),O2)  Gauss linear corrected;
+  laplacian(((rho*nut)+thermo:mu),CO)  Gauss linear corrected;
+  laplacian(((rho*nut)+thermo:mu),CO2) Gauss linear corrected;
+  laplacian(alphahe,h)                 Gauss linear corrected;
+  laplacian(rhorAUf,p_rgh)             Gauss linear corrected;
+}
+
+interpolationSchemes {
+  //default         linear;
+  default         none;
+  interpolate(rho)        linear;
+  interpolate((rho*rAU))  linear;
+  dotInterpolate(S,(rho_0*U_0))  linear;
+  flux((rho*HbyA)) linear;
+}
+
+snGradSchemes {
+  //default         limited 1.0;
+  default         none;
+  snGrad(p_rgh)   limited 1.0;
+  snGrad(rho)     limited 1.0;
+}
+
+fluxRequired {
+  default         none;
+  p_rgh;
+}
+
+// ************************************************************************* //

@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0/fluid";
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 101325.0;
+
+boundaryField
+{
+    fuel
+    {
+        type            fixedFluxExtrapolatedPressure;
+    }
+
+    shield
+    {
+        type            fixedFluxExtrapolatedPressure;
+    }
+
+    outlet
+    {
+        type            fixedValue;
+        value           uniform 101325.0;
+    }
+
+    burner
+    {
+        type            fixedFluxExtrapolatedPressure;
+    }
+
+    f_front
+    {
+        type            wedge;
+    }
+
+    f_back
+    {
+        type            wedge;
+    }
+
+    flow_to_porousMat
+    {
+        type            fixedFluxExtrapolatedPressure;
+    }
+}
+
+
+// ************************************************************************* //
