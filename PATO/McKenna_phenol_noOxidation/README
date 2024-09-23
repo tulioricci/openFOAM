@@ -1,0 +1,4 @@
+gmshToFoam mesh.msh
+splitMeshRegions -cellZones -overwrite
+-> update constant/boundary with "wedge" if necessary
+-> sh setFields.sh if necessary
