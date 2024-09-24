@@ -1,4 +1,9 @@
 gmshToFoam mesh.msh
+-> update constant/boundary with "wedge" in the respective places
+    - a_front, a_back
+    - f_front, f_back
+    - g_front, g_back
+    - s_front, s_back
 splitMeshRegions -cellZones -overwrite
--> update constant/boundary with "wedge" if necessary
--> sh setFields.sh if necessary
+sh setFields.sh
+PATOx
