@@ -1,9 +1,16 @@
+
+1) create the mesh with:
 gmshToFoam mesh.msh
--> update constant/boundary with "wedge" in the respective places
-    - a_front, a_back
-    - f_front, f_back
-    - g_front, g_back
-    - s_front, s_back
-splitMeshRegions -cellZones -overwrite
+
+2) make the case axi-symmetric with
+update constant/polyMesh/boundary with "wedge" instead of "patch" for
+    a_front, a_back
+    f_front, f_back
+    g_front, g_back
+    s_front, s_back
+
+3) run this script
 sh setFields.sh
+
+4) then run with
 PATOx

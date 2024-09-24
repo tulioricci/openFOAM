@@ -71,7 +71,7 @@ IO {
 /****************************** MASS, ENERGY, PYROLYSIS *******************/
 MaterialProperties {
   MaterialPropertiesType Porous; // porous material properties
-  MaterialPropertiesDirectory "$PATO_DIR/data/Materials/Composites/TACOT"; // material properties file
+  MaterialPropertiesDirectory "./myTACOT"; // material properties file
   detailedSolidEnthalpies yes;
 }
 
@@ -91,7 +91,7 @@ Energy {
 /****************************** GAS PROPERTIES  ************************************/
 GasProperties {
   GasPropertiesType Tabulated; // tabulated gas properties
-  GasPropertiesFile "$PATO_DIR/data/Materials/Composites/TACOT/gasProperties"; // tabulated gas properties file
+  GasPropertiesFile "./myTACOT/gasProperties"; // tabulated gas properties file
 }
 /****************************** END GAS PROPERTIES **************************/
 
