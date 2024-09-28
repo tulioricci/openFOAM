@@ -91,7 +91,7 @@ Energy {
 /****************************** GAS PROPERTIES  ************************************/
 GasProperties {
   GasPropertiesType Tabulated; // tabulated gas properties
-  GasPropertiesFile "./myTACOT/gasProperties"; // tabulated gas properties file
+  GasPropertiesFile "./TACOT_data/gasProperties"; // tabulated gas properties file
 }
 /****************************** END GAS PROPERTIES **************************/
 
