@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile {
+  version     2.0;
+  format      ascii;
+  class       dictionary;
+  object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes {
+  default           Euler;
+}
+
+gradSchemes {
+  default           none;
+  grad(Y[N2])       cellMDLimited Gauss linear 0;
+  grad(Y[O2])       cellMDLimited Gauss linear 0;
+  grad(Y[CO])       cellMDLimited Gauss linear 0;
+  grad(Y[CO2])      cellMDLimited Gauss linear 0;
+  //grad(cellMotionU) cellMDLimited Gauss linear 0;
+  grad(Ta)          cellMDLimited Gauss linear 0;
+  grad(p)           cellMDLimited Gauss linear 0;
+  grad(Dm[N2])      cellMDLimited Gauss linear 0;
+  grad(Dm[O2])      cellMDLimited Gauss linear 0;
+  grad(Dm[CO])      cellMDLimited Gauss linear 0;
+  grad(Dm[CO2])     cellMDLimited Gauss linear 0;
+  grad(Dm[C(gr)])   cellMDLimited Gauss linear 0;
+  grad(N2)      cellMDLimited Gauss linear 0;
+  grad(O2)      cellMDLimited Gauss linear 0;
+  grad(CO)      cellMDLimited Gauss linear 0;
+  grad(CO2)     cellMDLimited Gauss linear 0;
+  grad(C(gr))   cellMDLimited Gauss linear 0;
+/*  grad(Tg)          cellMDLimited Gauss linear 0;*/
+/*  grad(rho_s)       cellMDLimited Gauss linear 0;*/
+/*  grad(rT)          cellMDLimited Gauss linear 0;*/
+}
+
+divSchemes {
+  default           Gauss linear corrected;
+  div(meshPhi,Xsii) Gauss limitedLinear 1;
+  div(epsphi,Yi)    Gauss limitedLinear 1;
+  div(epsphi,Zi)    Gauss limitedLinear 1;
+}
+
+laplacianSchemes {
+  default none;
+  laplacian(k,Ta)     Gauss linear corrected;
+  laplacian(Gamma,p)  Gauss linear corrected;
+  laplacian(diffusivity,cellMotionU)  Gauss linear corrected;
+  laplacian(((((Dm[N2]|eta0)*eps_g)*rho_g)*hSpeciesField[0](N2)),Y[N2])    Gauss linear corrected;
+  laplacian(((((Dm[O2]|eta0)*eps_g)*rho_g)*hSpeciesField[0](O2)),Y[O2])    Gauss linear corrected;
+  laplacian(((((Dm[CO]|eta0)*eps_g)*rho_g)*hSpeciesField[0](CO)),Y[CO])    Gauss linear corrected;
+  laplacian(((((Dm[CO2]|eta0)*eps_g)*rho_g)*hSpeciesField[0](CO2)),Y[CO2]) Gauss linear corrected;
+  laplacian(((((Dm[N2]|eta0)*eps_g)*rho_g)*hSpeciesField[1](N2)),Y[N2])    Gauss linear corrected;
+  laplacian(((((Dm[O2]|eta0)*eps_g)*rho_g)*hSpeciesField[1](O2)),Y[O2])    Gauss linear corrected;
+  laplacian(((((Dm[CO]|eta0)*eps_g)*rho_g)*hSpeciesField[1](CO)),Y[CO])    Gauss linear corrected;
+  laplacian(((((Dm[CO2]|eta0)*eps_g)*rho_g)*hSpeciesField[1](CO2)),Y[CO2]) Gauss linear corrected;
+  laplacian(((((Dm[N2]|eta0)*eps_g)*rho_g)*hSpeciesField[2](N2)),Y[N2])    Gauss linear corrected;
+  laplacian(((((Dm[O2]|eta0)*eps_g)*rho_g)*hSpeciesField[2](O2)),Y[O2])    Gauss linear corrected;
+  laplacian(((((Dm[CO]|eta0)*eps_g)*rho_g)*hSpeciesField[2](CO)),Y[CO])    Gauss linear corrected;
+  laplacian(((((Dm[CO2]|eta0)*eps_g)*rho_g)*hSpeciesField[2](CO2)),Y[CO2]) Gauss linear corrected;
+  laplacian(((((Dm[N2]|eta0)*eps_g)*rho_g)*hSpeciesField[3](N2)),Y[N2])    Gauss linear corrected;
+  laplacian(((((Dm[O2]|eta0)*eps_g)*rho_g)*hSpeciesField[3](O2)),Y[O2])    Gauss linear corrected;
+  laplacian(((((Dm[CO]|eta0)*eps_g)*rho_g)*hSpeciesField[3](CO)),Y[CO])    Gauss linear corrected;
+  laplacian(((((Dm[CO2]|eta0)*eps_g)*rho_g)*hSpeciesField[3](CO2)),Y[CO2]) Gauss linear corrected;
+  laplacian((((Dm[N2]*eps_g)*rho_g)|eta0),N2)     Gauss linear corrected;
+  laplacian((((Dm[O2]*eps_g)*rho_g)|eta0),O2)     Gauss linear corrected;
+  laplacian((((Dm[CO]*eps_g)*rho_g)|eta0),CO)     Gauss linear corrected;
+  laplacian((((Dm[CO2]*eps_g)*rho_g)|eta0),CO2)   Gauss linear corrected;
+  laplacian(GammaHg,p)       Gauss linear corrected;
+}
+
+interpolationSchemes {
+  default none;
+  interpolate((eps_g*rho_g))     linear;
+  dotInterpolate(((S&interpolate(Gamma))-(((S&interpolate(Gamma))&(S|magSf))*(S|magSf))),grad(p))     linear;
+  interpolate(Eta)     linear;
+  interpolate(K)       linear;
+  interpolate((rho_g|mu_g))  linear;
+  dotInterpolate(((S&interpolate(GammaHg))-(((S&interpolate(GammaHg))&(S|magSf))*(S|magSf))),grad(p))   linear;
+  dotInterpolate(((S&interpolate(k))-(((S&interpolate(k))&(S|magSf))*(S|magSf))),grad(Ta))  linear;
+}
+
+snGradSchemes {
+  default none;
+  snGrad(p)        corrected;
+}
+
+fluxRequired { // used for the ALE correction
+  default         none;
+  Ta;
+  T;
+  p;
+  Xsii;
+  Yi;
+  Zi;
+  rT;
+  eps_s;
+}
+
+// ************************************************************************* //

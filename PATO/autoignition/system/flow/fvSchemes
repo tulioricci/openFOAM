@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile {
+  version     2.0;
+  format      ascii;
+  class       dictionary;
+  object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes {
+  default       backward;
+}
+
+gradSchemes {
+  default            cellMDLimited Gauss linear 0;
+  grad(U)            cellMDLimited Gauss linear 0.333;
+  grad(p_rgh)        cellMDLimited Gauss linear 0;
+  grad(rho)          cellMDLimited Gauss linear 0;
+  //grad(h)            cellMDLimited Gauss linear 0;
+  grad(N2)           cellMDLimited Gauss linear 0;
+}
+
+divSchemes {
+  default         none;
+  div(phi,U)      Gauss linearUpwind grad(U);
+  div(phi,K)      Gauss linear;
+  //div(phi,h)      Gauss linearUpwind grad(h);
+  div(phiv,p)     Gauss linear;
+  div(phi,e)      Gauss linearUpwind grad(e);
+  div(phi,Yi)     Gauss limitedLinear 1;
+  div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes {
+  default         Gauss linear corrected;
+  laplacian(diffusivity,cellMotionU)   Gauss linear corrected;
+  laplacian((rho*nuEff),U)             Gauss linear corrected;
+  laplacian(((rho*nut)+thermo:mu),N2)  Gauss linear corrected;
+  laplacian(alphahe,h)                 Gauss linear corrected;
+  laplacian(rhorAUf,p_rgh)             Gauss linear corrected;
+}
+
+interpolationSchemes {
+  default         none;
+  interpolate(rho)        linear;
+  interpolate((rho*rAU))  linear;
+  dotInterpolate(S,(rho_0*U_0))  linear;
+  flux((rho*HbyA)) linear;
+
+  // backward
+  dotInterpolate(S,((2*(rho_0*U_0))-(0.5*(rho_0_0*U_0_0)))) linear;
+  dotInterpolate(S,((100.9*(rho_0*U_0))-(98.9099*(rho_0_0*U_0_0)))) linear;
+  dotInterpolate(S,((2.001*(rho_0*U_0))-(0.500751*(rho_0_0*U_0_0)))) linear;
+}
+
+snGradSchemes {
+  //default         limited 1.0;
+  default         none;
+  snGrad(p_rgh)   limited 1.0;
+  snGrad(rho)     limited 1.0;
+}
+
+fluxRequired {
+  default         none;
+  p_rgh;
+  phi; //XXX
+  U; //XXX
+  T; //XXX
+  rho; //XXX
+  cellMotionU; //XXX
+  meshPhi; //XXX
+}
+
+// ************************************************************************* //
