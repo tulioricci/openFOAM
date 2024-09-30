@@ -90,7 +90,7 @@ functions
        region porousMat;
 
       // Fields to be probed. runTime modifiable!
-       fields (Ta);
+       fields (Ta tau);
 
        // Locations to be probed. runTime modifiable!
        probeLocations
