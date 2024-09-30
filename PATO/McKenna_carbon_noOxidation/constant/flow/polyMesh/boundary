@@ -1,0 +1,93 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/flow/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+9
+(
+    f_front
+    {
+        type            wedge;
+        physicalType    wedge;
+        inGroups        List<word> 1(wedge);
+        nFaces          22919;
+        startFace       36344;
+    }
+    outlet
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          34;
+        startFace       59263;
+    }
+    f_back
+    {
+        type            wedge;
+        physicalType    wedge;
+        inGroups        List<word> 1(wedge);
+        nFaces          22919;
+        startFace       59297;
+    }
+    fuel
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          64;
+        startFace       82216;
+    }
+    farfield
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          26;
+        startFace       82280;
+    }
+    burner
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          50;
+        startFace       82306;
+    }
+    shield
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          18;
+        startFace       82356;
+    }
+    flow_to_graphite
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          68;
+        startFace       82374;
+        sampleMode      nearestPatchFace;
+        sampleRegion    graphite;
+        samplePatch     graphite_to_flow;
+    }
+    flow_to_porousMat
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          46;
+        startFace       82442;
+        sampleMode      nearestPatchFace;
+        sampleRegion    porousMat;
+        samplePatch     porousMat_to_flow;
+    }
+)
+
+// ************************************************************************* //

@@ -1,0 +1,113 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+13
+(
+    f_front
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          22919;
+        startFace       42044;
+    }
+    s_front
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1378;
+        startFace       64963;
+    }
+    a_front
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1066;
+        startFace       66341;
+    }
+    g_front
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1188;
+        startFace       67407;
+    }
+    outlet
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          34;
+        startFace       68595;
+    }
+    f_back
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          22919;
+        startFace       68629;
+    }
+    fuel
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          64;
+        startFace       91548;
+    }
+    s_back
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1378;
+        startFace       91612;
+    }
+    a_back
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1066;
+        startFace       92990;
+    }
+    g_back
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1188;
+        startFace       94056;
+    }
+    farfield
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          26;
+        startFace       95244;
+    }
+    burner
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          50;
+        startFace       95270;
+    }
+    shield
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          18;
+        startFace       95320;
+    }
+)
+
+// ************************************************************************* //
