@@ -29,10 +29,10 @@ endTime         50;
 deltaT          5e-5;
 
 writeControl    adjustableRunTime;
-/*writeControl    timeStep;*/
-
 writeInterval   5e-2;
-/*writeInterval   100;*/
+
+//writeControl    timeStep;
+//writeInterval   1;
 
 purgeWrite      0;
 
@@ -72,7 +72,7 @@ Ythreshold  0.001; // Species below this mass fraction are ignored for the time 
 /* End adjustable time step */
 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid 0; // time in seconds
+delaySolid 1.0; // time in seconds
 
 
 functions
