@@ -53,10 +53,10 @@ IO {
     eps_s[1]
     rhoI_s[1]
     rho_s[1]
-    epsI_s[2]
-    eps_s[2]
-    rhoI_s[2]
-    rho_s[2]
+    //epsI_s[2]
+    //eps_s[2]
+    //rhoI_s[2]
+    //rho_s[2]
     //normFp[0]
     //normFp[1]
     //normFp[2]
@@ -74,7 +74,7 @@ IO {
 /****************************** MASS, ENERGY, PYROLYSIS *******************/
 MaterialProperties {
   MaterialPropertiesType Porous; // porous material properties
-  MaterialPropertiesDirectory "./CarbonFiberPreform_data"; // material properties file
+  MaterialPropertiesDirectory "./material_data"; // material properties file
   detailedSolidEnthalpies yes;
 }
 
@@ -94,7 +94,7 @@ Energy {
 /****************************** GAS PROPERTIES  ************************************/
 GasProperties {
   GasPropertiesType Tabulated; // tabulated gas properties
-  GasPropertiesFile "./CarbonFiberPreform_data/gasProperties"; // tabulated gas properties file
+  GasPropertiesFile "./material_data/gasProperties"; // tabulated gas properties file
 }
 /****************************** END GAS PROPERTIES **************************/
 
