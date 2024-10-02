@@ -65,7 +65,7 @@ for opt, arg in opts:
 
         idx = new_header.index("kk")
         kref = data[idx_for_T298,idx]
-        data[:,idx] = data[:,idx] - kref + ki0
+        data[:,idx] = data[:,idx] - kref + kk0
     if opt in ("--emissivity"):
         emis0 = float(arg)
         print ('Using emissivity = ', emis0)
