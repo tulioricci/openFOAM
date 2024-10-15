@@ -1,0 +1,91 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform 1e-12;
+
+boundaryField
+{
+    burner
+    {
+        type            epsilonWallFunction;
+        //Cmu             0.09;
+        //kappa           0.41;
+        //E               9.8;
+        value           $internalField;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    farfield
+    {
+        type            zeroGradient;
+    }
+
+    f_front
+    {
+        type            wedge;
+    }
+
+    f_back
+    {
+        type            wedge;
+    }
+
+    fuel
+    {
+        type            turbulentMixingLengthDissipationRateInlet;
+        mixingLength    0.01;
+        //phi             phi;
+        //k               k;
+        value           uniform 1e-12;
+    }
+
+    shield
+    {
+        type            turbulentMixingLengthDissipationRateInlet;
+        mixingLength    0.01;
+        //phi             phi;
+        //k               k;
+        value           uniform 1e-12;
+    }
+
+    flow_to_porousMat
+    {
+        type            epsilonWallFunction;
+        //Cmu             0.09;
+        //kappa           0.41;
+        //E               9.8;
+        value           $internalField;
+    }
+
+    flow_to_graphite
+    {
+        type            epsilonWallFunction;
+        //Cmu             0.09;
+        //kappa           0.41;
+        //E               9.8;
+        value           $internalField;
+    }
+}
+
+
+// ************************************************************************* //
