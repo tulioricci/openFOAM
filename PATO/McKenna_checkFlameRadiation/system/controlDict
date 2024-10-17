@@ -25,15 +25,15 @@ startTime       0;
 stopAt          endTime;
 /*stopAt          writeNow;*/
 
-endTime         50;
+endTime         50.0;
 
-deltaT          1e-6;
+deltaT          1e-7;
 
 writeControl    adjustableRunTime;
-writeInterval   1e-2;
+writeInterval   5e-2;
 
 /*writeControl    timeStep;*/
-/*writeInterval   50;*/
+/*writeInterval   25;*/
 
 purgeWrite      0;
 
@@ -59,11 +59,11 @@ maxCo           1.0;
 
 adjustStartTime 0;
 
-maxDeltaT   1.0e-4; // reduce it if the surface temperature starts oscilliating
+maxDeltaT   1e-4; // reduce it if the surface temperature starts oscilliating
 
 minDeltaT   1e-7;
 
-minChemDeltaT   1e-6; // Minimum time step for species equation
+minChemDeltaT   1e-7; // Minimum time step for species equation
 
 REVlength   1e3;
 
@@ -78,8 +78,6 @@ delaySolid 50; // time in seconds
 
 functions
 {
-    
-
     probes_sym
     {
        // Type of functionObject
@@ -100,6 +98,30 @@ functions
        (
        ( 0.0001 0.105 0.0)
        ); 
+    }
+
+    volAverage
+    {
+        libs             ("libfieldFunctionObjects.so");
+        type             volFieldValue;
+        operation        volAverage;
+        region           porousMat;
+        fields           (Ta tau rho_s[1] rho_s[2]);
+        writeFields      false;
+        writeControl     timeStep;
+        writeInterval    5;
+    }
+
+    volIntegrate
+    {
+        libs             ("libfieldFunctionObjects.so");
+        type             volFieldValue;
+        operation        volIntegrate;
+        region           porousMat;
+        fields           (rho_s[1] rho_s[2]);
+        writeFields      false;
+        writeControl     timeStep;
+        writeInterval    5;
     }
 
 /*    line*/
