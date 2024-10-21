@@ -7,14 +7,26 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    format      binary;
-    class       regIOobject;
-    location    "constant/polyMesh";
-    object      faceZones;
+    format      ascii;
+    class       dictionary;
+    location    "constant/gas";
+    object      physicalProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-0
-()
+thermoType
+{
+    type            heRhoThermo;
+    mixture         multiComponentMixture;
+    transport       polynomial;
+    thermo          janaf;
+    equationOfState perfectGas;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+defaultSpecie N2;
+
+#include "thermo.compressibleGas"
 
 // ************************************************************************* //

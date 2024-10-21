@@ -2,31 +2,43 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  10
+    \\  /    A nd           | Version:  7
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
+    version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "constant/gas";
-    object      physicalProperties;
+    class       volScalarField;
+    object      G;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-thermoType
+dimensions      [1 0 -3 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
 {
-    type            heRhoThermo;
-    mixture         multiComponentMixture;
-    transport       sutherland;
-    thermo          janaf;
-    equationOfState perfectGas;
-    specie          specie;
-    energy          sensibleEnthalpy;
+    ".*"
+    {
+        type            MarshakRadiation;
+        T               T;
+        emissivityMode  lookup;
+        emissivity      uniform 1.0;
+        value           uniform 0;
+    }
+
+    f_front
+    {
+        type            wedge;
+    }
+
+    f_back
+    {
+        type            wedge;
+    }
 }
 
-defaultSpecie N2;
-
-#include "thermo.compressibleGas"
 
 // ************************************************************************* //

@@ -2,19 +2,23 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  10
+    \\  /    A nd           | Version:  7
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    format      binary;
-    class       regIOobject;
-    location    "constant/polyMesh";
-    object      pointZones;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      fvOptions;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-0
-()
+radiation
+{
+    type            radiation;
+    libs ("libradiationModels.so");
+}
 
 // ************************************************************************* //
