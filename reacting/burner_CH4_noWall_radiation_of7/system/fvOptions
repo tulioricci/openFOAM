@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+limitT
+{
+    type            limitTemperature;
+    active          yes;
+
+    selectionMode   all;
+    min             200;
+    max             2500;
+}
+
+/*isotropicDamping1*/
+/*{*/
+/*    type            isotropicDamping;*/
+
+/*    selectionMode   all;*/
+
+/*    // Define the line along which to apply the graduation*/
+/*    origin          (0.5 0 0);*/
+/*    direction       (1 0 0);*/
+
+/*    scale*/
+/*    {*/
+/*        type        halfCosineRamp;*/
+/*        start       0;*/
+/*        duration    600;*/
+/*    }*/
+
+/*    value           (0 0 0);   // Value towards which the field it relaxed*/
+/*    lambda          [0 0 -1 0 0 0 0] 1000; // Damping coefficient*/
+
+/*    timeStart       0;*/
+/*    duration        1e6;*/
+/*}*/
