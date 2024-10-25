@@ -63,17 +63,17 @@ boundaryField
 
     flow_to_porousMat
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        Tnbr            Ta;
-        value           uniform 300;
+        type            compressible::turbulentTemperatureRadCoupledMixed;
+        value           uniform 300.0;
+        Tnbr 		    Ta;
         kappaMethod     fluidThermo;
     }
 
     flow_to_graphite
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        Tnbr            Ta;
-        value           uniform 300;
+        type            compressible::turbulentTemperatureRadCoupledMixed;
+        value           uniform 300.0;
+        Tnbr 		    Ta;
         kappaMethod     fluidThermo;
     }
 }

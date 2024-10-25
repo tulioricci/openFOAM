@@ -71,7 +71,7 @@ IO {
 /****************************** MASS, ENERGY, PYROLYSIS *******************/
 MaterialProperties {
   MaterialPropertiesType Porous; // porous material properties
-  MaterialPropertiesDirectory "./myTACOT"; // material properties file
+  MaterialPropertiesDirectory "./TACOT_data/"; // material properties file
   detailedSolidEnthalpies yes;
 }
 
