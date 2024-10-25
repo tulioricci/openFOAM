@@ -78,6 +78,7 @@ delaySolid 2; // time in seconds
 
 functions
 {
+    /*
     probes_sym
     {
        // Type of functionObject
@@ -98,6 +99,65 @@ functions
        (
        ( 0.0001 0.105 0.0)
        ); 
+    }
+    */
+
+    probes_T_porousMat
+    {
+       // Type of functionObject
+       type probes;
+
+       // Where to load it from (if not already in solver)
+       functionObjectLibs ("libsampling.so");
+       writeControl   timeStep;
+       writeInterval  5;
+
+       region porousMat;
+
+       // Fields to be probed. runTime modifiable!
+       fields (Ta tau);
+
+       // Locations to be probed. runTime modifiable!
+       probeLocations
+       (
+       ( 0.0158652 0.1100 0.0)
+       ( 0.0158652 0.1105 0.0)
+       ( 0.0158652 0.1110 0.0)
+       ( 0.0158652 0.1115 0.0)
+       ( 0.0000000 0.121905 0.0)
+       ( 0.0025000 0.121905 0.0)
+       ( 0.0050000 0.121905 0.0)
+       ( 0.0075000 0.121905 0.0)
+       ( 0.0100000 0.121905 0.0)
+       ( 0.0125000 0.121905 0.0)
+       ( 0.0150000 0.121905 0.0)
+       ( 0.0158652 0.121905 0.0)
+       ); 
+    }
+
+    volAverage
+    {
+        libs             ("libfieldFunctionObjects.so");
+        type             volFieldValue;
+        operation        volAverage;
+        region           porousMat;
+        fields           (tau rho_s[1] rho_s[2]);
+        writeFields      false;
+        writeControl     timeStep;
+        writeInterval    5;
+        //timeStart
+    }
+
+    volIntegrate
+    {
+        libs             ("libfieldFunctionObjects.so");
+        type             volFieldValue;
+        operation        volIntegrate;
+        region           porousMat;
+        fields           (rho_s[1] rho_s[2]);
+        writeFields      false;
+        writeControl     timeStep;
+        writeInterval    5;
     }
     
 /*    line*/
