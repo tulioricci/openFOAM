@@ -72,7 +72,7 @@ Ythreshold  0.001; // Species below this mass fraction are ignored for the time 
 /* End adjustable time step */
 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid 1.0; // time in seconds
+delaySolid 1.5; // time in seconds
 
 
 functions
@@ -89,7 +89,7 @@ functions
 
        region porousMat;
 
-      // Fields to be probed. runTime modifiable!
+       // Fields to be probed. runTime modifiable!
        fields (Ta tau);
 
        // Locations to be probed. runTime modifiable!

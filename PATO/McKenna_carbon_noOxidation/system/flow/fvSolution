@@ -79,16 +79,30 @@ solvers
         $U;
         relTol          0;
     }
+
+    "G.*"
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-7;
+        relTol          1e-4;
+    }
+
+    GFinal
+    {
+        $G;
+        relTol          0;
+    }
 }
 
 PIMPLE
 {
     momentumPredictor yes;
     nOuterCorrectors  1;
-/*    nCorrectors     3;*/
-/*    nNonOrthogonalCorrectors 2;*/
-    nCorrectors     1;
-    nNonOrthogonalCorrectors 0;
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 2;
+    //nCorrectors     1;
+    //nNonOrthogonalCorrectors 0;
 }
 
 relaxationFactors {

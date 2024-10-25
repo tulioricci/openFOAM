@@ -15,6 +15,12 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
  
+radiation
+{
+    type            radiation;
+    libs ("libradiationModels.so");
+}
+
 limitT
 {
     type            limitTemperature;

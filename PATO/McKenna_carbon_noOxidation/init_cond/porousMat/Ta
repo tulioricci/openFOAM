@@ -15,15 +15,16 @@ FoamFile
 
 dimensions      [ 0 0 0 1 0 0 0 ];
 
-internalField   uniform 300;
+internalField   uniform 300.0;
 
 boundaryField
 {
     porousMat_to_flow
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
+        type            compressible::turbulentTemperatureRadCoupledMixed;
+        value           uniform 300.0;
         Tnbr 		    T;
+        qrNbr           qr;
         kappaMethod     lookup;
         kappa		    k_abl_sym;
     }
@@ -31,7 +32,7 @@ boundaryField
     porousMat_to_graphite
     {
         type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
+        value           uniform 300.0;
         Tnbr 		    Ta;
         kappaMethod     lookup;
         kappa		    k_abl_sym;
@@ -40,7 +41,7 @@ boundaryField
     porousMat_to_alumina
     {
         type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
+        value           uniform 300.0;
         Tnbr 		    Ta;
         kappaMethod     lookup;
         kappa		    k_abl_sym;
@@ -54,11 +55,6 @@ boundaryField
     s_front
     {
         type            wedge;
-    }
-
-    defaultFaces
-    {
-        type            empty;
     }
 }
 
