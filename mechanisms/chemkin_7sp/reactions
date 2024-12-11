@@ -1,0 +1,53 @@
+elements        List<word> 
+4
+(
+O
+H
+C
+N
+)
+;
+
+species         List<word> 
+7
+(
+C2H4
+O2
+CO2
+CO
+H2O
+H2
+N2
+)
+;
+
+reactions
+{
+    un-named-reaction-0
+    {
+        type            irreversibleArrheniusReaction;
+        reaction        "C2H4^0.5 + O2^0.65 = 2CO + 2H2";
+        A               3548133892;
+        beta            0;
+        Ta              18114.8846;
+    }
+    un-named-reaction-1
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CO + 0.5O2 = CO2";
+        A               347850.5426;
+        beta            0.7;
+        Ta              5535.103627;
+    }
+    un-named-reaction-2
+    {
+        type            irreversibleArrheniusReaction;
+        reaction        "H2^0.75 + 0.5O2 = H2O";
+        A               124479558.7;
+        beta            0;
+        Ta              6038.294866;
+    }
+}
+
+Tlow            300;
+Thigh           5000;

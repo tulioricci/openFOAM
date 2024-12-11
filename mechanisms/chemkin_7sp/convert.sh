@@ -1,0 +1,1 @@
+chemkinToFoam uiuc_7sp.dat thermo_uiuc_7sp.dat transportProperties reactions thermo.compressibleGas

@@ -1,0 +1,6 @@
+# dynamicCode:
+# SHA1 = 2ce9caed4037c267ac87bf9266e55bdc7b5c431c
+
+SOURCE += basicChemistryModelTemplate.C
+
+LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libEulerImplicit_chemistryModel_polynomial_janaf_perfectGas_specie___sensibleInternalEnergy____2ce9caed4037c267ac87bf9266e55bdc7b5c431c

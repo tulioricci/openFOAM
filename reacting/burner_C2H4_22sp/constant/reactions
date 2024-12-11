@@ -1,0 +1,1421 @@
+reactions
+{
+    un-named-reaction-0
+    {
+        type            reversibleArrhenius;
+        reaction        "H + O2 = O + OH";
+        A               8.3e+10;
+        beta            0;
+        Ta              7252.495325;
+    }
+    un-named-reaction-1
+    {
+        type            reversibleArrhenius;
+        reaction        "H2 + O = H + OH";
+        A               50;
+        beta            2.67;
+        Ta              3165.072892;
+    }
+    un-named-reaction-2
+    {
+        type            reversibleArrhenius;
+        reaction        "H2 + OH = H + H2O";
+        A               216000;
+        beta            1.51;
+        Ta              1725.945949;
+    }
+    un-named-reaction-3
+    {
+        type            reversibleArrhenius;
+        reaction        "2OH = H2O + O";
+        A               35.7;
+        beta            2.4;
+        Ta              -1061.733514;
+    }
+    un-named-reaction-4
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "2H = H2";
+        A               1e+12;
+        beta            -1;
+        Ta              0;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 0)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 0)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1)
+(CO2 0)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-5
+    {
+        type            reversibleArrhenius;
+        reaction        "2H + H2 = H2 + H2";
+        A               9e+10;
+        beta            -0.6;
+        Ta              0;
+    }
+    un-named-reaction-6
+    {
+        type            reversibleArrhenius;
+        reaction        "2H + H2O = H2 + H2O";
+        A               6e+13;
+        beta            -1.25;
+        Ta              0;
+    }
+    un-named-reaction-7
+    {
+        type            reversibleArrhenius;
+        reaction        "2H + CO2 = H2 + CO2";
+        A               5.5e+14;
+        beta            -2;
+        Ta              0;
+    }
+    un-named-reaction-8
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "H + OH = H2O";
+        A               2.2e+16;
+        beta            -2;
+        Ta              0;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 0.73)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 3.65)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1)
+(CO2 1)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-9
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "H + O = OH";
+        A               5e+11;
+        beta            -1;
+        Ta              0;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-10
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "2O = O2";
+        A               1.2e+11;
+        beta            -1;
+        Ta              0;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 2.4)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 15.4)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.75)
+(CO2 3.6)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-11
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "H + O2 = HO2";
+        A               2.8e+12;
+        beta            -0.86;
+        Ta              0;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 1)
+(H 1)
+(O 1)
+(O2 0)
+(OH 1)
+(H2O 0)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 1)
+(CO 0.75)
+(CO2 1.5)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 0)
+)
+;
+    }
+    un-named-reaction-12
+    {
+        type            reversibleArrhenius;
+        reaction        "H + O2 + O2 = HO2 + O2";
+        A               3e+14;
+        beta            -1.72;
+        Ta              0;
+    }
+    un-named-reaction-13
+    {
+        type            reversibleArrhenius;
+        reaction        "H + O2 + H2O = HO2 + H2O";
+        A               1.652e+13;
+        beta            -0.76;
+        Ta              0;
+    }
+    un-named-reaction-14
+    {
+        type            reversibleArrhenius;
+        reaction        "H + O2 + N2 = HO2 + N2";
+        A               2.6e+13;
+        beta            -1.24;
+        Ta              0;
+    }
+    un-named-reaction-15
+    {
+        type            reversibleArrhenius;
+        reaction        "H + HO2 = H2O + O";
+        A               3970000000;
+        beta            0;
+        Ta              337.6413213;
+    }
+    un-named-reaction-16
+    {
+        type            reversibleArrhenius;
+        reaction        "H + HO2 = H2 + O2";
+        A               1.66e+10;
+        beta            0;
+        Ta              412.6168158;
+    }
+    un-named-reaction-17
+    {
+        type            reversibleArrhenius;
+        reaction        "H + HO2 = 2OH";
+        A               7.08e+10;
+        beta            0;
+        Ta              150.9573717;
+    }
+    un-named-reaction-18
+    {
+        type            reversibleArrhenius;
+        reaction        "HO2 + O = O2 + OH";
+        A               2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-19
+    {
+        type            reversibleArrhenius;
+        reaction        "HO2 + OH = H2O + O2";
+        A               4.64e+10;
+        beta            0;
+        Ta              -251.5956194;
+    }
+    un-named-reaction-20
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "CO + O = CO2";
+        A               602000000;
+        beta            0;
+        Ta              1509.573717;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 6)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 3.5)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-21
+    {
+        type            reversibleArrhenius;
+        reaction        "CO + OH = CO2 + H";
+        A               47600;
+        beta            1.228;
+        Ta              35.22338672;
+    }
+    un-named-reaction-22
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "CO + H2 = CH2O";
+        k0
+        {
+            A               5.07e+21;
+            beta            -3.42;
+            Ta              42444.181;
+        }
+        kInf
+        {
+            A               43000;
+            beta            1.5;
+            Ta              40054.02261;
+        }
+        F
+        {
+            alpha           0.932;
+            Tsss            197;
+            Ts              1540;
+            Tss             10300;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-23
+    {
+        type            reversibleArrhenius;
+        reaction        "CO + O2 = CO2 + O";
+        A               2500000000;
+        beta            0;
+        Ta              24052.54122;
+    }
+    un-named-reaction-24
+    {
+        type            reversibleArrhenius;
+        reaction        "CO + HO2 = CO2 + OH";
+        A               1.5e+11;
+        beta            0;
+        Ta              11875.31324;
+    }
+    un-named-reaction-25
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "H + HCO = CH2O";
+        k0
+        {
+            A               1.35e+18;
+            beta            -2.57;
+            Ta              717.0475153;
+        }
+        kInf
+        {
+            A               1090000000;
+            beta            0.48;
+            Ta              -130.8297221;
+        }
+        F
+        {
+            alpha           0.7824;
+            Tsss            271;
+            Ts              2755;
+            Tss             6570;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-26
+    {
+        type            reversibleArrhenius;
+        reaction        "H + HCO = CO + H2";
+        A               7.34e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-27
+    {
+        type            reversibleArrhenius;
+        reaction        "HCO + O = CO + OH";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-28
+    {
+        type            reversibleArrhenius;
+        reaction        "HCO + O = CO2 + H";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-29
+    {
+        type            reversibleArrhenius;
+        reaction        "HCO + OH = CO + H2O";
+        A               5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-30
+    {
+        type            reversibleThirdBodyArrhenius;
+        reaction        "HCO = CO + H";
+        A               1.87e+14;
+        beta            -1;
+        Ta              8554.25106;
+        coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-31
+    {
+        type            reversibleArrhenius;
+        reaction        "HCO + O2 = CO + HO2";
+        A               7600000000;
+        beta            0;
+        Ta              201.2764955;
+    }
+    un-named-reaction-32
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "CH2 + H = CH3";
+        k0
+        {
+            A               3.2e+21;
+            beta            -3.14;
+            Ta              618.9252238;
+        }
+        kInf
+        {
+            A               2.5e+13;
+            beta            -0.8;
+            Ta              0;
+        }
+        F
+        {
+            alpha           0.68;
+            Tsss            78;
+            Ts              1995;
+            Tss             5590;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-33
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + H2 = CH3 + H";
+        A               500;
+        beta            2;
+        Ta              3638.072657;
+    }
+    un-named-reaction-34
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + O = H + HCO";
+        A               8e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-35
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + O2 = HCO + OH";
+        A               1.056e+10;
+        beta            0;
+        Ta              754.7868583;
+    }
+    un-named-reaction-36
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + O2 = CO2 + 2H";
+        A               2640000000;
+        beta            0;
+        Ta              754.7868583;
+    }
+    un-named-reaction-37
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + OH = CH2O + H";
+        A               2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-38
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + HO2 = CH2O + OH";
+        A               2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-39
+    {
+        type            reversibleArrhenius;
+        reaction        "2CH2 = C2H2 + H2";
+        A               3.2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-40
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2O + H = H2 + HCO";
+        A               23000000;
+        beta            1.05;
+        Ta              1647.951307;
+    }
+    un-named-reaction-41
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2O + O = HCO + OH";
+        A               3.9e+10;
+        beta            0;
+        Ta              1781.296985;
+    }
+    un-named-reaction-42
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2O + OH = H2O + HCO";
+        A               3430000;
+        beta            1.18;
+        Ta              -224.9264838;
+    }
+    un-named-reaction-43
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2O + O2 = HCO + HO2";
+        A               1e+11;
+        beta            0;
+        Ta              20127.64955;
+    }
+    un-named-reaction-44
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "CH3 + H = CH4";
+        k0
+        {
+            A               2.477e+27;
+            beta            -4.76;
+            Ta              1227.786623;
+        }
+        kInf
+        {
+            A               1.27e+13;
+            beta            -0.63;
+            Ta              192.7222445;
+        }
+        F
+        {
+            alpha           0.783;
+            Tsss            74;
+            Ts              2941;
+            Tss             6964;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-45
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + O = CH2O + H";
+        A               8.43e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-46
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + OH = CH2 + H2O";
+        A               56000;
+        beta            1.6;
+        Ta              2727.296514;
+    }
+    un-named-reaction-47
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + O2 = CH2O + OH";
+        A               36000000;
+        beta            0;
+        Ta              4498.529675;
+    }
+    un-named-reaction-48
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + HO2 = CH4 + O2";
+        A               1000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-49
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + HCO = CH4 + CO";
+        A               8480000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-50
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2O + CH3 = CH4 + HCO";
+        A               3.32;
+        beta            2.81;
+        Ta              2948.70066;
+    }
+    un-named-reaction-51
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + CH3 = C2H4 + H";
+        A               4e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-52
+    {
+        type            reversibleArrhenius;
+        reaction        "CH4 + H = CH3 + H2";
+        A               660000;
+        beta            1.62;
+        Ta              5454.593029;
+    }
+    un-named-reaction-53
+    {
+        type            reversibleArrhenius;
+        reaction        "CH4 + O = CH3 + OH";
+        A               1020000;
+        beta            1.5;
+        Ta              4327.444654;
+    }
+    un-named-reaction-54
+    {
+        type            reversibleArrhenius;
+        reaction        "CH4 + OH = CH3 + H2O";
+        A               100000;
+        beta            1.6;
+        Ta              1569.956665;
+    }
+    un-named-reaction-55
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + CH4 = 2CH3";
+        A               2460;
+        beta            2;
+        Ta              4161.391545;
+    }
+    un-named-reaction-56
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "C2H3 = C2H2 + H";
+        k0
+        {
+            A               2.565e+24;
+            beta            -3.4;
+            Ta              18013.60227;
+        }
+        kInf
+        {
+            A               386000000;
+            beta            1.62;
+            Ta              18642.33972;
+        }
+        F
+        {
+            alpha           1.9816;
+            Tsss            5383.7;
+            Ts              4.2932;
+            Tss             -0.0795;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-57
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H2 + O = CH2 + CO";
+        A               4080;
+        beta            2;
+        Ta              956.0633538;
+    }
+    un-named-reaction-58
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H2 + OH = CH3 + CO";
+        A               4.83e-07;
+        beta            4;
+        Ta              -1006.382478;
+    }
+    un-named-reaction-59
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H2 + HCO = C2H3 + CO";
+        A               10000;
+        beta            2;
+        Ta              3019.147433;
+    }
+    un-named-reaction-60
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "C2H3 + H = C2H4";
+        k0
+        {
+            A               1.4e+24;
+            beta            -3.86;
+            Ta              1670.594913;
+        }
+        kInf
+        {
+            A               6080000000;
+            beta            0.27;
+            Ta              140.8935469;
+        }
+        F
+        {
+            alpha           0.782;
+            Tsss            207.5;
+            Ts              2663;
+            Tss             6095;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-61
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + H = C2H2 + H2";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-62
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + O = CH3 + CO";
+        A               4.8e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-63
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + OH = C2H2 + H2O";
+        A               3.011e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-64
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + O2 = C2H2 + HO2";
+        A               1340;
+        beta            1.61;
+        Ta              -192.923521;
+    }
+    un-named-reaction-65
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + O2 = CH2O + HCO";
+        A               4.6e+13;
+        beta            -1.39;
+        Ta              508.2231512;
+    }
+    un-named-reaction-66
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + HCO = C2H4 + CO";
+        A               9.033e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-67
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + CH3 = C2H2 + CH4";
+        A               392000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-68
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + H = C2H3 + H2";
+        A               50700;
+        beta            1.93;
+        Ta              6516.326543;
+    }
+    un-named-reaction-69
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + O = C2H3 + OH";
+        A               15100;
+        beta            1.91;
+        Ta              1881.935233;
+    }
+    un-named-reaction-70
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + O = CH3 + HCO";
+        A               19200;
+        beta            1.83;
+        Ta              110.7020725;
+    }
+    un-named-reaction-71
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + O = CH2 + CH2O";
+        A               384;
+        beta            1.83;
+        Ta              110.7020725;
+    }
+    un-named-reaction-72
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + OH = C2H3 + H2O";
+        A               3600;
+        beta            2;
+        Ta              1257.978097;
+    }
+    un-named-reaction-73
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H4 + O2 = C2H3 + HO2";
+        A               4.22e+10;
+        beta            0;
+        Ta              30594.02732;
+    }
+    un-named-reaction-74
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + N2 = CH2 + N2";
+        A               1.5e+10;
+        beta            0;
+        Ta              301.9147433;
+    }
+    un-named-reaction-75
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + O = CO + H2";
+        A               1.5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-76
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + O = H + HCO";
+        A               1.5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-77
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + OH = CH2O + H";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-78
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + H2 = CH3 + H";
+        A               7e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-79
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + O2 = CO + H + OH";
+        A               2.8e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-80
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + O2 = CO + H2O";
+        A               1.2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-81
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + H2O = CH2 + H2O";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-82
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + CO = CH2 + CO";
+        A               9000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-83
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + CO2 = CH2 + CO2";
+        A               7000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-84
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + CO2 = CH2O + CO";
+        A               1.4e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-85
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + OH = CH2* + H2O";
+        A               2.501e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-86
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + CH3 = C2H4 + H";
+        A               1.2e+10;
+        beta            0;
+        Ta              -286.8190061;
+    }
+    un-named-reaction-87
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + CH4 = 2CH3";
+        A               1.6e+10;
+        beta            0;
+        Ta              -286.8190061;
+    }
+    un-named-reaction-88
+    {
+        type            reversibleArrhenius;
+        reaction        "H + HCCO = CH2* + CO";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-89
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + O = CO + H";
+        A               5.7e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-90
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + OH = H + HCO";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-91
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + H2 = CH2 + H";
+        A               110700;
+        beta            1.79;
+        Ta              840.3293689;
+    }
+    un-named-reaction-92
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + H2O = CH2O + H";
+        A               5710000000;
+        beta            0;
+        Ta              -379.9093853;
+    }
+    un-named-reaction-93
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + O2 = HCO + O";
+        A               3.3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-94
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + CO2 = CO + HCO";
+        A               3400000000;
+        beta            0;
+        Ta              347.2019548;
+    }
+    un-named-reaction-95
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + OH = CH + H2O";
+        A               11300;
+        beta            2;
+        Ta              1509.573717;
+    }
+    un-named-reaction-96
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + CH2 = C2H2 + H";
+        A               4e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-97
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + CH3 = C2H3 + H";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-98
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + CH4 = C2H4 + H";
+        A               6e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-99
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2* + H = CH + H2";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-100
+    {
+        type            reversibleArrheniusTroeFallOff;
+        reaction        "CH + CO = HCCO";
+        k0
+        {
+            A               2.69e+22;
+            beta            -3.74;
+            Ta              974.1782384;
+        }
+        kInf
+        {
+            A               5e+10;
+            beta            0;
+            Ta              0;
+        }
+        F
+        {
+            alpha           0.5757;
+            Tsss            237;
+            Ts              1652;
+            Tss             5069;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+22
+(
+(C2H4 3)
+(H2 2)
+(H 1)
+(O 1)
+(O2 1)
+(OH 1)
+(H2O 6)
+(HO2 1)
+(CH2 1)
+(CH3 1)
+(CH4 2)
+(CO 1.5)
+(CO2 2)
+(HCO 1)
+(C2H3 1)
+(C2H2 3)
+(CH2O 1)
+(CH2CHO 1)
+(CH 1)
+(CH2* 1)
+(HCCO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-101
+    {
+        type            reversibleArrhenius;
+        reaction        "CH3 + HCCO = C2H4 + CO";
+        A               5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-102
+    {
+        type            reversibleArrhenius;
+        reaction        "HCCO + O = 2CO + H";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-103
+    {
+        type            reversibleArrhenius;
+        reaction        "HCCO + O2 = 2CO + OH";
+        A               1600000000;
+        beta            0;
+        Ta              429.725318;
+    }
+    un-named-reaction-104
+    {
+        type            reversibleArrhenius;
+        reaction        "CH + HCCO = C2H2 + CO";
+        A               5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-105
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2 + HCCO = C2H3 + CO";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-106
+    {
+        type            reversibleArrhenius;
+        reaction        "2HCCO = C2H2 + 2CO";
+        A               1e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-107
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H2 + O = H + HCCO";
+        A               16320;
+        beta            2;
+        Ta              956.0633538;
+    }
+    un-named-reaction-108
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + O2 = CH2CHO + O";
+        A               300000000;
+        beta            0.29;
+        Ta              5.535103627;
+    }
+    un-named-reaction-109
+    {
+        type            reversibleArrhenius;
+        reaction        "C2H3 + HO2 = CH2CHO + OH";
+        A               1e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-110
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2CHO = CH3 + CO";
+        A               7.8e+41;
+        beta            -9.147;
+        Ta              23599.6691;
+    }
+    un-named-reaction-111
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2CHO + H = CH3 + HCO";
+        A               9e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-112
+    {
+        type            reversibleArrhenius;
+        reaction        "CH2CHO + O2 = CH2O + CO + OH";
+        A               18000000;
+        beta            0;
+        Ta              0;
+    }
+}
+Tlow            300;
+Thigh           5000;
+
