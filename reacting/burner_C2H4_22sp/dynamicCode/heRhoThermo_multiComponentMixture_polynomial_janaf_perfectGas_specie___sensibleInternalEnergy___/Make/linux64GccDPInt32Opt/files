@@ -1,6 +1,0 @@
-# dynamicCode:
-# SHA1 = f775461b78243c0a07acbc0bb33cf5dcb8b6173e
-
-SOURCE += fluidReactionThermoTemplate.C
-
-LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libheRhoThermo_multiComponentMixture_polynomial_janaf_perfectGas_specie___sensibleInternalEnergy____f775461b78243c0a07acbc0bb33cf5dcb8b6173e
