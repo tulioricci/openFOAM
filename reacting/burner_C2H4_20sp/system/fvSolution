@@ -22,39 +22,33 @@ solvers
         solver          diagonal;
     }
 
-    p
+    p_rgh
     {
         solver           PCG;
         preconditioner   DIC;
         tolerance        1e-8;
-        relTol           1e-4;
+        relTol           1e-3;
     }
 
-    pFinal
+    p_rghFinal
     {
-        $p;
-        tolerance        1e-10;
-        relTol           0.0;
-    }
-
-    p_rgh
-    {
-        $p;
-        tolerance        1e-10;
-        relTol           0.0;
+        $p_rgh;
+        tolerance        1e-12;
+        relTol           0;
     }
 
     "(U|e|Yi)"
     {
         solver          PBiCGStab;
         preconditioner  DILU;
-        tolerance       1e-12;
-        relTol          1e-6;
+        tolerance       1e-8;
+        relTol          1e-3;
     }
 
     "(U|e|Yi)Final"
     {
         $U;
+        tolerance       1e-10;
         relTol          0;
     }
 
@@ -62,13 +56,14 @@ solvers
     {
         solver          PCG;
         preconditioner  DIC;
-        tolerance       1e-4;
-        relTol          0.001;
+        tolerance       1e-6;
+        relTol          1e-3;
     }
 
     GFinal
     {
         $G;
+        tolerance       1e-8;
         relTol          0;
     }
 }

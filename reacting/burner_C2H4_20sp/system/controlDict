@@ -31,10 +31,10 @@ deltaT          1e-7;
 maxDeltaT       1e-4;
 
 writeControl    adjustableRunTime;
-writeInterval   5e-3;
+writeInterval   1e-2;
 
 //writeControl    timeStep;
-//writeInterval   25;
+//writeInterval   100;
 
 purgeWrite      0;
 

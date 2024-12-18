@@ -27,8 +27,9 @@ regions
         box (0.0 0.1 -1.0) (0.030226 0.1005 1.0);
         fieldValues
         (
-            volScalarFieldValue C2H4 0.03
-            volScalarFieldValue T 1000
+            volScalarFieldValue C2H4 0.04547999975914204
+            volVectorFieldValue U (0.0 0.10 0.0)
+            volScalarFieldValue T 300
         );
     }
 
@@ -37,8 +38,9 @@ regions
         box (0.0 0.1005 -1.0) (0.030226 0.105 1.0);
         fieldValues
         (
-            volScalarFieldValue T 1813.7916714776784
-            volScalarFieldValue C2H4 0.001
+            volScalarFieldValue T 1800
+            volVectorFieldValue U (0.0 0.60 0.0)
+            volScalarFieldValue C2H4 0.01
         );
     }
 
@@ -48,6 +50,7 @@ regions
         fieldValues
         (
             volScalarFieldValue T 300
+            volVectorFieldValue U (0.0 0.10 0.0)
         );
     }
 );
