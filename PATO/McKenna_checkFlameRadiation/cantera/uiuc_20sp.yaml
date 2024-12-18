@@ -369,8 +369,7 @@ species:
 reactions:
 
 - equation: H + O2 <=> O + OH  # Reaction 1
-#  rate-constant: {A: 2.644e+16, b: -0.6707, Ea: 1.7041e+04}
-  rate-constant: {A: 3.144e+16, b: -0.6707, Ea: 1.7041e+04}
+  rate-constant: {A: 2.644e+16, b: -0.6707, Ea: 1.7041e+04}
 - equation: O + H2 <=> H + OH  # Reaction 2
   rate-constant: {A: 4.589e+04, b: 2.7, Ea: 6260.0}
 - equation: OH + H2 <=> H + H2O  # Reaction 3

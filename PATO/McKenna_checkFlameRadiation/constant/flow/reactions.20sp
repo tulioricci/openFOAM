@@ -37,7 +37,7 @@ reactions
     {
         type            reversibleArrheniusReaction;
         reaction        "H + O2 = O + OH";
-        A               3.144e+13;
+        A               2.644e+13;
         beta            -0.6707;
         Ta              8574.881901;
     }
