@@ -328,7 +328,7 @@ Physical Surface("farfield") = {123,127};
 Physical Surface("burner") = {131,202,224};
 Physical Surface("shield") = {141};
 Physical Surface("fuel") = {175,188};
-Physical Surface("wall") = {262,288,314,328,353};
+Physical Surface("sample") = {262,288,314,328,353};
 Physical Volume("flow") = {1:12};
 
 Mesh 3;

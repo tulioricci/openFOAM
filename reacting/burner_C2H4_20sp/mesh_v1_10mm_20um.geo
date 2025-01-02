@@ -321,7 +321,7 @@ Physical Surface("shield") = {146};
 Physical Surface("fuel") = {193,180};
 Physical Surface("f_front") = {1:6,11:15};
 Physical Surface("f_back") = {137,198,181,159,220,242,259,281,303,325,342};
-Physical Surface("wall") = {250,276,302,316,341};
+Physical Surface("sample") = {250,276,302,316,341};
 Physical Volume("flow") = {1:11};
 
 Mesh 3;

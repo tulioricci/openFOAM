@@ -48,7 +48,7 @@ boundaryField
         type            zeroGradient;
     }
 
-    wall
+    sample
     {
         type            zeroGradient;
     }

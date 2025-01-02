@@ -62,7 +62,7 @@ boundaryField
         value           uniform 300;
     }
 
-    wall
+    sample
     {
         type            fixedValue;
         value           uniform 300;

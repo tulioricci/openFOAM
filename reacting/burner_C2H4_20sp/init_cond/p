@@ -62,7 +62,7 @@ boundaryField
         type            wedge;
     }
 
-    wall
+    sample
     {
         type            fixedFluxExtrapolatedPressure;
     }

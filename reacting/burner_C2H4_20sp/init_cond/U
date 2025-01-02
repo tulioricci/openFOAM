@@ -47,7 +47,7 @@ boundaryField
         (0.2 (0 0.145170508529917 0))
         );
     }
-    wall
+    sample
     {
         type            noSlip;
     }

@@ -223,7 +223,7 @@ for spc in gas.species_names:
     os.system("echo '    }' >> " + spc)
 
     os.system("echo '' >> " + spc)
-    os.system("echo '    wall' >> " + spc)
+    os.system("echo '    sample' >> " + spc)
     os.system("echo '    {' >> " + spc)
     os.system("echo '        type            zeroGradient;' >> " + spc)
     os.system("echo '    }' >> " + spc)
