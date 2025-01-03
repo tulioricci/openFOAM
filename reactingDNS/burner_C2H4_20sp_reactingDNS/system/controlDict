@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingDNS;
+
+startFrom       latestTime;
+/*startFrom       startTime;*/
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         2;
+
+deltaT          1e-7;
+
+maxCo           0.6;
+
+maxDeltaT       2.5e-5;
+
+adjustTimeStep  yes;
+
+writeControl    adjustableRunTime;
+writeInterval   1e-2;
+
+//writeControl    timeStep;
+//writeInterval   10;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      fixed;
+/*timeFormat      general;*/
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+
+// ************************************************************************* //
