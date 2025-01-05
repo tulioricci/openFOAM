@@ -73,6 +73,31 @@ functions
         writeControl    writeTime;
     }
     
+    patchProbes
+    {
+       type               patchProbes;
+       functionObjectLibs ("libsampling.so");
+
+       // Patches to sample (wildcards allowed)
+       patchName          wall;
+
+       // Name of the directory for probe data
+       //name               patchProbes;
+
+       writeControl       writeTime;
+       //writeControl       timeStep;
+       //writeInterval      5;
+
+       //region             flow;
+       fields             (wallHeatFlux);
+
+        // Locations to probe. These get snapped onto the nearest point
+        // on the selected patches
+       probeLocations (
+           ( 0.0 0.11 0.0)
+       );
+    }
+    
     fileUpdate1
     {
         type            timeActivatedFileUpdate;
@@ -83,8 +108,8 @@ functions
         timeVsFile
         (
             (0.0000    "$FOAM_CASE/system/controlDict_1")
-            (0.0001    "$FOAM_CASE/system/controlDict_2")
-            (0.0002    "$FOAM_CASE/system/controlDict_3")
+            (0.0005    "$FOAM_CASE/system/controlDict_2")
+            (0.0010    "$FOAM_CASE/system/controlDict_3")
         );
     }
 }
