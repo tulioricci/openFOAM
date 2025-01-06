@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{limitT}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{type}\PYG{+w}{            }\PYG{n}{limitTemperature}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{active}\PYG{+w}{          }\PYG{n}{yes}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{n}{selectionMode}\PYG{+w}{   }\PYG{n}{all}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{min}\PYG{+w}{             }\PYG{l+m+mi}{200}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{max}\PYG{+w}{             }\PYG{l+m+mi}{2400}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

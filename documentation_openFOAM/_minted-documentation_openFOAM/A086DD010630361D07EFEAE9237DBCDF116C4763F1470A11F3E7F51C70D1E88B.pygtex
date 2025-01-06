@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{verticalDamping}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{type}\PYG{+w}{            }\PYG{n}{verticalDamping}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{n}{selectionMode}\PYG{+w}{   }\PYG{n}{all}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{n}{origin}\PYG{+w}{          }\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mf}{0.35}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// x y z}
+\PYG{+w}{        }\PYG{n}{direction}\PYG{+w}{       }\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
+
+\PYG{+w}{        }\PYG{n}{scale}\PYG{+w}{  }\PYG{c+c1}{// still unclear what it exactly means}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{type}\PYG{+w}{        }\PYG{n}{halfCosineRamp}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{start}\PYG{+w}{       }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{duration}\PYG{+w}{    }\PYG{l+m+mf}{.05}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{n}{lambda}\PYG{+w}{          }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}1}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{l+m+mi}{1000}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Damping coefficient}
+
+\PYG{+w}{        }\PYG{n}{timeStart}\PYG{+w}{       }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{duration}\PYG{+w}{        }\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// time}
+
+\PYG{+w}{        }\PYG{n}{writeForceFields}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

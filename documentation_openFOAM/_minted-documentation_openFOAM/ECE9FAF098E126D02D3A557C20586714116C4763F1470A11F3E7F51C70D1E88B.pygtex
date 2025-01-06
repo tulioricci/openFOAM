@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{        }\PYG{n}{virtual}\PYG{+w}{ }\PYG{n}{tmp}\PYG{o}{\PYGZlt{}}\PYG{n}{scalarField}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{DEff}
+\PYG{+w}{        }\PYG{p}{(}
+\PYG{+w}{            }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{volScalarField}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{Yi}\PYG{p}{,}
+\PYG{+w}{            }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{label}\PYG{+w}{ }\PYG{n}{patchi}
+\PYG{+w}{        }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{return}
+\PYG{+w}{                }\PYG{n}{this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{thermo}\PYG{p}{().}\PYG{n}{kappa}\PYG{p}{().}\PYG{n}{boundaryField}\PYG{p}{()[}\PYG{n}{patchi}\PYG{p}{]}
+\PYG{+w}{               }\PYG{o}{/}\PYG{n}{this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{thermo}\PYG{p}{().}\PYG{n}{Cp}\PYG{p}{().}\PYG{n}{boundaryField}\PYG{p}{()[}\PYG{n}{patchi}\PYG{p}{];}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{probes}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{       }\PYG{n}{type}\PYG{+w}{               }\PYG{n}{probes}\PYG{p}{;}
+\PYG{+w}{       }\PYG{n}{functionObjectLibs}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}libsampling.so\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{       }\PYG{n}{writeControl}\PYG{+w}{       }\PYG{n}{timeStep}\PYG{p}{;}
+\PYG{+w}{       }\PYG{n}{writeInterval}\PYG{+w}{      }\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{+w}{       }\PYG{n}{region}\PYG{+w}{             }\PYG{n}{flow}\PYG{p}{;}
+\PYG{+w}{       }\PYG{n}{fields}\PYG{+w}{             }\PYG{p}{(}\PYG{n}{T}\PYG{p}{);}
+\PYG{+w}{       }\PYG{n}{probeLocations}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{           }\PYG{p}{(}\PYG{+w}{ }\PYG{l+m+mf}{0.0001}\PYG{+w}{ }\PYG{l+m+mf}{0.105}\PYG{+w}{ }\PYG{l+m+mf}{0.0}\PYG{p}{)}
+\PYG{+w}{           }\PYG{p}{...}
+\PYG{+w}{       }\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

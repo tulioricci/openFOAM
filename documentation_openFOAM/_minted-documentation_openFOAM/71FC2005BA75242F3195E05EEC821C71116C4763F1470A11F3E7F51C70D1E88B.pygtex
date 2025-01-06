@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{radiation}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{type}\PYG{+w}{            }\PYG{n}{radiation}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{libs}\PYG{+w}{            }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}libradiationModels.so\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
