@@ -29,7 +29,7 @@ endTime         2;
 deltaT          1e-7;
 
 // either maxCo or maxDeltaT, not both 
-maxCo           0.1;
+maxCo           0.4;
 //maxDeltaT       2.5e-5;
 
 adjustTimeStep  yes;
@@ -63,7 +63,7 @@ functions
         libs            ("libfieldFunctionObjects.so");
 
         // Optional entries (runtime modifiable)
-        patches         ("wall");
+        patches         ("sample");
         qr              qr;
 
         // Optional (inherited) entries
@@ -79,7 +79,7 @@ functions
        functionObjectLibs ("libsampling.so");
 
        // Patches to sample (wildcards allowed)
-       patchName          wall;
+       patchName          sample;
 
        // Name of the directory for probe data
        //name               patchProbes;
@@ -96,7 +96,7 @@ functions
        probeLocations (
            ( 0.0 0.11 0.0)
        );
-    }    
+    }
     
     fileUpdate1
     {
@@ -113,5 +113,6 @@ functions
         );
     }
 }
+
 
 // ************************************************************************* //

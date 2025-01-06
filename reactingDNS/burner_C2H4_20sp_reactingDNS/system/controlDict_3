@@ -63,7 +63,7 @@ functions
         libs            ("libfieldFunctionObjects.so");
 
         // Optional entries (runtime modifiable)
-        patches         ("wall");
+        patches         ("sample");
         qr              qr;
 
         // Optional (inherited) entries
@@ -79,7 +79,7 @@ functions
        functionObjectLibs ("libsampling.so");
 
        // Patches to sample (wildcards allowed)
-       patchName          wall;
+       patchName          sample;
 
        // Name of the directory for probe data
        //name               patchProbes;

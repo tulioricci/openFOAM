@@ -1,16 +1,18 @@
-#~~~ Create IC file
+
+set -e
+
 rm -rf 0.000000
+rm -rf dynamicCode
+rm -rf constant/polyMesh
+find -name "cellToRegion" -delete
+
+#~~~ Create IC file
 cp -r init_cond 0.000000
 cd 0.000000
 python3 setup.py --phi 1.0
 cd ../
 
-#~~~ If chtMultiRegionFoam
-#splitMeshRegions -cellZones -overwrite
-
 #~~~
-find -name "cellToRegion" -delete
-rm -rf constant/polyMesh
 gmsh mesh_v4_HAB=10mm.geo -parse_and_exit
 gmshToFoam mesh.msh
 line=$(grep -n "f_front" constant/polyMesh/boundary | cut -f1 -d:)
