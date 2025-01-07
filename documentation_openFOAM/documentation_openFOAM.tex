@@ -167,19 +167,40 @@
             {\code export PATH="\$PATH:/g/g92/$<$your-username$>$/gmsh-4.13.1-Linux64/bin"}
 
     \subsection{openFOAM}
-        \begin{itemize}
-        \item Build openFOAM: \\
-        OFversion=8 \\
+        \begin{enumerate}
+        \item Download openFOAM: \\
+        OFversion=... \\
         wget -O - http://dl.openfoam.org/third-party/\$\{OFversion\} $|$ tar zxv \\
         mv ThirdParty-\$\{OFversion\}-version-\$\{OFversion\} ThirdParty-\$\{OFversion\} \\
         wget -O - http://dl.openfoam.org/source/\$\{OFversion\} $|$ tar zxv \\
         mv OpenFOAM-\$\{OFversion\}-version-\$\{OFversion\} OpenFOAM-\$\{OFversion\} \\
+
+        \item Build openFOAM: \\
         source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc \\
         ./Allwmake $<$-j np$>$
 
         \item Add to .bashrc for future use (or as an alias): \\
         source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc
-        \end{itemize}
+        \end{enumerate}
+
+    \subsection{Adding a new solver}
+
+        \subsubsection{reactingDNS}
+
+            \begin{enumerate}
+            \item Needs OpenFOAM 8, so follow the previous step with {\code OFversion=8} but do not build it. Just download everything.
+
+            \item Copy the folder {\code reactingDNS} from {\code $<$github$>$/applications/solvers/combustion} to {\code $<$path$>$/OpenFOAM-8/applications/solvers/combustion}
+
+            \item Sometimes, this file gives issue. I noticed that, independent on the version, it always works fine with the updated file: \\
+            {\code cd $<$path$>$/OpenFOAM-8/src/OpenFOAM/db/IOstreams/hashes/} \\
+            {\code mv OSHA1stream.H \_OSHA1stream.H} \\
+            {\code mv $<$github$>$/OpenFOAM-8/src/OpenFOAM/db/IOstreams/hashes/ .}
+
+            \item Source and build OpenFOAM 8
+
+            \item Use the files in {\code $<$github-folder$>$/reactingDNS} to run the simulation
+            \end{enumerate}
 
     \subsection{PATO}
         \begin{itemize}
