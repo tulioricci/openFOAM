@@ -4,12 +4,14 @@ set -e
 rm -rf 0.000000
 rm -rf dynamicCode
 rm -rf constant/polyMesh
+rm -rf processor?
 find -name "cellToRegion" -delete
 
 #~~~ Create IC file
 cp -r init_cond 0.000000
 cd 0.000000
-python3 setup.py --phi 1.0
+python3 setup_Dirichlet.py --phi 1.0
+#python3 setup_Neumann.py --phi 1.0
 cd ../
 
 #~~~
@@ -39,4 +41,4 @@ sed -i "${phys_line}s/patch/wall/" constant/polyMesh/boundary | sed -n "${phys_l
 setFields
 
 #~~~ Domain decomposition 
-decomposePar -force
+decomposePar

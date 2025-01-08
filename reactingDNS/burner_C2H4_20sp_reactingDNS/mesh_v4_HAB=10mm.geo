@@ -169,7 +169,7 @@ Point(105) = {0.0, mat_location - 0.000050 , int_radius*sin, 1.0};
 Transfinite Line {-50,52,53,-58,59,-60} = 21 Using Progression 1.100;
 */
 
-/*//10 um
+//10 um
 Transfinite Line {22,-24,-79,-80} = 13 Using Progression 1.02;
 Transfinite Line { 3, 4, 6, 16} = 45 Using Progression 1.08;
 Transfinite Line { 13} = 45 Using Progression 1.02;
@@ -179,9 +179,8 @@ Transfinite Line { 68} = 57 Using Progression 1.005;
 Point(104) = {0.0, 0.000010 + burner_height, int_radius*sin, 1.0};
 Point(105) = {0.0, mat_location - 0.000100 , int_radius*sin, 1.0};
 Transfinite Line {-50,52,53,-58,59,-60} = 15 Using Progression 1.08;
-*/
 
-// 20um
+/*// 20um
 Transfinite Line {22,-24,-79,-80} = 11 Using Progression 1.02;
 Transfinite Line { 3, 4, 6, 16} = 36 Using Progression 1.08;
 Transfinite Line { 13} = 31 Using Progression 1.02;
@@ -191,6 +190,7 @@ Transfinite Line { 68} = 46 Using Progression 1.005;
 Point(104) = {0.0, 0.000020 + burner_height, int_radius*sin, 1.0};
 Point(105) = {0.0, mat_location - 0.000200 , int_radius*sin, 1.0};
 Transfinite Line {-50,52,53,-58,59,-60} = 11 Using Progression 1.08;
+*/
 
 /*material*/
 Transfinite Line { 26} = 29 Using Progression 1.012;

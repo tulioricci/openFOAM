@@ -29,13 +29,13 @@ endTime         2;
 deltaT          1e-7;
 
 // either maxCo or maxDeltaT, not both 
-maxCo           0.4;
+maxCo           0.1;
 //maxDeltaT       2.5e-5;
 
 adjustTimeStep  yes;
 
 writeControl    adjustableRunTime;
-writeInterval   1e-2;
+writeInterval   1e-4;
 
 //writeControl    timeStep;
 //writeInterval   10;
@@ -113,6 +113,5 @@ functions
         );
     }
 }
-
 
 // ************************************************************************* //

@@ -27,7 +27,7 @@ regions
         box (0.0 0.1 -1.0) (0.030226 0.1005 1.0);
         fieldValues
         (
-            volScalarFieldValue C2H4 0.04547999975914204
+            volScalarFieldValue C2H4 0.06372925403106726
             volVectorFieldValue U (0.0 0.10 0.0)
             volScalarFieldValue T 300
         );
@@ -40,7 +40,7 @@ regions
         (
             volScalarFieldValue T 1800
             volVectorFieldValue U (0.0 0.60 0.0)
-            volScalarFieldValue C2H4 0.01
+            volScalarFieldValue C2H4 0.015
         );
     }
 
