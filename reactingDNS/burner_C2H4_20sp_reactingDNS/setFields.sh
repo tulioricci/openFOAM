@@ -10,7 +10,8 @@ find -name "cellToRegion" -delete
 #~~~ Create IC file
 cp -r init_cond 0.000000
 cd 0.000000
-python3 setup_Dirichlet.py --phi 1.0
+python3 setup_useRefValues.py --phi 1.0
+#python3 setup_Dirichlet.py --phi 1.0
 #python3 setup_Neumann.py --phi 1.0
 cd ../
 
