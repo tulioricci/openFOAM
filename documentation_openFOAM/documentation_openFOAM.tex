@@ -129,6 +129,9 @@
 
     - sponge (?)
 
+    - constraint fields:
+    \href{https://www.openfoam.com/documentation/guides/latest/doc/guide-fvoptions-constraints-fixed-value.html}{\blue{constraint}}
+
 \section{Building}
 
 	\subsection{Pre-reqs}
@@ -293,12 +296,13 @@
         {\code $>$ decomposePar -allRegions if running in parallel}
 
     \subsection{Mesh generation}
+    \label{subsec:mesh_gen}
 
         {\code gmshToFoam mesh.msh}
 
-        Quads that touch the boundaries with a single node gives trouble and make a new ``boundary'' (defaultFaces). This may lead to issues on the simulation.
+        Quads that touch the boundaries with a single node gives trouble and make a new ``boundary'' (defaultFaces). This may lead to issues on the simulation. So far, the best I could do was to run mixed meshes, with quads/hexes on well behaved regions (transfinite) and triangles everywhere else.
 
-        So far, the best I could do was to run mixed meshes, with quads/hexes on well behaved regions (transfinite) and triangles everywhere else.
+        When creating a mesh with gmsh, you can specify multiple volumes, without splitting, combining or prescribing anything to their boundaries. This will be treated as different {\code cellZone}, which can then be used for unique purposes.
 
         \subsubsection{blockMesh}
 
@@ -520,6 +524,7 @@
 
     \subsection{fvOptions}
 
+    \begin{minipage}{\textwidth}
     {\setstretch{1.0}
     \begin{minted}{c}
     limitT
@@ -533,7 +538,10 @@
     }
     \end{minted}
     }
+    \end{minipage}
 
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
     \href{
     https://github.com/OpenFOAM/OpenFOAM-12/blob/master/src/waves/fvModels/verticalDamping/verticalDamping.C
     }{\blue{verticalDamping.C}}
@@ -565,8 +573,64 @@
     }
     \end{minted}
     }
+    \end{minipage}
 
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    fixedTemperature
+    {
+        type            fixedTemperatureConstraint;
 
+        selectionMode   cellZone;
+        cellZone        porosity;
+        mode            uniform;
+        temperature     300;
+    }
+    \end{minted}
+    }
+    \end{minipage}
+
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    fixedValue
+    {
+        type            scalarFixedValueConstraint;
+        active          yes;
+
+        selectionMode   cellZone;
+        cellZone        porosity;
+        fieldValues
+        {
+            mu          1e-5;
+        }
+    }
+    \end{minted}
+    }
+    \end{minipage}
+
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    fixedValue
+    {
+        type            vectorFixedValueConstraint;
+        active          yes;
+
+        selectionMode   cellZone;
+        cellZone        porosity;
+        fieldValues
+        {
+            U           (1.0 0.0 0.0);
+        }
+    }
+    \end{minted}
+    }
+    \end{minipage}
 
     \subsection{controlDict}
 
@@ -672,8 +736,6 @@
     \end{minted}
     }
     \end{minipage}
-
-
 
     \begin{minipage}{\textwidth}
     \vspace{12pt}
@@ -817,6 +879,62 @@
         To modify parameters in a parallel simulation, may be easier to recombine the latest solution file; modify then re-decompose
         \end{minipage}}
         \end{center}
+
+    \subsection{changeDictionary}
+
+    In parallel just use the "-parallel" option of changeDictionary, just as most OF tools work with cases.
+    ( so the command line will be ``mpirun -np X changeDictionary -parallel'')
+
+    \subsubsection{Erase entry}
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    U
+    {
+        boundaryField
+        {
+            ~fuel
+            {
+            }
+
+            ~shield
+            {
+            }
+        }
+    }
+    \end{minted}
+    }
+    \end{minipage}
+
+    \subsubsection{Modify entry}
+
+    Note that this will first modify the specific entries, then append new ones. Options not re-specified will be kept.
+
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    U
+    {
+        boundaryField
+        {
+            fuel
+            {
+                type            fixedValue;
+                value           uniform (0 0.14517050853 0);
+            }
+
+            shield
+            {
+                type            fixedValue;
+                value           uniform (0 0.14517050853 0);
+            }
+        }
+    }
+    \end{minted}
+    }
+    \end{minipage}
 
 \clearpage
 \section{Solvers}
