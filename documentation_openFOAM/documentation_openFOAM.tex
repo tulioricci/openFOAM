@@ -505,11 +505,35 @@
 
     \subsubsection{fvSchemes}
 
+        \href{https://www.openfoam.com/documentation/user-guide/6-solving/6.2-numerical-schemes}{\blue{fvSchemes}}
+
+        \href{https://doc.cfd.direct/openfoam/user-guide-v7/fvschemes}{\blue{fvSchemes}}
+
         \href{https://www.wolfdynamics.com/training/introOF8/supplement_tipsandtricks.pdf}{\blue{fvSchemes}}
 
     \subsubsection{fvSolution}
 
-        PISO - PIMPLE - SIMPLE
+        \href{https://doc.cfd.direct/openfoam/user-guide-v11/fvsolution}{\blue{link}}
+
+        \paragraph{PISO:\\}
+
+            \href{https://openfoamwiki.net/index.php/PISO}{\blue{link}}
+
+            \href{https://openfoamwiki.net/index.php/OpenFOAM_guide/The_PISO_algorithm_in_OpenFOAM}{\blue{link}}
+
+            \href{https://openfoamwiki.net/index.php/OpenFOAM_guide/The_PIMPLE_algorithm_in_OpenFOAM}{\blue{link}}
+
+            \href{https://www.tfd.chalmers.se/~hani/kurser/OS_CFD_2022/lectureNotes/PIMPLE.pdf}{\blue{link}}
+
+            \href{https://forum.freecad.org/viewtopic.php?style=4&t=31782}{\blue{link}}
+
+            \href{https://doc.cfd.direct/notes/cfd-general-principles/the-pimple-algorithm}{\blue{link}}
+
+            \href{https://doc.cfd.direct/notes/cfd-general-principles/steady-state-solution#x139-18400012}{\blue{link}}
+
+            \href{https://doc.cfd.direct/notes/cfd-general-principles/transient-solution#x150-19700019}{\blue{link}}
+
+            \href{https://www.simscale.com/forum/t/cfd-pimple-algorithm/81418}{\blue{link}}
 
         \paragraph{convergence:\\}
             In some case, if tolerances are too big, the solution may look a bit off, with pressure oscillations and spurious velocity fields
@@ -633,6 +657,8 @@
     \end{minipage}
 
     \subsection{controlDict}
+
+    \href{https://www.openfoam.com/documentation/user-guide/6-solving/6.1-time-and-data-inputoutput-control}{\blue{time control}}
 
     \href{https://www.cfd-online.com/Forums/openfoam-solving/128713-varying-time-step.html}{\blue{modify controlDict on the fly}}
 
@@ -939,6 +965,10 @@
 \clearpage
 \section{Solvers}
 
+    \subsection{rhoPimpleFoam}
+
+        \href{https://www.openfoam.com/documentation/guides/latest/doc/guide-applications-solvers-compressible-rhoPimpleFoam.html}{\blue{link}}
+
     \subsection{chtMultiRegionFoam}
 
         Put all BCs in ``0/'' (including the wall as fluid\_to\_solid and solid\_to\_fluid)
@@ -948,6 +978,18 @@
           {\code -cellZonesOnly} :: in case one of the domains is disjoint, i.e., no shared nodes. Otherwise, it will be split.
 
         May need to copy a {\code regionProperties} to {\code constant}
+
+        \href{https://www.cfd-online.com/Forums/openfoam/233208-conjugate-heat-transfer-contact-thermal-resistance-both-patches.html}{\blue{link}}
+
+        \href{https://www.sciencedirect.com/science/article/pii/S1290072920312606?fr=RR-2&ref=pdf_download&rr=8b9465ed4a1ce157}{\blue{link}}
+
+        \href{https://doc.openfoam.com/2306/tools/processing/solvers/rtm/heat-transfer/chtMultiRegionFoam/}{\blue{link}}
+
+        \href{https://help.sim-flow.com/solvers/cht-multi-region-foam}{\blue{link}}
+
+    \subsection{reactingFoam}
+
+        \href{https://help.sim-flow.com/solvers/reacting-foam}{\blue{link}}
 
 \clearpage
 \section{postProcess}
@@ -979,6 +1021,11 @@
         Specify initial time for conversion :: {\code -time 5.0:}
 
     \subsection{solver-dependent}
+
+\clearpage
+\section{Tutorials}
+
+    \href{https://www.cfdyna.com/Home/of_Programming.html}{\blue{a link that looks very good}}
 
 \clearpage
 \section{Formulation}
