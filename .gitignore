@@ -6,6 +6,12 @@
 *trash*
 *VTK
 *postProcessing
+documentation_openFOAM/_minted*
+documentation_openFOAM/documentation_openFOAM.aux
+documentation_openFOAM/documentation_openFOAM.log
+documentation_openFOAM/documentation_openFOAM.out
+documentation_openFOAM/documentation_openFOAM.synctex.gz
+documentation_openFOAM/documentation_openFOAM.toc
 #material_data/gasProperties
 #material_data/constantProperties
 #material_data/virgin
