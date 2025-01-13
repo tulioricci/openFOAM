@@ -10,13 +10,14 @@ find -name "cellToRegion" -delete
 #~~~ Create IC file
 cp -r init_cond 0.000000
 cd 0.000000
-python3 setup_useRefValues.py --phi 1.0
+python3 setup_Cantera.py --phi 1.0
+#python3 setup_useRefValues.py --phi 1.0
 #python3 setup_Dirichlet.py --phi 1.0
 #python3 setup_Neumann.py --phi 1.0
 cd ../
 
 #~~~
-gmsh mesh_v4_HAB=10mm.geo -parse_and_exit
+gmsh mesh_v5_HAB=10mm.geo -parse_and_exit
 gmshToFoam mesh.msh
 line=$(grep -n "f_front" constant/polyMesh/boundary | cut -f1 -d:)
 type_line=$(($line+2))

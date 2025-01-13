@@ -1,6 +1,22 @@
 import numpy as np
 import cantera
 
+import sys
+import getopt
+
+arg_list = sys.argv[1:]
+
+phi = None
+opts, args = getopt.getopt(arg_list,":",["phi="])
+for opt, arg in opts:
+    if opt in ("--phi"):
+        phi = float(arg)
+        print ('Equivalence ratio = ', float(phi))
+
+if phi is None:
+    print("Define the equivalence ratio with --phi")
+    sys.exit()
+
 mech_input = "uiuc_20sp.yaml"
 
 equiv_ratio = 1.0
@@ -12,7 +28,7 @@ slope = 0.05
 curve = 0.05
 loglevel = 0
 
-transp_model = 'unity-Lewis-number'
+transp_model = 'mixture-averaged'
 
 cantera_soln = cantera.Solution(mech_input)
 cantera_soln.transport_model = transp_model
@@ -25,8 +41,7 @@ width_mm = str('%02i' % (width*1000)) + "mm"
 
 air = "O2:0.21,N2:0.79"
 fuel = "C2H4:1"
-cantera_soln.set_equivalence_ratio(phi=equiv_ratio,
-                                   fuel=fuel, oxidizer=air)
+cantera_soln.set_equivalence_ratio(phi=phi, fuel=fuel, oxidizer=air)
 temp_unburned = 300.0
 pres_unburned = 101325.0
 cantera_soln.TP = temp_unburned, pres_unburned
@@ -72,9 +87,8 @@ print(f"{rhoU_int= }")
 print(f"{rhoU_ext= }")
 print("ratio=", u_ext/u_int,"\n")
 
-# Set Cantera internal gas temperature, pressure, and mole fractios
+# Set Cantera internal gas temperature, pressure, and mole fractions
 cantera_soln.TPX = temp_unburned, pres_unburned, x_reference
-
 
 # Pull temperature, density, mass fractions, and pressure from Cantera
 # set the mass flow rate at the inlet
@@ -96,7 +110,6 @@ sim.solve(loglevel, refine_grid=True, auto=True)
 sim.inlet.mdot = sim.density[0]*u_int
 sim.set_refine_criteria(ratio=ratio, slope=slope, curve=curve, prune=0.025)
 sim.solve(loglevel, refine_grid=True, auto=True)
-
 
 # ~~~ Reactants
 #assert np.absolute(sim.density[0]*sim.velocity[0] - rhoU_int) < 1e-11

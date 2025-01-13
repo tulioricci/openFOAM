@@ -41,12 +41,15 @@ boundaryField
     }
     fuel
     {
-        type uniformFixedValue;
-        uniformValue table
-        (
-        (0.0 (0 0.10 0))
-        (0.2 (0 0.145170508529917 0))
-        );
+        //type uniformFixedValue;
+        //uniformValue table
+        //(
+        //(0.0 (0 0.10 0))
+        //(0.2 (0 0.145170508529917 0))
+        //);
+        type            fixedValue;
+        value           uniform (0 0.14517050853 0);
+
     }
     wall
     {
@@ -58,12 +61,14 @@ boundaryField
     }
     shield
     {
-        type uniformFixedValue;
-        uniformValue table
-        (
-        (0.0 (0 0.10 0))
-        (0.2 (0 0.145170508529917 0))
-        );
+        //type uniformFixedValue;
+        //uniformValue table
+        //(
+        //(0.0 (0 0.10 0))
+        //(0.2 (0 0.145170508529917 0))
+        //);
+        type            fixedValue;
+        value           uniform (0 0.14517050853 0);
     }
 }
 
