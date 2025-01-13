@@ -107,10 +107,11 @@ volScalarField volFraction
         "volFraction",
         runTime.timeName(),
         mesh,
-        IOobject::MUST_READ,
+        IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     ),
-    mesh
+    mesh,
+    dimensionedScalar("volFraction",dimensionSet (0,0,0,0,0,0,0),1.0)
 );
 
 //**********************Binary Diffusion****************//

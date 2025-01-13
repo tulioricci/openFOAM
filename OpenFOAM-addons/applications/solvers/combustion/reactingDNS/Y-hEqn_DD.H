@@ -52,7 +52,7 @@ for(label i=0; i < Y.size(); i++)
         volScalarField& Diffi = Diff[i];
         volScalarField  ThermalDiffRatio = TDRatio_H*0;
         
-        // porosity region -- enforce constant transport 
+        // porosity region
         label zoneIndex = czMesh.findZoneID(targetZoneName);
         //Info << "zoneIndex : " << zoneIndex << endl;
         if (zoneIndex != -1) // -1 indicates the zone was not found
@@ -73,10 +73,10 @@ for(label i=0; i < Y.size(); i++)
                 //}
             }  
         }
-        else
-        {
-            Info << "Cell zone " << targetZoneName << " not found!" << endl;
-        }
+        //else
+        //{
+        //    Info << "Cell zone " << targetZoneName << " not found!" << endl;
+        //}
         //
      
         if(thermalDiffusion)
