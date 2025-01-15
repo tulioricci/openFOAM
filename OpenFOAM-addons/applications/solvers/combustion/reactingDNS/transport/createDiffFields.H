@@ -1,3 +1,26 @@
+
+//dimensionedScalar pUnit("pUnit",dimensionSet (1,-1,-2,0,0,0,0),1.0);
+//dimensionedScalar TUnit("TUnit", dimTemperature, 1.0);
+//dimensionedScalar DUnit("DUnit",dimensionSet (0,2,-1,0,0,0,0),1.0);
+//dimensionedScalar MuUnit("MuUnit",dimensionSet (1,-1,-1,0,0,0,0),1.0);
+//dimensionedScalar lambdaUnit("lambdaUnit",dimensionSet (1,1,-3,-1,0,0,0),1.0);
+
+volScalarField volFraction
+(
+    IOobject
+    (
+        "volFraction",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,  
+    dimensionedScalar("volFraction",dimensionSet (0,0,0,0,0,0,0),1.0)
+);
+
+// *****************************************************************************
+
 volScalarField MW
 (
     IOobject
@@ -14,24 +37,18 @@ volScalarField MW
 
 volScalarField chemistryhsSource
 (
-        IOobject
-        (
+    IOobject
+    (
         "chemistryhsSource",
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
         IOobject::AUTO_WRITE
         //false
-        ),
-        mesh,
-        dimensionedScalar("chemistryhsSource", dimEnergy/dimTime/dimVolume, 0.0)
+    ),
+    mesh,
+    dimensionedScalar("chemistryhsSource", dimEnergy/dimTime/dimVolume, 0.0)
 );
-
-dimensionedScalar pUnit("pUnit",dimensionSet (1,-1,-2,0,0,0,0),1.0);
-dimensionedScalar TUnit("TUnit", dimTemperature, 1.0);
-dimensionedScalar DUnit("DUnit",dimensionSet (0,2,-1,0,0,0,0),1.0);
-dimensionedScalar lambdaUnit("lambdaUnit",dimensionSet (1,1,-3,-1,0,0,0),1.0);
-dimensionedScalar MuUnit("MuUnit",dimensionSet (1,-1,-1,0,0,0,0),1.0);
 
 PtrList<volScalarField> Diff(Y.size());
 forAll(Y,i)
@@ -100,84 +117,68 @@ forAll(X,i)
     );
 }
 
-volScalarField volFraction
-(
-    IOobject
-    (
-        "volFraction",
-        runTime.timeName(),
-        mesh,
-        IOobject::READ_IF_PRESENT,
-        IOobject::AUTO_WRITE
-    ),
-    mesh,
-    dimensionedScalar("volFraction",dimensionSet (0,0,0,0,0,0,0),1.0)
-);
-
-//**********************Binary Diffusion****************//
 List<dimensionedScalar> Diff1(0.5*Y.size()*(Y.size()+1));
 List<dimensionedScalar> Diff2(0.5*Y.size()*(Y.size()+1));
 List<dimensionedScalar> Diff3(0.5*Y.size()*(Y.size()+1));
 List<dimensionedScalar> Diff4(0.5*Y.size()*(Y.size()+1));
-//******************************************************//
+List<dimensionedScalar> Diff5(0.5*Y.size()*(Y.size()+1));
 
 volScalarField DiNumerator
 (
-           IOobject
-           (
-              "DiNumerator",
-              runTime.timeName(),
-              mesh,
-              IOobject::NO_READ,
-              IOobject::NO_WRITE
-           ),
-           mesh,
-           dimensionedScalar("DiNumerator",dimensionSet (0,0,0,0,0,0,0),0.0)
+    IOobject
+    (
+        "DiNumerator",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("DiNumerator",dimensionSet (0,0,0,0,0,0,0),0.0)
 );
 
 volScalarField DiDenominator
 (
-           IOobject
-           (
-              "DiDenominator",
-              runTime.timeName(),
-              mesh,
-              IOobject::NO_READ,
-              IOobject::NO_WRITE
-           ),
-           mesh,
-           dimensionedScalar("DiDenominator",dimensionSet (0,0,0,0,0,0,0),0.0)
+    IOobject
+    (
+        "DiDenominator",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("DiDenominator",dimensionSet (0,0,0,0,0,0,0),0.0)
 );
 
 volScalarField Di
 (
-           IOobject
-           (
-              "Di",
-              runTime.timeName(),
-              mesh,
-              IOobject::NO_READ,
-              IOobject::NO_WRITE
-           ),
-           mesh,
-           dimensionedScalar("Di",dimensionSet (0,2,-1,0,0,0,0),0.0)
+    IOobject
+    (
+        "Di",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("Di",dimensionSet (0,2,-1,0,0,0,0),0.0)
 );
 
 volScalarField Hsi
 (
-           IOobject
-           (
-              "Hsi",
-              runTime.timeName(),
-              mesh,
-              IOobject::NO_READ,
-              IOobject::NO_WRITE
-           ),
-           mesh,
-           dimensionedScalar("Hsi",dimensionSet (0,2,-2,0,0,0,0),0.0),
-           zeroGradientFvPatchScalarField::typeName
+    IOobject
+    (
+        "Hsi",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("Hsi",dimensionSet (0,2,-2,0,0,0,0),0.0),
+    zeroGradientFvPatchScalarField::typeName
 );
-
 
 volVectorField DiffError
 (
@@ -193,7 +194,7 @@ volVectorField DiffError
     dimensionedVector("DiffError",dimensionSet (1,-2,-1,0,0,0,0),vector::zero)
 );
 
-surfaceScalarField vk //volVectorField vk
+surfaceScalarField vk
 (
     IOobject
     (
@@ -216,7 +217,6 @@ volScalarField diffsh
         mesh,
         IOobject::NO_READ,
         IOobject::NO_WRITE
-        //false
     ),
     mesh,
     dimensionedScalar("diffsh", dimEnergy/dimTime/dimVolume, 0.0)

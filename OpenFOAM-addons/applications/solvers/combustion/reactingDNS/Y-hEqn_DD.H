@@ -36,12 +36,12 @@ forAll(Y,i)
 volScalarField Yt(0.0*Y[0]);
 surfaceScalarField  phiUc = fvc::interpolate(DiffError) & mesh.Sf();
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************* TRR
 #include "cellZoneMesh.H"
 
 const cellZoneMesh& czMesh = mesh.cellZones();
 const word targetZoneName = "porosity";
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************* TRR
 
 for(label i=0; i < Y.size(); i++)
 {
@@ -51,33 +51,23 @@ for(label i=0; i < Y.size(); i++)
         volScalarField& Xi = X[i];
         volScalarField& Diffi = Diff[i];
         volScalarField  ThermalDiffRatio = TDRatio_H*0;
-        
+
+        // ************************* TRR
         // porosity region
         label zoneIndex = czMesh.findZoneID(targetZoneName);
-        //Info << "zoneIndex : " << zoneIndex << endl;
         if (zoneIndex != -1) // -1 indicates the zone was not found
         {
             const cellZone& targetZone = czMesh[targetZoneName];
 
             // Access the cells in the cellZone
             const labelList& cellIndices = targetZone;
-
-            //Info << "Number of cells in zone " << targetZoneName << ": " << cellIndices.size() << endl;
             
             forAll(cellIndices, j)
             {
                 Diffi[cellIndices[j]] = volFraction[cellIndices[j]]*Diffi[cellIndices[j]];
-                //label cellID = cellIndices[j];
-                //if(i == 0){
-                //    Info << "Processing cell ID: " << cellIndices[j] << ", " << volFraction[cellIndices[j]] << endl;
-                //}
             }  
         }
-        //else
-        //{
-        //    Info << "Cell zone " << targetZoneName << " not found!" << endl;
-        //}
-        //
+        // ************************* TRR
      
         if(thermalDiffusion)
         {
@@ -114,23 +104,25 @@ for(label i=0; i < Y.size(); i++)
             }
         }
     
-        surfaceScalarField speicesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi)+Yi*rho*Diffi*fvc::grad(MW)/MW+(-rho*Diff[i]*ThermalDiffRatio*fvc::grad(T)*Yi/(T*(Xi+SMALL)))-Yi*DiffError)& mesh.Sf();
+        surfaceScalarField speicesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW + (-rho*Diff[i]*ThermalDiffRatio*fvc::grad(T)*Yi/(T*(Xi+SMALL)))-Yi*DiffError)& mesh.Sf();
         vk += fvc::interpolate(Hsi)*speicesFlux;
         sumOfOtherSpeices += speicesFlux;
-        diffsh += fvc::laplacian(mixAlpha*Hsi, Yi);// override temperature to enthalpy
+        diffsh += fvc::laplacian(mixAlpha*Hsi, Yi); // override temperature to enthalpy
 
         fvScalarMatrix YEqn
         (
           fvm::ddt(rho, Yi)
           + mvConvection->fvmDiv(phi, Yi)
-          - fvm::laplacian(rho*Diffi, Yi)  //- fvm::laplacian(rho*Diffi+turbulence->mut()/Sct, Yi)
+          - fvm::laplacian(rho*Diffi, Yi)  //- fvm::laplacian(rho*Diffi+turbulence->mut()/Sct, Yi) // TRR
           + mvConvection->fvmDiv(phiUc,Yi)
           - fvc::laplacian(rho*Diffi*Yi/MW,MW)
-          //- fvc::laplacian(-rho*Diffi*ThermalDiffRatio*Yi/(T*(Xi+SMALL)),T) // soret effect  Yi/(T*(Xi+SMALL)),T)
+          //- fvc::laplacian(-rho*Diffi*ThermalDiffRatio*Yi/(T*(Xi+SMALL)),T) // soret effect  Yi/(T*(Xi+SMALL)),T) // TRR
           ==
-          reaction->R(Yi)
-          + fvOptions(rho, Yi)
+          fvOptions(rho, Yi)          
+          //reaction->R(Yi) //XXX XXX
+          //+ fvOptions(rho, Yi) //XXX XXX
         );
+        Info << "NO REACTIONS" << endl; // XXX
         YEqn.relax();
 
         fvOptions.constrain(YEqn);
@@ -146,7 +138,6 @@ for(label i=0; i < Y.size(); i++)
 // for N2
 {
     label i = inertIndex;
-    //volScalarField& Yi = Y[i];
     for(label icell = 0; icell < rho.size(); icell++)
     {
         Hsi[icell] = composition.Hs(i, p[icell], T[icell]);
@@ -173,8 +164,13 @@ for(label i=0; i < Y.size(); i++)
 Y[inertIndex] = scalar(1) - Yt;
 Y[inertIndex].max(0.0);
         
-chemistryhsSource = reaction->Qdot();
+chemistryhsSource = reaction->Qdot();  // visualization only?
 
+
+
+
+
+// TODO : put in separate file
 // Energy Equation
 
 volScalarField& he = thermo.he();
@@ -212,3 +208,4 @@ fvOptions.correct(he);
 thermo.correct();
 
 Info<< "min/max(T) = " << min(T).value() << ", " << max(T).value() << endl;
+Info<< "min/max(P) = " << min(p).value() << ", " << max(p).value() << endl;

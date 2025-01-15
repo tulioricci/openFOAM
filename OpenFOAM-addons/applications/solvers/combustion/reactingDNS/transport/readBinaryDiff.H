@@ -1,16 +1,16 @@
-//*****************S. Zhong 2016.12.26******************//
-  Info << "Read binaryDiff" << endl;
-     IOdictionary binaryDiff
+Info << "Read binaryDiff" << endl;
+
+IOdictionary binaryDiff
+(
+    IOobject
     (
-        IOobject
-        (
-            "binaryDiff",
-            runTime.constant(),
-            mesh,
-            IOobject::MUST_READ_IF_MODIFIED,
-            IOobject::NO_WRITE
-        )
-    );
+        "binaryDiff",
+        runTime.constant(),
+        mesh,
+        IOobject::MUST_READ_IF_MODIFIED,
+        IOobject::NO_WRITE
+    )
+);
 
 const dimensionedScalar dUnit
 (
@@ -19,108 +19,101 @@ const dimensionedScalar dUnit
     1.0
 );
 
-boolList flags(0.5*Y.size()*(Y.size()+1), true);
-forAll(groupSpecies,i)
+/*
+Info << groupSpecies.size() << endl;
+forAll(groupSpecies, i)
 {
-	dictionary dDict;
-	if(groupSpecies[i][0] != -1)
-	{
-		forAll(groupSpecies[i],h)
-		{
-			for(label j = i; j < groupSpecies.size();j ++)
-			{
-				if(groupSpecies[j][0] != -1)
-				{
-					forAll(groupSpecies[j],z)
-					{
-						bool foundDict = false;
-						if(binaryDiff.found(Y[groupSpecies[i][h]].name()+"-"+Y[groupSpecies[j][z]].name()))
-						{
-							dDict = binaryDiff.subDict(Y[groupSpecies[i][h]].name()+"-"+Y[groupSpecies[j][z]].name());
-							foundDict = true;
-						}
-						else if(binaryDiff.found(Y[groupSpecies[j][z]].name()+"-"+Y[groupSpecies[i][h]].name()))
-						{
-							dDict = binaryDiff.subDict(Y[groupSpecies[j][z]].name()+"-"+Y[groupSpecies[i][h]].name());
-							foundDict = true;
-						}
-						else 
-						{
-							label xx = z*h;
-							if(xx == (groupSpecies[j].size()*groupSpecies[i].size()))
-							{
-								Info << "binary diffsusion coefficient for " << endl;
-								Info << "(" << endl;
-								forAll(groupSpecies[i],h)
-								{
-									Info << Y[groupSpecies[i][h]].name() << endl;
-								}
-								Info << ")" << endl;
-								Info << "(" << endl;
-								forAll(groupSpecies[j],z)
-								{
-									Info << Y[groupSpecies[j][z]].name() << endl;
-								}
-								Info << ")" << endl;
-								Info << " are not provided in constant/binaryDiff" <<	FatalErrorIn( "something wrong in your constant/binaryDiff") << abort(FatalError);	
-							}						
-						}
-						
-						if(foundDict)
-						{
-/* 							if(i != groupSpecies[j][0])
-							{
-								forAll(groupSpecies[j],z)
-								{
-										label m = max(i,groupSpecies[j][z]);
-										label n = min(i,groupSpecies[j][z]);
-										
-										label k = Y.size()*n+m-0.5*n*(n+1);
-										if(flags[k])
-										{
-											Diff1[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-											Diff2[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-											Diff3[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-											Diff4[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+  Info << groupSpecies[i] << endl;
+  forAll(groupSpecies[i], h)
+  {
+    Info << Y[groupSpecies[i][h]].name() << endl;
+  }
+}
 
-											Diff1[k] = readScalar(dDict.lookup("Diff1")) * dUnit;
-											Diff2[k] = readScalar(dDict.lookup("Diff2")) * dUnit;
-											Diff3[k] = readScalar(dDict.lookup("Diff3")) * dUnit;
-											Diff4[k] = readScalar(dDict.lookup("Diff4")) * dUnit;
-											flags[k] = false;
-										}	
-								}
-							} */
-								forAll(groupSpecies[i],h)
-								{
-									forAll(groupSpecies[j],z)
-									{
-											label m = max(groupSpecies[i][h],groupSpecies[j][z]);
-											label n = min(groupSpecies[i][h],groupSpecies[j][z]);
-											
-											label k = Y.size()*n+m-0.5*n*(n+1);
-											if(flags[k])
-											{
-												Diff1[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-												Diff2[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-												Diff3[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-												Diff4[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+exit(1);
+*/
 
-												Diff1[k] = readScalar(dDict.lookup("Diff1")) * dUnit;
-												Diff2[k] = readScalar(dDict.lookup("Diff2")) * dUnit;
-												Diff3[k] = readScalar(dDict.lookup("Diff3")) * dUnit;
-												Diff4[k] = readScalar(dDict.lookup("Diff4")) * dUnit;
-												flags[k] = false;
-											}	
-									}								
-								}
-							break;				
-						}
-					}
-				}	
-			}				
-		}
-	}
+boolList flags(0.5*Y.size()*(Y.size()+1), true);
+forAll(groupSpecies, i)
+{
+    dictionary dDict;
+    if(groupSpecies[i][0] != -1)
+    {
+        forAll(groupSpecies[i], h)
+        {
+            for(label j = i; j < groupSpecies.size(); j++)
+            {
+                if(groupSpecies[j][0] != -1)
+                {
+                    forAll(groupSpecies[j],z)
+                    {
+                        bool foundDict = false;
+                        if(binaryDiff.found(Y[groupSpecies[i][h]].name()+"-"+Y[groupSpecies[j][z]].name()))
+                        {
+                            dDict = binaryDiff.subDict(Y[groupSpecies[i][h]].name()+"-"+Y[groupSpecies[j][z]].name());
+                            foundDict = true;
+                        }
+                        else if(binaryDiff.found(Y[groupSpecies[j][z]].name()+"-"+Y[groupSpecies[i][h]].name()))
+                        {
+                            dDict = binaryDiff.subDict(Y[groupSpecies[j][z]].name()+"-"+Y[groupSpecies[i][h]].name());
+                            foundDict = true;
+                        }
+                        else 
+                        {
+                            label xx = z*h;
+                            if(xx == (groupSpecies[j].size()*groupSpecies[i].size()))
+                            {
+                                Info << "binary diffusion coefficient for " << endl;
+                                Info << "(" << endl;
+                                forAll(groupSpecies[i],h)
+                                {
+                                    Info << Y[groupSpecies[i][h]].name() << endl;
+                                }
+                                Info << ")" << endl;
+                                Info << "(" << endl;
+                                forAll(groupSpecies[j],z)
+                                {
+                                    Info << Y[groupSpecies[j][z]].name() << endl;
+                                }
+                                Info << ")" << endl;
+                                Info << " are not provided in constant/binaryDiff" << FatalErrorIn( "something wrong in your constant/binaryDiff") << abort(FatalError);	
+                            }						
+                        }
+                        
+                        if(foundDict)
+                        {
+                            forAll(groupSpecies[i],h)
+                            {
+                                forAll(groupSpecies[j],z)
+                                {
+                                    label m = max(groupSpecies[i][h],groupSpecies[j][z]);
+                                    label n = min(groupSpecies[i][h],groupSpecies[j][z]);
+                                    
+                                    label k = Y.size()*n+m-0.5*n*(n+1);
+                                    if(flags[k])
+                                    {
+                                        Diff1[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+                                        Diff2[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+                                        Diff3[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+                                        Diff4[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+                                        Diff5[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+
+                                        Diff1[k] = readScalar(dDict.lookup("Diff1")) * dUnit;
+                                        Diff2[k] = readScalar(dDict.lookup("Diff2")) * dUnit;
+                                        Diff3[k] = readScalar(dDict.lookup("Diff3")) * dUnit;
+                                        Diff4[k] = readScalar(dDict.lookup("Diff4")) * dUnit;
+                                        Diff5[k] = readScalar(dDict.lookup("Diff5")) * dUnit;
+                                        flags[k] = false;
+                                    }	
+                                }								
+                            }
+                            break;				
+                        }
+                    }
+                }	
+            }				
+        }
+    }
 }
 
 
@@ -128,15 +121,22 @@ Info << "species binary diffusion log polynomial fitting coefficient" << endl;
 Info << "(" << endl;
 forAll(Y,i)
 {
-   for (label j = i; j < Y.size(); j++)
-   {
-		label m = max(i,j);
-		label n = min(i,j);
-		label k = Y.size()*n+m-0.5*n*(n+1);
-		Info << Y[i].name() << "-" << Y[j].name() << tab << Diff1[k].value() << tab << Diff2[k].value() << tab << Diff3[k].value() << tab << Diff4[k].value() << endl;
-	}
+    for (label j = i; j < Y.size(); j++)
+    {
+        label m = max(i,j);
+        label n = min(i,j);
+        label k = Y.size()*n+m-0.5*n*(n+1);
+        Info << Y[i].name() << "-" << Y[j].name()
+            << tab << Diff1[k].value()
+            << tab << Diff2[k].value()
+            << tab << Diff3[k].value()
+            << tab << Diff4[k].value() 
+            << tab << Diff5[k].value() << endl;
+    }
 }
 Info << ")" << endl;
+
+
 /*
 forAll(Y,i)
 {
@@ -167,12 +167,13 @@ forAll(Y,i)
 		Diff2[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
 		Diff3[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
 		Diff4[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+		Diff5[k].dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
 
 		Diff1[k] = readScalar(dDict.lookup("Diff1")) * dUnit;
 		Diff2[k] = readScalar(dDict.lookup("Diff2")) * dUnit;
 		Diff3[k] = readScalar(dDict.lookup("Diff3")) * dUnit;
 		Diff4[k] = readScalar(dDict.lookup("Diff4")) * dUnit;
+		Diff5[k] = readScalar(dDict.lookup("Diff5")) * dUnit;
    }
 }
 */
-

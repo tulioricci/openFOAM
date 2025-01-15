@@ -68,7 +68,6 @@ int main(int argc, char *argv[])
     #include "createFieldRefs.H"
 
     #include "readChemistryProperties.H"
-
     #include "createDiffFields.H"
     #include "createTDiffFields.H"
     #include "createLambdaFields.H"
@@ -91,7 +90,6 @@ int main(int argc, char *argv[])
     #include "readThermalDiff.H"
     #include "readSpeciesLambda.H"
     #include "readSpeciesMu.H"
-    //#include "getElementData.H"
 
     while (runTime.run())
     {
@@ -120,15 +118,8 @@ int main(int argc, char *argv[])
             #include "updateTransProperties.H"
             #include "UEqn.H"
 
-            //chemistry.solve(runTime.deltaT().value());
-
-            //Info<< "Before Y, ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-            //    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-            //            << endl;
-            reaction->correct();
-            //Info<< "reactions, ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-            //    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-            //            << endl;            
+            //chemistry.solve(runTime.deltaT().value());  // XXX Did I comment this?
+            reaction->correct();       
             if(differentialDiffusion)
             {
                 #include "Y-hEqn_DD.H"
@@ -137,10 +128,6 @@ int main(int argc, char *argv[])
             {
                 #include "Y-hEqn.H"
             }
-            
-            //Info<< "After Y, ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-            //    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-            //            << endl;
 
              // --- Pressure corrector loop
             while (pimple.correct())

@@ -20,15 +20,12 @@ new volScalarField
 );
 }
 
-//***********************viscosity*************************//
-
 List<dimensionedScalar> Mu1(Y.size());
 List<dimensionedScalar> Mu2(Y.size());
 List<dimensionedScalar> Mu3(Y.size());
 List<dimensionedScalar> Mu4(Y.size());
+List<dimensionedScalar> Mu5(Y.size());
 
-
-//********************viscocity********************//
 volScalarField mixMu
 (
     IOobject

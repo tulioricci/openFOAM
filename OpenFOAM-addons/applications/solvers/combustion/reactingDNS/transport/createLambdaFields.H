@@ -22,12 +22,12 @@ i,new volScalarField
 
 
 //**********************lambda***********************//
-
 List<dimensionedScalar> Lambda1(Y.size());
 List<dimensionedScalar> Lambda2(Y.size());
 List<dimensionedScalar> Lambda3(Y.size());
 List<dimensionedScalar> Lambda4(Y.size());
-//**********************lambda**************************//
+List<dimensionedScalar> Lambda5(Y.size());
+
 volScalarField mixLambdaA
 (
     IOobject

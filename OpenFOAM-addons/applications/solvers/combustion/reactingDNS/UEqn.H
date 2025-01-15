@@ -2,6 +2,7 @@
 
 MRF.correctBoundaryVelocity(U);
 
+// TRR Always using the mixAvg transport!
 tmp<fvVectorMatrix> tUEqn
 (
     fvm::ddt(rho, U) + fvm::div(phi, U)
@@ -24,7 +25,3 @@ if (pimple.momentumPredictor())
     fvOptions.correct(U);
     K = 0.5*magSqr(U);
 }
-
-//Info<< "UEqn, ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-//    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-//            << endl;
