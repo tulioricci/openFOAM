@@ -2,13 +2,12 @@
 
 MRF.correctBoundaryVelocity(U);
 
-// TRR Always using the mixAvg transport!
-tmp<fvVectorMatrix> tUEqn
+tmp<fvVectorMatrix> tUEqn  // TRR Always using the mixAvg transport!
 (
     fvm::ddt(rho, U) + fvm::div(phi, U)
   + MRF.DDt(rho, U)
   - fvm::laplacian(mixMu+turbulence->mut(),U)
-  - fvc::div(((mixMu+turbulence->mut())*dev2(fvc::grad(U)().T())))
+  //- fvc::div(((mixMu+turbulence->mut())*dev2(fvc::grad(U)().T())))
  ==  
     fvOptions(rho, U)
 );
@@ -20,8 +19,29 @@ fvOptions.constrain(UEqn);
 
 if (pimple.momentumPredictor())
 {
+    solve
+    (
+        UEqn
+     ==
+        fvc::reconstruct
+        (
+            (
+              - ghf*fvc::snGrad(rho)
+              - fvc::snGrad(p_rgh)
+            )*mesh.magSf()
+        )
+    );
+
+    fvOptions.correct(U);
+    K = 0.5*magSqr(U);
+}
+
+/*
+if (pimple.momentumPredictor())
+{
     solve(UEqn == -fvc::grad(p));
 
     fvOptions.correct(U);
     K = 0.5*magSqr(U);
 }
+*/

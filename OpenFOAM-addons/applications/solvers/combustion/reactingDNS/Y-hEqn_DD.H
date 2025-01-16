@@ -17,10 +17,12 @@ surfaceScalarField sumOfOtherSpeices = fvc::interpolate(DiffError) & mesh.Sf();
 forAll(Y,i)
 {
     volScalarField& Yi = Y[i];
-    volScalarField& Xi = X[i];
     volScalarField& Diffi = Diff[i];
     DiffError += (rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW);
-    if(thermalDiffusion)
+    
+    /* TODO
+    volScalarField& Xi = X[i];    
+    if (thermalDiffusion)
     {
         if(Y[i].name() == "H")
         {
@@ -31,10 +33,11 @@ forAll(Y,i)
             DiffError +=  (-rho*Diffi*TDRatio_H2*fvc::grad(T)*Yi/(T*(Xi+SMALL)));
         }
     }
+    */
 }
 
 volScalarField Yt(0.0*Y[0]);
-surfaceScalarField  phiUc = fvc::interpolate(DiffError) & mesh.Sf();
+surfaceScalarField phiUc = fvc::interpolate(DiffError) & mesh.Sf();  // treat the correction velocity as a velocity
 
 // ************************* TRR
 #include "cellZoneMesh.H"
@@ -48,12 +51,11 @@ for(label i=0; i < Y.size(); i++)
     if(i != inertIndex)
     {
         volScalarField& Yi = Y[i];
-        volScalarField& Xi = X[i];
         volScalarField& Diffi = Diff[i];
-        volScalarField  ThermalDiffRatio = TDRatio_H*0;
 
         // ************************* TRR
         // porosity region
+        // TODO put this snippet when computing the diffusivity, and not here?
         label zoneIndex = czMesh.findZoneID(targetZoneName);
         if (zoneIndex != -1) // -1 indicates the zone was not found
         {
@@ -69,7 +71,10 @@ for(label i=0; i < Y.size(); i++)
         }
         // ************************* TRR
      
+        /* TODO 
         if(thermalDiffusion)
+        volScalarField& Xi = X[i];
+        volScalarField  ThermalDiffRatio = TDRatio_H*0;
         {
             if(Y[i].name() == "H")
             {
@@ -84,7 +89,10 @@ for(label i=0; i < Y.size(); i++)
                ThermalDiffRatio *= 0;
             }
         }
+        */
         
+        // *********************************************************************
+        // Enthalpy -- for boundaries, obtain it from P and T
         for(label icell = 0; icell < rho.size(); icell++)
         {
             Hsi[icell] = composition.Hs(i, p[icell], T[icell]);
@@ -104,25 +112,26 @@ for(label i=0; i < Y.size(); i++)
             }
         }
     
-        surfaceScalarField speicesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW + (-rho*Diff[i]*ThermalDiffRatio*fvc::grad(T)*Yi/(T*(Xi+SMALL)))-Yi*DiffError)& mesh.Sf();
-        vk += fvc::interpolate(Hsi)*speicesFlux;
-        sumOfOtherSpeices += speicesFlux;
+        // TODO TRR surfaceScalarField speicesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW + (-rho*Diff[i]*ThermalDiffRatio*fvc::grad(T)*Yi/(T*(Xi+SMALL)))-Yi*DiffError)& mesh.Sf();
+        surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW - Yi*DiffError)& mesh.Sf();
+        vk += fvc::interpolate(Hsi)*speciesFlux;
+        sumOfOtherSpeices += speciesFlux;
         diffsh += fvc::laplacian(mixAlpha*Hsi, Yi); // override temperature to enthalpy
-
+        // *********************************************************************
+        
         fvScalarMatrix YEqn
         (
           fvm::ddt(rho, Yi)
           + mvConvection->fvmDiv(phi, Yi)
-          - fvm::laplacian(rho*Diffi, Yi)  //- fvm::laplacian(rho*Diffi+turbulence->mut()/Sct, Yi) // TRR
-          + mvConvection->fvmDiv(phiUc,Yi)
+          - fvm::laplacian(rho*Diffi, Yi)
           - fvc::laplacian(rho*Diffi*Yi/MW,MW)
-          //- fvc::laplacian(-rho*Diffi*ThermalDiffRatio*Yi/(T*(Xi+SMALL)),T) // soret effect  Yi/(T*(Xi+SMALL)),T) // TRR
-          ==
-          fvOptions(rho, Yi)          
-          //reaction->R(Yi) //XXX XXX
-          //+ fvOptions(rho, Yi) //XXX XXX
+          + mvConvection->fvmDiv(phiUc, Yi)
+          // TODO - fvm::laplacian(rho*Diffi+turbulence->mut()/Sct, Yi) // TRR
+          // TODO - fvc::laplacian(-rho*Diffi*ThermalDiffRatio*Yi/(T*(Xi+SMALL)),T) // soret effect  Yi/(T*(Xi+SMALL)),T) // TRR
+          ==        
+          reaction->R(Yi)
+          + fvOptions(rho, Yi)
         );
-        Info << "NO REACTIONS" << endl; // XXX
         YEqn.relax();
 
         fvOptions.constrain(YEqn);
@@ -156,15 +165,18 @@ for(label i=0; i < Y.size(); i++)
             HsiPatch[facei] = composition.Hs(i, pp[facei], Tp[facei]);
         }
     }
+    
+    //~~~ surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW - Yi*DiffError)& mesh.Sf();
+    //~~~ vk += fvc::interpolate(Hsi)*speciesFlux;
+    //~~~ sumOfOtherSpeices += speciesFlux;   
+    //~~~ diffsh += fvc::laplacian(mixAlpha*Hsi, Yi); // override temperature to enthalpy
 
-    vk += fvc::interpolate(Hsi)*-sumOfOtherSpeices;
-    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);
+    vk += fvc::interpolate(Hsi)*-sumOfOtherSpeices;  // XXX this looks wrong to me
+    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);  // XXX wtf?!?!?
 }
 
 Y[inertIndex] = scalar(1) - Yt;
 Y[inertIndex].max(0.0);
-        
-chemistryhsSource = reaction->Qdot();  // visualization only?
 
 
 
@@ -206,6 +218,8 @@ EEqn.solve("he");
 fvOptions.correct(he);
 
 thermo.correct();
+        
+chemistryhsSource = reaction->Qdot();  // visualization only?
 
 Info<< "min/max(T) = " << min(T).value() << ", " << max(T).value() << endl;
 Info<< "min/max(P) = " << min(p).value() << ", " << max(p).value() << endl;

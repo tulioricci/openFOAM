@@ -1,4 +1,20 @@
 
+if (differentialDiffusion)
+{
+	if (thermalDiffusion)
+	{
+		Info << " WITH differential diffusion and thermalDiffusion" << endl;
+	}
+	else
+	{
+		Info << " WITH differential diffusion"  << endl;
+	}
+}
+else
+{
+    Info << " WITHOUT differential diffusion " << endl;
+}
+
 dimensionedScalar pUnit("pUnit",dimensionSet (1,-1,-2,0,0,0,0),1.0);
 dimensionedScalar TUnit("TUnit", dimTemperature, 1.0);
 dimensionedScalar DUnit("DUnit",dimensionSet (0,2,-1,0,0,0,0),1.0);
@@ -26,7 +42,7 @@ forAll(Y,i)
 // evaluate polynomials
 volScalarField tmpT = log(T/TUnit);
 
-if(differentialDiffusion)
+if (differentialDiffusion)
 {
     forAll(groupSpecies,i)
     {
@@ -60,30 +76,27 @@ if(differentialDiffusion)
             }
         }
     }
-}
 
-// Diffusivity mixture rule
-if(differentialDiffusion)
-{
+    // Diffusivity mixture rule
     forAll(Y,i)
     {
         DiNumerator *= 0;
         DiDenominator *= 0;
-        for (label j = 0; j< Y.size(); j++)
+        for (label j = 0; j < Y.size(); j++)
         {
             label m = max(i,j);
             label n = min(i,j);
             volScalarField& Xj = X[j];
 
-            if(j != i)
+            if (j != i)
             {
                 label k = Y.size()*n+m-0.5*n*(n+1);
                 DiNumerator += (Xj+1e-12) * composition.Wi(j);
                 DiDenominator += MW*(Xj+1e-12)/d[k];
             } 
         }
+        // FIXME :: currently, won't account for singular cases
         Diff[i] = DiNumerator*DUnit/ DiDenominator;
-        //Info << i << tab << Diff[i] << endl; 
     }
 }
 
@@ -123,16 +136,18 @@ forAll(Y,i)
     {
         volScalarField& Xz = X[z];
         volScalarField& Muz = Mu[z];
-        yhi += Xz*0.353553*pow(1.0+Foam::sqrt(Mui/Muz)*pow025(composition.Wi(z)/composition.Wi(i)),2)/Foam::sqrt(1.0+composition.Wi(i)/composition.Wi(z));
+        yhi += Xz*0.353553391*pow(1.0 + Foam::sqrt(Mui/Muz)*pow025(composition.Wi(z)/composition.Wi(i)),2)/Foam::sqrt(1.0+composition.Wi(i)/composition.Wi(z));
     }
     mixMu += (Xi)*Mui/yhi;
+    
     mixLambdaA += Xi*Lambda[i];
     mixLambdaB += Xi/Lambda[i];
 }
 
-mixAlpha = 0.5*(mixLambdaA+(1/mixLambdaB))/thermo.Cp();
+mixAlpha = 0.5*(mixLambdaA+(1/mixLambdaB))/thermo.Cp();  // OpenFOAM "alpha"
 
-// for soret effect, thermal diffusion for light species
+/*
+// for Soret effect, thermal diffusion for light species
 if(thermalDiffusion)
 {
     TDRatio_H *= 0;
@@ -163,19 +178,4 @@ if(thermalDiffusion)
         }
     }
 }
-
-if(differentialDiffusion)
-{
-	if(thermalDiffusion)
-	{
-		Info << " WITH differential diffusion and thermalDiffusion"  << endl;
-	}
-	else
-	{
-		Info << " WITH differential diffusion"  << endl;
-	}
-}
-else
-{
-    Info << " WITHOUT differential diffusion "  << endl;
-}
+*/
