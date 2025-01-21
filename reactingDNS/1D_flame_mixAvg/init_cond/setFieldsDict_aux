@@ -1,0 +1,23 @@
+
+volScalarFieldValue C2H4 -1.942710373427e-22
+volScalarFieldValue H2 0.0002867666829885
+volScalarFieldValue H 3.310553106457e-05
+volScalarFieldValue O2 0.01138914403186
+volScalarFieldValue O 0.0004475454868439
+volScalarFieldValue H2O 0.07856971645003
+volScalarFieldValue CO 0.02030383449768
+volScalarFieldValue CO2 0.1672492872497
+volScalarFieldValue OH 0.00336007429295
+volScalarFieldValue HCO 3.378735769949e-09
+volScalarFieldValue HO2 1.382100491936e-06
+volScalarFieldValue H2O2 8.143102010836e-08
+volScalarFieldValue C2H3 1.196416051067e-25
+volScalarFieldValue C2H2 1.153577425678e-20
+volScalarFieldValue CH4 3.739809335876e-17
+volScalarFieldValue CH3 1.484464821591e-16
+volScalarFieldValue CH2 4.970509443412e-17
+volScalarFieldValue CH2O 3.556945292163e-11
+volScalarFieldValue CH2CHO 5.175401691433e-24
+volScalarFieldValue N2 0.7183590588311
+volScalarFieldValue T 2381.417962569
+volVectorFieldValue U (4.996919928327 0.0 0.0)

@@ -1,0 +1,135 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0/fluid";
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 101325.0;
+
+boundaryField
+{
+
+    inlet
+    {
+        type            codedFixedValue;
+        value           uniform 101325.0;
+        name            myPressureInlet;
+        //redirectType    myPinlet;
+
+        code
+        #{
+            const scalar p0 = 101325.0;
+            const scalar rho0 = 1.169853268102;
+            const scalar T0 = 300.0;
+            const scalar R = 288.7114215170679;
+            const scalar gamma = 1.382504729781694;
+            const scalar u0 = 5.952410108387e-01;
+
+            const fvPatch& boundaryPatch = patch();          // Get the current patch
+            scalarField& patchField = *this;                 // Directly access the boundary field
+
+            // Access the fields
+            const vectorField& faceNormals = boundaryPatch.Sf();
+            const scalarField faceAreas = mag(faceNormals);
+            const volVectorField& U = db().lookupObject<volVectorField>("U");
+            const volScalarField& psi = db().lookupObject<volScalarField>("thermo:psi");
+            const volScalarField& p = db().lookupObject<volScalarField>("p_rgh");
+            const volScalarField& T = db().lookupObject<volScalarField>("T");
+
+            const vectorField& UVal = U.internalField();       // Access cell-centered velocity
+            const scalarField& psiVal = psi.internalField();   // Access cell-centered psi
+            const scalarField& pVal = p.internalField();       // Access cell-centered pressure
+            const scalarField& TVal = T.internalField();       // Access cell-centered temperature
+
+            // Loop over the boundary faces and compute necessary values
+            forAll(boundaryPatch, faceI)
+            {
+                // Get the cell index corresponding to the boundary face
+                label cellI = boundaryPatch.faceCells()[faceI];
+
+                // Extract cell-centered values
+                vector U_cell = UVal[cellI];
+                scalar psi_cell = psiVal[cellI];
+                scalar p_cell = pVal[cellI];
+                scalar T_cell = TVal[cellI];
+
+                // Compute quantities
+                vector nHat = faceNormals[faceI] / faceAreas[faceI];
+                scalar U_normal = mag(U_cell & nHat);
+                scalar rho_cell = psi_cell * p_cell;
+
+                // Compute perturbed values
+                scalar u_tilde = U_normal - u0;
+                scalar p_tilde = p_cell - p0;
+                scalar rho_tilde = rho_cell - rho0;
+                scalar sound_speed = sqrt(gamma * R * T_cell);
+
+                // Compute coefficients
+                //scalar c1 = rho_tilde * std::pow(sound_speed,2) + p_tilde;
+                //scalar c2 = 0.0;
+                //scalar c3 = rho0 * sound_speed * u_tilde + p_tilde;
+                //scalar c4 = 0.0;
+                scalar c1 = 0.0;
+                //scalar c2 = 0.0;
+                scalar c3 = 0.0;
+                scalar c4 = -rho0 * sound_speed * u_tilde + p_tilde;
+                
+                //Info << 0.5 * c3 + 0.5 * c4 + p0 << endl;
+                patchField[faceI] = 0.5 * c3 + 0.5 * c4 + p0;
+            }
+
+            // Update the coefficients for the patch field
+            fixedValueFvPatchField::updateCoeffs();
+        #};
+
+        /*
+        codeOptions
+        #{
+            -I$(LIB_SRC)/../applications/solvers/combustion/reactingDNS/transport
+        #};
+        */
+
+        codeInclude
+        #{
+            #include <cmath>
+            #include <iostream>
+        #};
+    }
+
+    /*
+    inlet
+    {
+        type            fixedFluxExtrapolatedPressure;
+    }
+    */
+
+    outlet
+    {
+        type            waveTransmissive;
+        gamma           1.4;
+        fieldInf        101325.0;
+        lInf            0.2;
+        value           uniform 101325.0;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
