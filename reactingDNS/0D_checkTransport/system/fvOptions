@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+/*
+radiation
+{
+    type            radiation;
+    libs            ("libradiationModels.so");
+}
+ 
+limitT
+{
+    type            limitTemperature;
+    active          yes;
+
+    selectionMode   all;
+    min             200;
+    max             2499.99;
+}
+*/
+
+fixedTemperature
+{
+    type            fixedTemperatureConstraint;
+    selectionMode   all; // Or cellZone, etc.
+    //cellSet         myCellSet;
+    mode            uniform; // Applies a uniform temperature
+    temperature     table
+    (
+        (0 300)
+        (1e-7 300)
+        (2e-7 400)
+        (3e-7 500)
+        (4e-7 600)
+        (5e-7 700)
+        (6e-7 800)
+        (7e-7 900)
+        (8e-7 1000)
+        (9e-7 1100)
+        (10e-7 1200)
+        (11e-7 1300)
+        (12e-7 1400)
+        (13e-7 1500)
+        (14e-7 1600)
+        (15e-7 1700)
+        (16e-7 1800)
+        (17e-7 1900)
+        (18e-7 2000)
+        (19e-7 2100)
+        (20e-7 2200)
+        (21e-7 2300)
+        (22e-7 2400)
+        (23e-7 2500)
+        (24e-7 2500)
+    );
+}
+
+/*
+fixedValue1
+{
+    type            scalarFixedValueConstraint;
+    active          yes;
+
+    selectionMode   all;    //cellZone or all
+    //cellZone        porosity;
+    fieldValues
+    {
+        p           101325.0;
+    }
+}
+*/

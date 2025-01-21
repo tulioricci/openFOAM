@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingDNS;
+
+startFrom       latestTime;
+/*startFrom       startTime;*/
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1.3e-3;
+
+deltaT          1e-7;
+
+// either maxCo or maxDeltaT, not both 
+//maxCo           0.04;
+maxDeltaT       1.0e-7;
+
+adjustTimeStep  yes;
+
+writeControl    adjustableRunTime;
+writeInterval   1e-2;
+
+//writeControl    timeStep;
+//writeInterval   10;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      fixed;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    myProbes
+    {
+       // Type of functionObject
+       type probes;
+
+       // Where to load it from (if not already in solver)
+       functionObjectLibs ("libsampling.so");
+       writeControl   timeStep;
+       writeInterval  1;
+
+       //region flow;
+
+       // Fields to be probed. runTime modifiable!
+       fields (T P C2H4 CO2 H2 H2O O2 H OH C2H2);
+
+       // Locations to be probed. runTime modifiable!
+       probeLocations
+       (
+       ( 0.0 0.0 0.0)
+       ); 
+    }
+}
+
+// ************************************************************************* //
