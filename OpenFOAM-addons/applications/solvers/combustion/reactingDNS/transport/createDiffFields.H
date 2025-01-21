@@ -19,6 +19,28 @@ volScalarField volFraction
     dimensionedScalar("volFraction",dimensionSet (0,0,0,0,0,0,0),1.0)
 );
 
+PtrList<volScalarField> omegaDot(Y.size());
+forAll(Y,i)
+{
+    word name("omegaDot"+Y[i].name());
+    omegaDot.set
+    (
+    i,new volScalarField
+        ( 
+        IOobject
+        (
+            name,
+            runTime.timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh,  
+        dimensionedScalar(name,dimensionSet (1,-3,-1,0,0,0,0),0)
+        )
+    );
+}
+
 // *****************************************************************************
 
 volScalarField MW
@@ -163,6 +185,20 @@ volScalarField Di
     ),
     mesh,
     dimensionedScalar("Di",dimensionSet (0,2,-1,0,0,0,0),0.0)
+);
+
+volScalarField selfDiffusion_Dii
+(
+    IOobject
+    (
+        "selfDiffusion_Dii",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("selfDiffusion_Dii",dimensionSet (0,0,0,0,0,0,0),0.0)
 );
 
 volScalarField Hsi

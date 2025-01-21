@@ -14,11 +14,17 @@ diffsh *= 0;
 DiffError *= 0;
 surfaceScalarField sumOfOtherSpeices = fvc::interpolate(DiffError) & mesh.Sf();
 
+// Compute correction velocity
 forAll(Y,i)
 {
     volScalarField& Yi = Y[i];
     volScalarField& Diffi = Diff[i];
-    DiffError += (rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW);
+    
+    // nabla X --  may be singular when using harmonic fluxes
+    //DiffError += (rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW);
+    
+    // nabla Y
+    DiffError += rho*Diffi*fvc::grad(Yi);
     
     /* TODO
     volScalarField& Xi = X[i];    
@@ -92,7 +98,10 @@ for(label i=0; i < Y.size(); i++)
         */
         
         // *********************************************************************
-        // Enthalpy -- for boundaries, obtain it from P and T
+        // Enthalpy evaluated in this loop, with the species
+        // (ideally, it would be more organized if they were split apart)
+        
+        // for boundaries, obtain it from P and T
         for(label icell = 0; icell < rho.size(); icell++)
         {
             Hsi[icell] = composition.Hs(i, p[icell], T[icell]);
@@ -113,7 +122,13 @@ for(label i=0; i < Y.size(); i++)
         }
     
         // TODO TRR surfaceScalarField speicesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW + (-rho*Diff[i]*ThermalDiffRatio*fvc::grad(T)*Yi/(T*(Xi+SMALL)))-Yi*DiffError)& mesh.Sf();
-        surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW - Yi*DiffError)& mesh.Sf();
+        
+        // nabla X
+        //surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW - Yi*DiffError)& mesh.Sf();
+        
+        // nabla Y
+        surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) - Yi*DiffError)& mesh.Sf();
+        
         vk += fvc::interpolate(Hsi)*speciesFlux;
         sumOfOtherSpeices += speciesFlux;
         diffsh += fvc::laplacian(mixAlpha*Hsi, Yi); // override temperature to enthalpy
@@ -124,7 +139,7 @@ for(label i=0; i < Y.size(); i++)
           fvm::ddt(rho, Yi)
           + mvConvection->fvmDiv(phi, Yi)
           - fvm::laplacian(rho*Diffi, Yi)
-          - fvc::laplacian(rho*Diffi*Yi/MW,MW)
+          //- fvc::laplacian(rho*Diffi*Yi/MW,MW) // nabla X
           + mvConvection->fvmDiv(phiUc, Yi)
           // TODO - fvm::laplacian(rho*Diffi+turbulence->mut()/Sct, Yi) // TRR
           // TODO - fvc::laplacian(-rho*Diffi*ThermalDiffRatio*Yi/(T*(Xi+SMALL)),T) // soret effect  Yi/(T*(Xi+SMALL)),T) // TRR
@@ -142,6 +157,8 @@ for(label i=0; i < Y.size(); i++)
 
         Yi.max(0.0);
         Yt += Yi;
+        
+        omegaDot[i] = reaction->R(Yi) & rho / mag(rho); //composition.Wi(i);
     }
 }
 // for N2
@@ -166,13 +183,9 @@ for(label i=0; i < Y.size(); i++)
         }
     }
     
-    //~~~ surfaceScalarField speciesFlux = fvc::interpolate(rho*Diffi*fvc::grad(Yi) + Yi*rho*Diffi*fvc::grad(MW)/MW - Yi*DiffError)& mesh.Sf();
-    //~~~ vk += fvc::interpolate(Hsi)*speciesFlux;
-    //~~~ sumOfOtherSpeices += speciesFlux;   
-    //~~~ diffsh += fvc::laplacian(mixAlpha*Hsi, Yi); // override temperature to enthalpy
-
-    vk += fvc::interpolate(Hsi)*-sumOfOtherSpeices;  // XXX this looks wrong to me
-    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);  // XXX wtf?!?!?
+    // this is weird but it is right. It comes from "Y_N2 = 1 - Yt"
+    vk += fvc::interpolate(Hsi)*-sumOfOtherSpeices;
+    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);  // XXX: there is a laplacian((mixAlpha*Hsi),(1-(0*C2H4))).. Is this coming from here? Why the zero?
 }
 
 Y[inertIndex] = scalar(1) - Yt;
@@ -189,8 +202,10 @@ volScalarField& he = thermo.he();
 
 fvScalarMatrix EEqn
 (
-    fvm::ddt(rho, he) + mvConvection->fvmDiv(phi, he)
-    + fvc::ddt(rho, K) + fvc::div(phi, K)
+    fvm::ddt(rho, he)
+    + mvConvection->fvmDiv(phi, he)
+    + fvc::ddt(rho, K)
+    + fvc::div(phi, K)
     + (
         he.name() == "e"
         ? fvc::div
@@ -201,8 +216,9 @@ fvScalarMatrix EEqn
         )
         : -dpdt
     )
-    - fvm::laplacian(mixAlpha, he)  //- fvm::laplacian(mixAlpha+turbulence->mut()/Prt, he)
-    + diffsh
+    - fvm::laplacian(mixAlpha, he)  // lambda nabla T -- first term
+    //- fvm::laplacian(mixAlpha+turbulence->mut()/Prt, he)
+    + diffsh  // lambda nabla T -- second term
     - fvc::div(vk)
     ==
     reaction->Qdot()

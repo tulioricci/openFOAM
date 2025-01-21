@@ -1,14 +1,14 @@
 
 if (differentialDiffusion)
 {
-	if (thermalDiffusion)
-	{
-		Info << " WITH differential diffusion and thermalDiffusion" << endl;
-	}
-	else
-	{
-		Info << " WITH differential diffusion"  << endl;
-	}
+    if (thermalDiffusion)
+    {
+        Info << " WITH differential diffusion and thermalDiffusion" << endl;
+    }
+    else
+    {
+        Info << " WITH differential diffusion"  << endl;
+    }
 }
 else
 {
@@ -55,13 +55,13 @@ if (differentialDiffusion)
                     label m = max(groupSpecies[i][0],groupSpecies[j][0]);
                     label n = min(groupSpecies[i][0],groupSpecies[j][0]);	
                     label k = Y.size()*n+m-0.5*n*(n+1);
-                    //volScalarField tmpd = 1e-4 * exp(Diff1[k]+tmpT*(Diff2[k]+tmpT*(Diff3[k]+tmpT*Diff4[k]))) / (p / 101325 /pUnit);
+
                     volScalarField tmpd = sqrt(T/TUnit)*(T/TUnit) / (p/pUnit)*(
                                             Diff1[k] + tmpT*(
                                               Diff2[k] + tmpT*(
                                                 Diff3[k] + tmpT*(
-                                                  Diff4[k] + tmpT*Diff5[k])))); // TRR
-                    //Info << pow(T/TUnit,3/2) << endl;
+                                                  Diff4[k] + tmpT*Diff5[k]))));
+
                     forAll(groupSpecies[i],h)
                     {
                         forAll(groupSpecies[j],z)
@@ -77,6 +77,7 @@ if (differentialDiffusion)
         }
     }
 
+    /* * * * * * * * * * * * * * * * * * * * *
     // Diffusivity mixture rule
     forAll(Y,i)
     {
@@ -98,26 +99,59 @@ if (differentialDiffusion)
         // FIXME :: currently, won't account for singular cases
         Diff[i] = DiNumerator*DUnit/ DiDenominator;
     }
+    * * * * * * * * * * * * * * * * * * * * */
+
+    // Diffusivity mixture rule
+    forAll(Y,i)
+    {
+        DiNumerator *= 0;
+        DiDenominator *= 0;
+        for (label j = 0; j < Y.size(); j++)
+        {
+            label m = max(i,j);
+            label n = min(i,j);
+            label k = Y.size()*n+m-0.5*n*(n+1);
+            volScalarField& Xj = X[j];
+            
+            if (j != i)
+            {
+                DiNumerator += (Xj) * composition.Wi(j);
+                DiDenominator += MW*(Xj)/d[k];
+            }
+            else
+            {
+                selfDiffusion_Dii = d[k]
+            }            
+        }
+        Diff[i] = DUnit*( (DiNumerator + 1e-12*selfDiffusion_Dii)/(DiDenominator + 1e-12) );
+    }
 }
 
+// Compute mu and lambda
 forAll(groupSpecies,i)
 {
     if(groupSpecies[i][0] != -1)
     {
+        // Cantera-like interpolation for thermal conductivity
         Lambda[groupSpecies[i][0]] = lambdaUnit*sqrt(T/TUnit)*(
                                       Lambda1[groupSpecies[i][0]] + tmpT*(
                                         Lambda2[groupSpecies[i][0]] + tmpT*(
                                           Lambda3[groupSpecies[i][0]] + tmpT*(
                                             Lambda4[groupSpecies[i][0]] + tmpT*Lambda5[groupSpecies[i][0]])))
-                                      ); // TRR                                    
+                                      );
+
+        // Cantera-like interpolation for viscosity
         Mu[groupSpecies[i][0]] = MuUnit*sqrt(T/TUnit)*pow(
                                   Mu1[groupSpecies[i][0]] + tmpT*(
                                     Mu2[groupSpecies[i][0]] + tmpT*(
                                       Mu3[groupSpecies[i][0]] + tmpT*(
-                                        Mu4[groupSpecies[i][0]] + tmpT*Mu5[groupSpecies[i][0]]))), 2); // TRR
+                                        Mu4[groupSpecies[i][0]] + tmpT*Mu5[groupSpecies[i][0]]))), 2);
+                                        
+        // The implementation may combine some species, so this is used to 
+        // copy-and-paste the values among all of the grouped ones...
         forAll(groupSpecies[i],j)
         {
-            if(j > 0)  // TRR: what is this ???
+            if (j > 0)
             {
                 Lambda[groupSpecies[i][j]] = Lambda[groupSpecies[i][0]];
                 Mu[groupSpecies[i][j]] = Mu[groupSpecies[i][0]];
