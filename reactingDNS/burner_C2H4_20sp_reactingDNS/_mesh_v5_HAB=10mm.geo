@@ -197,6 +197,8 @@ If (mesh_type == 3)
     Transfinite Line {-50,52,53,-58,59,-60} = 15 Using Progression 1.08;
 EndIf
 
+Point(106) = {0.0, 0.001 + burner_height, 0.0*sin, 1.0};
+
 /*material*/
 Transfinite Line { 26} = 29 Using Progression 1.012;
 Transfinite Line { 54} = 29 Using Progression 1.025;
