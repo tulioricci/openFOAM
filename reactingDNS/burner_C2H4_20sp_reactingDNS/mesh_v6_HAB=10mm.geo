@@ -325,7 +325,6 @@ Plane Surface(15) = {15};
 Transfinite Surface {15};
 Recombine Surface(15);
 
-/*
 Extrude {{0,1,0}, {0,0,0}, 2*Pi/frac} { Surface{ 1}; Layers{1}; Recombine; }
 Extrude {{0,1,0}, {0,0,0}, 2*Pi/frac} { Surface{ 2}; Layers{1}; Recombine; }
 Extrude {{0,1,0}, {0,0,0}, 2*Pi/frac} { Surface{ 3}; Layers{1}; Recombine; }
@@ -350,11 +349,9 @@ Physical Surface("shield") = {257};
 Physical Surface("fuel") = {174,215};
 Physical Surface("sample") = {362,388,414,428,453};
 Physical Volume("flow") = {1:13};
-*/
 
-Mesh 2;
+Mesh 3;
 order = 1;
 SetOrder order;
 Mesh.MshFileVersion = 2.2;
-
-//Save "mesh.msh";
+Save "mesh.msh";

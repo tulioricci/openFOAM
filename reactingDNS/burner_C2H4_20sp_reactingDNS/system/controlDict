@@ -29,16 +29,16 @@ endTime         2;
 deltaT          1e-7;
 
 // either maxCo or maxDeltaT, not both 
-maxCo           0.1;
+maxCo           0.5;
 //maxDeltaT       2.5e-5;
 
 adjustTimeStep  yes;
 
 writeControl    adjustableRunTime;
-writeInterval   1e-4;
+writeInterval   1e-2;
 
 //writeControl    timeStep;
-//writeInterval   10;
+//writeInterval   2;
 
 purgeWrite      0;
 
@@ -72,6 +72,35 @@ functions
         //region          flow;
         writeControl    writeTime;
     }
+
+    wallGradient
+    {
+        type            grad;
+        libs            ("libfieldFunctionObjects.so");
+        field           T;
+
+        patches         ("sample");
+
+        // Optional (inherited) entries
+        result          gradT;
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
+    }
+
+    gradient
+    {
+        type            grad;
+        libs            ("libfieldFunctionObjects.so");
+        field           T;
+
+        // Optional (inherited) entries
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
+    }
     
     patchProbes
     {
@@ -89,7 +118,7 @@ functions
        //writeInterval      5;
 
        //region             flow;
-       fields             (wallHeatFlux);
+       fields             (wallHeatFlux mixLambda gradT );
 
         // Locations to probe. These get snapped onto the nearest point
         // on the selected patches
@@ -98,20 +127,7 @@ functions
        );
     }
     
-    fileUpdate1
-    {
-        type            timeActivatedFileUpdate;
-        functionObjectLibs ("libutilityFunctionObjects.so");
-        outputControl   timeStep;
-        outputInterval  1;
-        fileToUpdate    "$FOAM_CASE/system/controlDict";
-        timeVsFile
-        (
-            (0.0000    "$FOAM_CASE/system/controlDict_1")
-            (0.0005    "$FOAM_CASE/system/controlDict_2")
-            (0.0010    "$FOAM_CASE/system/controlDict_3")
-        );
-    }
 }
+
 
 // ************************************************************************* //
