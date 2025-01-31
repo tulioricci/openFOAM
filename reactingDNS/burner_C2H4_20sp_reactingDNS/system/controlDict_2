@@ -35,12 +35,12 @@ maxCo           0.25;
 adjustTimeStep  yes;
 
 writeControl    adjustableRunTime;
-writeInterval   1e-4;
+writeInterval   5e-2;
 
 //writeControl    timeStep;
 //writeInterval   10;
 
-purgeWrite      0;
+purgeWrite      3;
 
 writeFormat     binary;
 
@@ -110,9 +110,9 @@ functions
             (0.0000    "$FOAM_CASE/system/controlDict_1")
             (0.0005    "$FOAM_CASE/system/controlDict_2")
             (0.0010    "$FOAM_CASE/system/controlDict_3")
+            (1.0000    "$FOAM_CASE/system/controlDict_4")
         );
     }
 }
-
 
 // ************************************************************************* //
