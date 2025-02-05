@@ -1,0 +1,133 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingDNS;
+
+startFrom       latestTime;
+/*startFrom       startTime;*/
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         2;
+
+deltaT          1e-7;
+
+// either maxCo or maxDeltaT, not both 
+//maxCo           0.5;
+maxDeltaT       1.0e-6;
+
+adjustTimeStep  yes;
+
+writeControl    adjustableRunTime;
+writeInterval   1e-2;
+
+//writeControl    timeStep;
+//writeInterval   2;
+
+purgeWrite      3;
+
+writeFormat     binary;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      fixed;
+/*timeFormat      general;*/
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    wallHeatFlux1
+    {
+        type            wallHeatFlux;
+        libs            ("libfieldFunctionObjects.so");
+
+        // Optional entries (runtime modifiable)
+        patches         ("sample");
+        qr              qr;
+
+        // Optional (inherited) entries
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
+    }
+
+    wallGradient
+    {
+        type            grad;
+        libs            ("libfieldFunctionObjects.so");
+        field           T;
+
+        patches         ("sample");
+
+        // Optional (inherited) entries
+        result          gradT;
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
+    }
+
+    gradient
+    {
+        type            grad;
+        libs            ("libfieldFunctionObjects.so");
+        field           T;
+
+        // Optional (inherited) entries
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
+    }
+    
+    patchProbes
+    {
+       type               patchProbes;
+       functionObjectLibs ("libsampling.so");
+
+       // Patches to sample (wildcards allowed)
+       patchName          sample;
+
+       // Name of the directory for probe data
+       //name               patchProbes;
+
+       writeControl       writeTime;
+       //writeControl       timeStep;
+       //writeInterval      5;
+
+       //region             flow;
+       fields             (wallHeatFlux mixLambda gradT );
+
+        // Locations to probe. These get snapped onto the nearest point
+        // on the selected patches
+       probeLocations (
+           ( 0.0 0.11 0.0)
+       );
+    }
+    
+}
+
+
+// ************************************************************************* //
