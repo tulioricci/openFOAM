@@ -214,17 +214,13 @@
         source $<$path$>$/OpenFOAM-7/etc/bashrc \\
         source \$PATO\_DIR/bashrc \\
         cd \$PATO\_DIR/src/thirdParty/mutation++ \\
-        See instruction in \ref{sec:mutation} for {\code mutation++} \\
+        * See instruction in \ref{sec:mutation} for {\code mutation++} \\
         ln -s \$(pwd)/thirdparty/eigen/Eigen/ ./install/include \\
         cd \$PATO\_DIR \\
         ./Allwmake
 
         \item Alias in .bashrc
         \end{itemize}
-
-        %PS: it may have some issues with mutation++: installing the thirdParty version manually seems easier; also need to go to \textit{install/include} and manually link the \textit{Eigen} library in their thirdParty folder: it struggles with the Eigen package, so just do it by hand...
-
-        %PS: check the \textit{sources} and \textit{exports}. If it doesn't find \textit{wmkdep} is because of export and sources. %I also rebuild the ``ThirdParty-7'' from openfoam before it worked...
 
     \subsection{Mutation++ \\}
     \label{sec:mutation}
@@ -233,9 +229,7 @@
         git clone https://github.com/mutationpp/Mutationpp.git
 
         Build Mutation: \\
-        % mkdir build \\
-        % module load cmake/3.12.0 \\
-        cmake -DCMAKE\_INSTALL\_PREFIX:PATH=$<$path$>$/install \\
+        cmake -DCMAKE\_INSTALL\_PREFIX:PATH=\$(pwd)/install
         make -j 4 install \\
 
         If installing inside PATO, it is done.
@@ -247,7 +241,7 @@
         export LD\_LIBRARY\_PATH=\$MPP\_DIRECTORY/install/lib64:\$LD\_LIBRARY\_PATH
 
         Can check just in case: \\
-        checkmix air\_11
+        checkmix air11
 
     \subsection{TODO: (ignore this)}
     \paragraph{swak4Foam \\}
@@ -746,18 +740,20 @@
     \vspace{12pt}
     {\setstretch{1.0}
     \begin{minted}{c}
-    probes
+    wallGradient
     {
-       type               probes;
-       functionObjectLibs ("libsampling.so");
-       writeControl       timeStep;
-       writeInterval      5;
-       region             flow;
-       fields             (T);
-       probeLocations (
-           ( 0.0001 0.105 0.0)
-           ...
-       );
+        type            grad;
+        libs            ("libfieldFunctionObjects.so");
+        field           T;
+
+        patches         ("sample");
+
+        // Optional (inherited) entries
+        result          gradT;
+        writePrecision  8;
+        writeToFile     true;
+        //region          flow;
+        writeControl    writeTime;
     }
     \end{minted}
     }
@@ -773,7 +769,7 @@
        functionObjectLibs ("libsampling.so");
 
        // Patches to sample (wildcards allowed)
-       patchName          wall;
+       patchName          sample;
 
        // Name of the directory for probe data
        //name               patchProbes;
@@ -783,7 +779,7 @@
        //writeInterval      5;
 
        //region             flow;
-       fields             (wallHeatFlux);
+       fields             (wallHeatFlux mixLambda gradT );
 
         // Locations to probe. These get snapped onto the nearest point
         // on the selected patches
@@ -791,7 +787,27 @@
            ( 0.0 0.11 0.0)
        );
     }
+    \end{minted}
+    }
+    \end{minipage}
 
+    \begin{minipage}{\textwidth}
+    \vspace{12pt}
+    {\setstretch{1.0}
+    \begin{minted}{c}
+    probes
+    {
+       type               probes;
+       functionObjectLibs ("libsampling.so");
+       writeControl       timeStep;
+       writeInterval      5;
+       region             flow;
+       fields             (T);
+       probeLocations (
+           ( 0.0001 0.105 0.0)
+           ...
+       );
+    }
     \end{minted}
     }
     \end{minipage}
@@ -965,6 +981,8 @@
 \clearpage
 \section{Solvers}
 
+    \subsection{scalarTransportFoam}
+
     \subsection{rhoPimpleFoam}
 
         \href{https://www.openfoam.com/documentation/guides/latest/doc/guide-applications-solvers-compressible-rhoPimpleFoam.html}{\blue{link}}
@@ -1119,9 +1137,5 @@
         \end{equation}
 
         Species diffusivity based on unitary \textbf{Lewis} or \textbf{Schmidt} number (may depend on openFOAM version)
-
-        \href{
-        https://pure.tue.nl/ws/portalfiles/portal/305474394/1013373-Neural\_Network\_Hydrogen\_Combustion\_Modelling.pdf
-        }{\blue{transport model}}
 
 \end{document}
