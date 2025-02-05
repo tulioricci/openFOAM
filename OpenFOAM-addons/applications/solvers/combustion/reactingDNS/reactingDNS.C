@@ -142,7 +142,8 @@ int main(int argc, char *argv[])
             }
         }
 
-        rho = thermo.rho();  
+        rho = thermo.rho();
+        U_sponge = - rho*sponge*(U - Uref);
 
         runTime.write();
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"

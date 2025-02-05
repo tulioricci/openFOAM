@@ -33,7 +33,8 @@ forAll(Y,i)
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
-            IOobject::AUTO_WRITE
+            //IOobject::AUTO_WRITE
+            IOobject::NO_WRITE
         ),
         mesh,  
         dimensionedScalar(name,dimensionSet (1,-3,-1,0,0,0,0),0)
@@ -86,8 +87,8 @@ forAll(Y,i)
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
-            //IOobject::NO_WRITE
-            IOobject::AUTO_WRITE
+            IOobject::NO_WRITE
+            //IOobject::AUTO_WRITE
         ),
         mesh,  
         dimensionedScalar(name,dimensionSet (0,2,-1,0,0,0,0),0)

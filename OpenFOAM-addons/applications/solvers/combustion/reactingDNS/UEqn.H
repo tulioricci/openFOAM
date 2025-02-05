@@ -7,9 +7,10 @@ tmp<fvVectorMatrix> tUEqn  // TRR Always using the mixAvg transport!
     fvm::ddt(rho, U) + fvm::div(phi, U)
   + MRF.DDt(rho, U)
   - fvm::laplacian(mixMu+turbulence->mut(),U)
-  //- fvc::div(((mixMu+turbulence->mut())*dev2(fvc::grad(U)().T())))
+  //- fvc::div(((mixMu+turbulence->mut())*dev2(fvc::grad(U)().T()))) // XXX ???
  ==  
-    fvOptions(rho, U)
+  fvOptions(rho, U)
+  - rho*sponge*(U - Uref)
 );
 fvVectorMatrix& UEqn = tUEqn.ref();
 
@@ -35,13 +36,3 @@ if (pimple.momentumPredictor())
     fvOptions.correct(U);
     K = 0.5*magSqr(U);
 }
-
-/*
-if (pimple.momentumPredictor())
-{
-    solve(UEqn == -fvc::grad(p));
-
-    fvOptions.correct(U);
-    K = 0.5*magSqr(U);
-}
-*/

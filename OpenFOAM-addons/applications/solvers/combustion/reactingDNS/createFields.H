@@ -142,3 +142,45 @@ fields.add(thermo.he());
 
 #include "createMRF.H"
 #include "createFvOptions.H"
+
+volScalarField sponge
+(
+    IOobject
+    (
+        "sponge",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,  
+    dimensionedScalar("sponge",dimensionSet (0,0,-1,0,0,0,0),0.0)
+);
+
+volVectorField Uref
+(
+    IOobject
+    (
+        "Uref",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,  
+    dimensionedVector("Uref", dimensionSet(0,1,-1,0,0,0,0), vector(0,0,0))
+);
+
+volVectorField U_sponge
+(
+    IOobject
+    (
+        "U_sponge",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,  
+    dimensionedVector("U_sponge", dimensionSet(1,-2,-2,0,0,0,0), vector(0,0,0))
+);

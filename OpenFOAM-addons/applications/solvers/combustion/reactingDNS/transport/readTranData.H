@@ -56,6 +56,7 @@ forAll(groupSpecies,i)
     groupSpecies[i].setSize(1,i);
 }
 
+/* XXX TRR
 forAll(trandata,i)
 {
     for(label j = 0; j < i;j++)
@@ -73,6 +74,7 @@ forAll(trandata,i)
         }
     }
 }
+*/
 
 forAll(groupSpecies,i)
 {

@@ -123,7 +123,6 @@ if (differentialDiffusion)
                 selfDiffusion_Dii = d[k];
             }            
         }
-        // uses an epsilon term to work around singular cases
         Diff[i] = DUnit*( (DiNumerator + 1e-12*selfDiffusion_Dii)/(DiDenominator + 1e-12) );
     }
 }
