@@ -20,7 +20,7 @@ plt.rcParams["figure.dpi"] = 120
 #plt.style.use("ggplot")
 #plt.style.use("seaborn-pastel")
 
-gas = ct.Solution("uiuc_20sp.yaml")
+gas = ct.Solution("wang99_51sp.yaml")
 
 # Define the reactor temperature and pressure
 reactor_temperature = 1200  # Kelvin
@@ -71,14 +71,11 @@ while t < estimated_ignition_delay_time:
         # We will save only every 10th value. Otherwise, this takes too long
         # Note that the species concentrations are mass fractions
         time_history.append(r.thermo.state, t=t)
-        transport.append(gas.mix_diff_coeffs)
+        #transport.append(gas.mix_diff_coeffs)
     counter += 1
 
-transport = np.asarray(transport)
-plt.plot(time_history.T, transport[:,0]); plt.show()
-
-import sys
-sys.exit()
+#transport = np.asarray(transport)
+#plt.plot(time_history.T, transport[:,0]); plt.show()
 
 plt.figure()
 plt.plot(time_history.t*1000, time_history.T, "-o", color='black', label='Cantera')
