@@ -1,3 +1,0 @@
-gmshToFoam mesh.msh
-update constant/polyMesh/boundary with "wedge"
-sh setFields.sh
