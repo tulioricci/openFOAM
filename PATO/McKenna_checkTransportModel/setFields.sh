@@ -4,6 +4,10 @@ set -e
 rm -rf 0.000000
 rm -rf dynamicCode
 rm -rf constant/polyMesh
+rm -rf constant/flow/polyMesh
+rm -rf constant/graphite/polyMesh
+rm -rf constant/alumina/polyMesh
+rm -rf constant/porousMat/polyMesh
 rm -rf processor?
 find -name "cellToRegion" -delete
 
@@ -66,4 +70,7 @@ splitMeshRegions -cellZones -overwrite
 setFields -region flow
 
 #~~~ Domain decomposition 
-#decomposePar
+decomposePar -region alumina
+decomposePar -region graphite
+decomposePar -region porousMat
+decomposePar -region flow

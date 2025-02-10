@@ -15,10 +15,11 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains  2;
+numberOfSubdomains  6;
 
 method          scotch;
 
+/*
 simpleCoeffs
 {
   n               (2 2 1);
@@ -40,6 +41,6 @@ manualCoeffs
 distributed     no;
   
 roots           ( );
-
+*/
 
 // ************************************************************************* //

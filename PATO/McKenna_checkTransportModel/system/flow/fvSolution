@@ -17,40 +17,10 @@ FoamFile
 
 solvers
 {
-    /*"rho.*"
+    "rho.*"
     {
         solver          diagonal;
-    }*/
-
-    rho
-    {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-7;
-        relTol          0;
     }
-
-    rhoFinal
-    {
-        $rho;
-        tolerance       1e-7;
-        relTol          0;
-    }
-
-/*    p*/
-/*    {*/
-/*        solver           PCG;*/
-/*        preconditioner   DIC;*/
-/*        tolerance        1e-14;*/
-/*        relTol           1e-7;*/
-/*    }*/
-
-/*    pFinal*/
-/*    {*/
-/*        $p;*/
-/*        tolerance        1e-14;*/
-/*        relTol           0.0;*/
-/*    }*/
 
     p_rgh
     {
@@ -66,7 +36,7 @@ solvers
         relTol           0.0;
     }
 
-    "(U|e|Yi)"
+    "(U|h|Yi)"
     {
         solver          PBiCGStab;
         preconditioner  DILU;
@@ -74,30 +44,12 @@ solvers
         relTol          1e-6;
     }
 
-    "(U|e|Yi)Final"
+    "(U|h|Yi)Final"
     {
         $U;
         relTol          0;
     }
 
-/*
-    "(k|epsilon)"
-    {
-        solver           PBiCGStab;
-        preconditioner   DILU;
-        tolerance        1e-7;
-        relTol           0.1;
-    }
-
-    "(k|epsilon)Final"
-    {
-        $U;
-        tolerance        1e-7;
-        relTol           0;
-    }
-*/
-
-/*
     "G.*"
     {
         solver          PCG;
@@ -111,7 +63,6 @@ solvers
         $G;
         relTol          0;
     }
-*/
 }
 
 PIMPLE

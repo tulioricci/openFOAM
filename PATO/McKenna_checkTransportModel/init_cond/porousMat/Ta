@@ -21,29 +21,35 @@ boundaryField
 {
     porousMat_to_flow
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
-        Tnbr 		    T;
-        kappaMethod     lookup;
-        kappa		    k_abl_sym;
+        type            fixedValue;
+        value           uniform 300;    
+//        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+//        value           uniform 300;
+//        Tnbr 		    T;
+//        kappaMethod     lookup;
+//        kappa		    k_abl_sym;
     }
 
     porousMat_to_graphite
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
-        Tnbr 		    Ta;
-        kappaMethod     lookup;
-        kappa		    k_abl_sym;
+        type            fixedValue;
+        value           uniform 300;    
+//        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+//        value           uniform 300;
+//        Tnbr 		    Ta;
+//        kappaMethod     lookup;
+//        kappa		    k_abl_sym;
     }
 
     porousMat_to_alumina
     {
-        type            compressible::turbulentTemperatureCoupledBaffleMixed;
-        value           uniform 300;
-        Tnbr 		    Ta;
-        kappaMethod     lookup;
-        kappa		    k_abl_sym;
+        type            fixedValue;
+        value           uniform 300;    
+//        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+//        value           uniform 300;
+//        Tnbr 		    Ta;
+//        kappaMethod     lookup;
+//        kappa		    k_abl_sym;
     }
 
     s_back

@@ -75,7 +75,7 @@ Ythreshold  0.001; // Species below this mass fraction are ignored for the time 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
 delaySolid 50; // time in seconds
 
-
+/*
 functions
 {
     probes_sym
@@ -150,5 +150,6 @@ functions
 /*        fields ( p T );*/
 /*    }*/
 }
+*/
 
 // ************************************************************************* //
