@@ -57,6 +57,39 @@ runTimeModifiable true;
 
 functions
 {
+    line
+    {
+        type            sets;
+        functionObjectLibs ("libsampling.so");
+        writeControl   writeTime;
+
+        //region flow;
+
+        interpolationScheme cellPoint;
+        setFormat       raw;
+        sets
+        (
+            lineH
+            {
+                type lineUniform;
+                axis distance;
+                start ( 0.00 0.105 0 );
+                end   ( 0.05 0.105 0 );
+                nPoints 101;
+            }
+            
+            lineV
+            {
+                type lineUniform;
+                axis distance;
+                start ( 1e-5 0.10 0 );
+                end   ( 1e-5 0.11 0 );
+                nPoints 1001;
+            }            
+        );
+        fields ( T CO CO2 O2 N2 );
+    }
+    
     wallHeatFlux1
     {
         type            wallHeatFlux;
@@ -107,9 +140,6 @@ functions
         fileToUpdate    "$FOAM_CASE/system/controlDict";
         timeVsFile
         (
-            (0.0000    "$FOAM_CASE/system/controlDict_1")
-            (0.0005    "$FOAM_CASE/system/controlDict_2")
-            (0.0010    "$FOAM_CASE/system/controlDict_3")
             (1.0000    "$FOAM_CASE/system/controlDict_4")
         );
     }
