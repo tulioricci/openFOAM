@@ -178,6 +178,7 @@ forAll(Y,i)
     mixLambdaB += Xi/Lambda[i];
 }
 
+mixLambda = 0.5*(mixLambdaA+(1/mixLambdaB));
 mixAlpha = 0.5*(mixLambdaA+(1/mixLambdaB))/thermo.Cp();  // OpenFOAM "alpha"
 
 /*

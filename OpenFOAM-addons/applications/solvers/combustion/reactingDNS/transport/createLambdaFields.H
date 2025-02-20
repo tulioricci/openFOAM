@@ -70,6 +70,20 @@ volScalarField mixLambdaB
     dimensionedScalar("mixLambdaB",dimensionSet (-1,-1,3,1,0,0,0),0.0)
 );
 
+volScalarField mixLambda
+(
+    IOobject
+    (
+        "mixLambda",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("mixLambda",dimensionSet (1,1,-3,-1,0,0,0),0.0)
+);
+
 volScalarField mixAlpha
 (
     IOobject

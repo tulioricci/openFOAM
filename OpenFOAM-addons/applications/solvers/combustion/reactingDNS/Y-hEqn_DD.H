@@ -158,7 +158,7 @@ for(label i=0; i < Y.size(); i++)
         Yi.max(0.0);
         Yt += Yi;
         
-        omegaDot[i] = reaction->R(Yi) & rho / mag(rho); //composition.Wi(i);
+        //omegaDot[i] = reaction->R(Yi) & rho / mag(rho); //composition.Wi(i);
     }
 }
 // for N2
