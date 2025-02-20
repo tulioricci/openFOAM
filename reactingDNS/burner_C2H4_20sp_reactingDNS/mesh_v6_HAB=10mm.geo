@@ -8,7 +8,7 @@ cl2 = 0.072000;
 
 radius = 1.0;
 
-mesh_type = 3;
+mesh_type = 2;
 
 frac = 90;
 sin = Sin(Pi/frac);

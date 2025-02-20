@@ -30,7 +30,7 @@ deltaT          1e-7;
 
 // either maxCo or maxDeltaT, not both 
 //maxCo           0.5;
-maxDeltaT       1.0e-6;
+maxDeltaT       1.0e-5;
 
 adjustTimeStep  yes;
 
