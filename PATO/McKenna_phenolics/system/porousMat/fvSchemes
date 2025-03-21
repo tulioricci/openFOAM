@@ -1,0 +1,77 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    //div(meshPhi,Xsii) Gauss downwind;
+    div(epsphi,Yi)    Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),C2H4)   Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),N2)     Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),H2)     Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),O2)     Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),CO)     Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),CO2)    Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),H2O)    Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),A1)     Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),A1OH)   Gauss upwind;
+    div((interpolate((eps_g*rho_g))*meshPhi),CH4)    Gauss upwind;
+    div(meshPhi,Xsi[2][1])             Gauss linear corrected;
+    div(meshPhi,Xsi[2][2])             Gauss linear corrected;
+    div(meshPhi,Xsi[2][3])             Gauss linear corrected;
+    div(meshPhi,eps_s)                 Gauss linear corrected;
+    div((interpolate(Eta)*meshPhi),p)  Gauss linear 0.333;
+    div(meshPhi,epsgRhogEg)            Gauss linear corrected;
+    div(meshPhi,Ta)                    Gauss linear corrected;
+}
+
+laplacianSchemes
+{
+    default             Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired { // used for the ALE correction
+  default         no;
+  Ta;
+  T;
+  p;
+  Xsii;
+  Yi;
+  Zi;
+  rT;
+}
+
+// ************************************************************************* //

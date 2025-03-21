@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+Input file needed for the mesh motion solver. Please do not remove.
+It is not advised to modify this file unless you need to modify the boundaryField names.
+\*---------------------------------------------------------------------------*/
+
+FoamFile {
+  version         2.0;
+  format          ascii;
+  class           pointVectorField;
+  object          pointMotionU;
+  IOobject        NO_WRITE;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField {
+
+    fuel
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    shield
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    outlet
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    farfield
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    burner
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    f_front
+    {
+        type            wedge;
+    }
+
+    f_back
+    {
+        type            wedge;
+    }
+
+    flow_to_porousMat
+    {
+      type              calculated;
+    } 
+
+    flow_to_graphite
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+}
+
+
+// ************************************************************************* //
