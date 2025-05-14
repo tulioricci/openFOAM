@@ -25,12 +25,12 @@ startTime       0;
 stopAt          endTime;
 /*stopAt          writeNow;*/
 
-endTime         50.0;
+endTime         500.0;
 
 deltaT          1e-7;
 
 writeControl    adjustableRunTime;
-writeInterval   1e-2;
+writeInterval   2e-1;
 
 purgeWrite      0;
 
@@ -55,7 +55,7 @@ maxCo           1.0;
 
 adjustStartTime 0;
 
-maxDeltaT   5e-5; // reduce it if the surface temperature starts oscilliating
+maxDeltaT   4e-5; // reduce it if the surface temperature starts oscillating
 
 minDeltaT   1e-7;
 
@@ -69,7 +69,7 @@ Ythreshold  0.001; // Species below this mass fraction are ignored for the time 
 /* End adjustable time step */
 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid 0; // time in seconds
+delaySolid 2; // time in seconds
 
 /*
 functions

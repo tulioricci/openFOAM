@@ -16,11 +16,11 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-radiation off;
+//radiation off;
 
-radiationModel none;
+//radiationModel none;
 
-/*
+
 radiation on;
 
 radiationModel  P1;
@@ -177,6 +177,5 @@ greyMeanCombustionCoeffs
 scatterModel    none;
 
 sootModel       none;
-*/
 
 // ************************************************************************* //

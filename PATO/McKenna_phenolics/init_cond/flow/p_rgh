@@ -65,6 +65,10 @@ boundaryField
     flow_to_porousMat
     {
         type            fixedFluxExtrapolatedPressure;
+        //type            fixedValueToNbrValue;
+        //nbr             p;
+        //value 	  $internalField;
+        value           101325.0;
     }
 
     flow_to_graphite

@@ -21,8 +21,7 @@ internalField   uniform 0.767090782041577;
 boundaryField {
     porousMat_to_flow
     {
-        type            fixedValueToNbrValue;
-        nbr             N2;
+        type            calculated;
         value           $internalField;
     }
   

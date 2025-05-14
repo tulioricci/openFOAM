@@ -15,14 +15,43 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains  4;
+numberOfSubdomains  5;
 
 method          scotch;
 
 /*
+scotchCoeffs
+{
+    processorWeights (1 1 10 10 10);
+}
+    geometric
+    {
+        type    geometric;
+
+        grow    false;
+
+        selection
+        {
+            box1
+            {
+                source  box;
+                min     (-1 0.10 -1);
+                max     (0.02 0.105 1);
+            }
+            box2
+            {
+                source  box;
+                min     (0.02 0.10 -1);
+                max     (0.04 0.105 1);
+            }
+}
+}
+*/
+
+/*
 simpleCoeffs
 {
-  n               (2 2 1);
+  n               (6 1 1);
   delta           0.001;
 }
   

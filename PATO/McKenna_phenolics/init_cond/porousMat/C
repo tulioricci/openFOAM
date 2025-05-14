@@ -21,9 +21,7 @@ internalField   uniform 0;
 boundaryField {
     porousMat_to_flow
     {
-        type            fixedValueToNbrValue;
-        nbr             C;
-        value           $internalField;
+        type            zeroGradient;
     }
   
     s_back

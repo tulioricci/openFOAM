@@ -26,6 +26,8 @@ boundaryField
         Tnbr 		T;
         kappaMethod     lookup;
         kappa		k_abl_sym;
+        qr              Qr;
+        qrNbr           none; //qr;
     }
 
     porousMat_to_graphite
@@ -54,11 +56,6 @@ boundaryField
     s_front
     {
         type            wedge;
-    }
-
-    defaultFaces
-    {
-        type            empty;
     }
 }
 

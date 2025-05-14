@@ -16,7 +16,23 @@ FoamFile
 
 ddtSchemes
 {
-    default         Euler;
+    default         none;
+    ddt((eps_g*rho_g),O2)     CrankNicolson 1;
+    ddt((eps_g*rho_g),CO2)    CrankNicolson 1;
+    ddt((eps_g*rho_g),CO)     CrankNicolson 1;
+    ddt((eps_g*rho_g),CH4)    CrankNicolson 1;
+    ddt((eps_g*rho_g),H2)     CrankNicolson 1;
+    ddt((eps_g*rho_g),H2O)    CrankNicolson 1;
+    ddt((eps_g*rho_g),A1)     CrankNicolson 1;
+    ddt((eps_g*rho_g),A1OH)   CrankNicolson 1;
+    ddt((eps_g*rho_g),C2H4)   CrankNicolson 1;
+    ddt(Xsi[2][1])            CrankNicolson 1;
+    ddt(Xsi[2][2])            CrankNicolson 1;
+    ddt(Xsi[2][3])            CrankNicolson 1;
+    ddt(eps_s)                CrankNicolson 1;
+    ddt(Eta,p)                CrankNicolson 1;
+    ddt(epsgRhogEg)           CrankNicolson 1;
+    ddt(Ta)                   CrankNicolson 1;
 }
 
 gradSchemes
@@ -27,7 +43,6 @@ gradSchemes
 divSchemes
 {
     default         none;
-    //div(meshPhi,Xsii) Gauss downwind;
     div(epsphi,Yi)    Gauss upwind;
     div((interpolate((eps_g*rho_g))*meshPhi),C2H4)   Gauss upwind;
     div((interpolate((eps_g*rho_g))*meshPhi),N2)     Gauss upwind;
@@ -39,13 +54,20 @@ divSchemes
     div((interpolate((eps_g*rho_g))*meshPhi),A1)     Gauss upwind;
     div((interpolate((eps_g*rho_g))*meshPhi),A1OH)   Gauss upwind;
     div((interpolate((eps_g*rho_g))*meshPhi),CH4)    Gauss upwind;
-    div(meshPhi,Xsi[2][1])             Gauss linear corrected;
-    div(meshPhi,Xsi[2][2])             Gauss linear corrected;
-    div(meshPhi,Xsi[2][3])             Gauss linear corrected;
-    div(meshPhi,eps_s)                 Gauss linear corrected;
-    div((interpolate(Eta)*meshPhi),p)  Gauss linear 0.333;
-    div(meshPhi,epsgRhogEg)            Gauss linear corrected;
-    div(meshPhi,Ta)                    Gauss linear corrected;
+    //div(meshPhi,Xsi[2][1])             Gauss linear corrected;
+    //div(meshPhi,Xsi[2][2])             Gauss linear corrected;
+    //div(meshPhi,Xsi[2][3])             Gauss linear corrected;
+    //div(meshPhi,eps_s)                 Gauss linear corrected;
+    //div((interpolate(Eta)*meshPhi),p)  Gauss linear 0.333;
+    //div(meshPhi,epsgRhogEg)            Gauss linear corrected;
+    //div(meshPhi,Ta)                    Gauss linear corrected;
+    div(meshPhi,Xsi[2][1])             Gauss upwind;
+    div(meshPhi,Xsi[2][2])             Gauss upwind;
+    div(meshPhi,Xsi[2][3])             Gauss upwind;
+    div(meshPhi,eps_s)                 Gauss upwind;
+    div((interpolate(Eta)*meshPhi),p)  Gauss upwind; 
+    div(meshPhi,epsgRhogEg)            Gauss upwind;
+    div(meshPhi,Ta)                    Gauss upwind;
 }
 
 laplacianSchemes

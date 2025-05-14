@@ -37,11 +37,14 @@ boundaryField
     }
     graphite_to_flow
     {   
-        type            compressible::turbulentTemperatureRadCoupledMixed;
+        //type            compressible::turbulentTemperatureRadCoupledMixed;
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
         value           uniform 300;
         Tnbr 		T;
         kappaMethod     lookup;
         kappa		k_abl_sym;
+        //qr              Qr;
+        //qrNbr           none; //qr;
     }
 
     g_back

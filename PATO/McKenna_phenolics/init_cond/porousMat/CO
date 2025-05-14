@@ -21,9 +21,11 @@ internalField   uniform 0;
 boundaryField {
     porousMat_to_flow
     {
-        type            fixedValueToNbrValue;
-        nbr             CO;
-        value           $internalField;
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 0.0;
+        Tnbr 	        CO;
+        kappaMethod     lookup;
+        kappa           "diffY[CO]"; 
     }
   
     s_back

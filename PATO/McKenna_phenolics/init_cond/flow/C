@@ -8,45 +8,65 @@
 FoamFile
 {
     version     2.0;
-    format      binary;
+    format      ascii;
     class       volScalarField;
-    location    "0/flow";
-    object      cellToRegion;
+    location    "0";
+    object      C;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0.0;
 
 boundaryField
 {
-    down
-    {
-        type            symmetryPlane;
-    }
-    right
+
+    fuel
     {
         type            zeroGradient;
     }
-    up
-    {
-        type            symmetryPlane;
-    }
-    left
+
+    shield
     {
         type            zeroGradient;
-    }
-    defaultFaces
-    {
-        type            empty;
     }
     flow_to_porousMat
     {
-        type            calculated;
-        value           uniform 0;
+        type            zeroGradient;
+    }
+    flow_to_graphite
+    {
+        type            zeroGradient;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    farfield
+    {
+        type            zeroGradient;
+    }
+
+    burner
+    {
+        type            zeroGradient;
+    }
+
+    sample
+    {
+        type            zeroGradient;
+    }
+
+    f_front
+    {
+        type            wedge;
+    }
+
+    f_back
+    {
+        type            wedge;
     }
 }
-
-
-// ************************************************************************* //

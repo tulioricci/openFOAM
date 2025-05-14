@@ -222,6 +222,27 @@ for spc in gas.species_names:
     os.system("echo '    {' >> " + spc)
     os.system("echo '        type            wedge;' >> " + spc)
     os.system("echo '    }' >> " + spc)
+    
+    if spc == "C":
+        os.system("echo '' >> " + spc)
+        os.system("echo '    flow_to_porousMat' >> " + spc)
+        os.system("echo '    {' >> " + spc)
+        os.system("echo '         type            zeroGradient;' >> " + spc)
+        os.system("echo '    }' >> " + spc)
+    else:
+        os.system("echo '' >> " + spc)
+        os.system("echo '    flow_to_porousMat' >> " + spc)
+        os.system("echo '    {' >> " + spc)
+        os.system("echo '         type            fixedValueToNbrValue;' >> " + spc)
+        os.system("echo '         nbr             " + spc + ";' >> " + spc)
+        os.system("echo '         value           $internalField; ' >> " + spc)
+        os.system("echo '    }' >> " + spc)
+
+    os.system("echo '' >> " + spc)
+    os.system("echo '    flow_to_graphite' >> " + spc)
+    os.system("echo '    {' >> " + spc)
+    os.system("echo '         type            zeroGradient;' >> " + spc)
+    os.system("echo '    }' >> " + spc)
 
     os.system("echo '}' >> " + spc)
     

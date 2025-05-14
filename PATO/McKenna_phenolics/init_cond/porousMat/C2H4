@@ -1,8 +1,8 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  plus                                  |
-|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|  \\    /   O peration     | Version:  2.2.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile {
@@ -10,7 +10,7 @@ FoamFile {
   format      ascii;
   class       volScalarField;
   location    "0";
-  object      CO2;
+  object      C2H4;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -19,31 +19,36 @@ dimensions      [0 0 0 0 0 0 0];
 internalField   uniform 0;
 
 boundaryField {
-  up {
-    type            symmetryPlane;
-  }
+    porousMat_to_flow
+    {
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 0.0;
+        Tnbr 	        C2H4;
+        kappaMethod     lookup;
+        kappa           "diffY[C2H4]"; 
+    }
+  
+    s_back
+    {
+        type            wedge;
+    }
 
-  down {
-    type            symmetryPlane;
-  }
-  left
-  {
-    type            fixedValue;
-    value           $internalField ;
-  }
-  right
-  {
-    type            zeroGradient;
-  }
-  flow_to_porousMat
-  {
-/*    type            fixedValue;*/
-/*    value           $internalField;*/
-    type            fixedValueToNbrValue;
-    nbr             CO2;
-    value           $internalField;
-  }
+    s_front
+    {
+        type            wedge;
+    }
+
+    porousMat_to_alumina
+    {
+        type            zeroGradient;
+    }
+
+    porousMat_to_graphite
+    {
+        type            zeroGradient;
+    }
 }
+
 
 
 // ************************************************************************* //
