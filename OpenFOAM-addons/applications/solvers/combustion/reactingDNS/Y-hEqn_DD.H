@@ -162,6 +162,7 @@ for(label i=0; i < Y.size(); i++)
     }
 }
 // for N2
+// TRR: this is weird but it is right.
 {
     label i = inertIndex;
     for(label icell = 0; icell < rho.size(); icell++)
@@ -185,7 +186,7 @@ for(label i=0; i < Y.size(); i++)
     
     // this is weird but it is right. It comes from "Y_N2 = 1 - Yt"
     vk += fvc::interpolate(Hsi)*-sumOfOtherSpeices;
-    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);  // XXX: there is a laplacian((mixAlpha*Hsi),(1-(0*C2H4))).. Is this coming from here? Why the zero?
+    diffsh += fvc::laplacian(mixAlpha*Hsi, 1-Yt);  // XXX: there is a laplacian((mixAlpha*Hsi),(1-(0*C2H4))) // This is because the way Yt is allocated: Yt(0.0*Y[0]);
 }
 
 Y[inertIndex] = scalar(1) - Yt;
