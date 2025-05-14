@@ -121,16 +121,16 @@
 
 
 \section{TODO}
-    - transport models
+    %- transport models
 
-    \href{https://www.cfd-online.com/Forums/openfoam-community-contributions/103227-multi-species-mass-transport-library-update-6.html}{\blue{library up to openfoam 6}}
+    %\href{https://www.cfd-online.com/Forums/openfoam-community-contributions/103227-multi-species-mass-transport-library-update-6.html}{\blue{library up to openfoam 6}}
 
-    \href{https://github.com/ZSHtju/reactingDNS_OpenFOAM}{\blue{OpenFOAM-8 ``working'' version}}
+    %\href{https://github.com/ZSHtju/reactingDNS_OpenFOAM}{\blue{OpenFOAM-8 ``working'' version}}
 
-    - sponge (?)
+    %- sponge (?)
 
-    - constraint fields:
-    \href{https://www.openfoam.com/documentation/guides/latest/doc/guide-fvoptions-constraints-fixed-value.html}{\blue{constraint}}
+    %- constraint fields:
+    %\href{https://www.openfoam.com/documentation/guides/latest/doc/guide-fvoptions-constraints-fixed-value.html}{\blue{constraint}}
 
 \section{Building}
 
@@ -157,7 +157,7 @@
             Install \href{https://docs.open-mpi.org/en/v5.0.x/installing-open-mpi/quickstart.html}{\blue{openMPI}}
 
         \paragraph{Cantera \\}
-            {\code python3 -m pip install cantera}
+            {\code python3 -m pip install cantera$<$==x.y.z$>$}
 
         \paragraph{gmsh \\}
 
@@ -172,18 +172,18 @@
     \subsection{openFOAM}
         \begin{enumerate}
         \item Download openFOAM: \\
-        OFversion=... \\
-        wget -O - http://dl.openfoam.org/third-party/\$\{OFversion\} $|$ tar zxv \\
-        mv ThirdParty-\$\{OFversion\}-version-\$\{OFversion\} ThirdParty-\$\{OFversion\} \\
-        wget -O - http://dl.openfoam.org/source/\$\{OFversion\} $|$ tar zxv \\
-        mv OpenFOAM-\$\{OFversion\}-version-\$\{OFversion\} OpenFOAM-\$\{OFversion\} \\
+        {\code OFversion=...} \\
+        {\code wget -O - http://dl.openfoam.org/third-party/\$\{OFversion\} $|$ tar zxv} \\
+        {\code mv ThirdParty-\$\{OFversion\}-version-\$\{OFversion\} ThirdParty-\$\{OFversion\}} \\
+        {\code wget -O - http://dl.openfoam.org/source/\$\{OFversion\} $|$ tar zxv} \\
+        {\code mv OpenFOAM-\$\{OFversion\}-version-\$\{OFversion\} OpenFOAM-\$\{OFversion\}} \\
 
         \item Build openFOAM: \\
-        source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc \\
-        ./Allwmake $<$-j np$>$
+        {\code source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc} \\
+        {\code ./Allwmake $<$-j np$>$}
 
         \item Add to .bashrc for future use (or as an alias): \\
-        source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc
+        {\code source $<$path$>$/OpenFOAM-\$\{OFversion\}/etc/bashrc}
         \end{enumerate}
 
     \subsection{Adding a new solver}
@@ -208,40 +208,40 @@
     \subsection{PATO}
         \begin{itemize}
         \item Build PATO: \\
-        wget https://github.com/nasa/pato/archive/refs/tags/3.1.tar.gz \\
-        tar -zxvf 3.1.tar.gz \\
-        export PATO\_DIR=\$(pwd)/PATO/pato-3.1 \\
-        source $<$path$>$/OpenFOAM-7/etc/bashrc \\
-        source \$PATO\_DIR/bashrc \\
-        cd \$PATO\_DIR/src/thirdParty/mutation++ \\
+        {\code wget https://github.com/nasa/pato/archive/refs/tags/3.1.tar.gz} \\
+        {\code tar -zxvf 3.1.tar.gz} \\
+        {\code export PATO\_DIR=\$(pwd)/PATO/pato-3.1} \\
+        {\code source $<$path$>$/OpenFOAM-7/etc/bashrc} \\
+        {\code source \$PATO\_DIR/bashrc} \\
+        {\code cd \$PATO\_DIR/src/thirdParty/mutation++} \\
         * See instruction in \ref{sec:mutation} for {\code mutation++} \\
-        ln -s \$(pwd)/thirdparty/eigen/Eigen/ ./install/include \\
-        cd \$PATO\_DIR \\
-        ./Allwmake
+        {\code cd \$PATO\_DIR} \\
+        {\code ./Allwmake}
 
         \item Alias in .bashrc
         \end{itemize}
 
-    \subsection{Mutation++ \\}
+    \subsection{Mutation++}
     \label{sec:mutation}
 
         If outside PATO: \\
-        git clone https://github.com/mutationpp/Mutationpp.git
+        {\code git clone https://github.com/mutationpp/Mutationpp.git} \\
 
         Build Mutation: \\
-        cmake -DCMAKE\_INSTALL\_PREFIX:PATH=\$(pwd)/install
-        make -j 4 install \\
+        {\code cmake -DCMAKE\_INSTALL\_PREFIX:PATH=\$(pwd)/install} \\
+        {\code make -j 4 install} \\
+        {\code ln -s \$(pwd)/thirdparty/eigen/Eigen/ ./install/include} \\
+        check if {\code install} has {\code lib} and not {\code lib64}. Else, create a link:
+        {\code ln -s lib64 lib} \\
 
-        If installing inside PATO, it is done.
-
-        Else, if stand-alone, add to .bashrc: \\
-        export MPP\_DIRECTORY=$<$path$>$ \\
-        export MPP\_DATA\_DIRECTORY=\$MPP\_DIRECTORY/data \\
-        export PATH=\$MPP\_DIRECTORY/install/bin:\$PATH \\
-        export LD\_LIBRARY\_PATH=\$MPP\_DIRECTORY/install/lib64:\$LD\_LIBRARY\_PATH
+        If installing as a stand-alone, outside PATO, add to .bashrc: \\
+        {\code export MPP\_DIRECTORY=$<$path$>$} \\
+        {\code export MPP\_DATA\_DIRECTORY=\$MPP\_DIRECTORY/data} \\
+        {\code export PATH=\$MPP\_DIRECTORY/install/bin:\$PATH} \\
+        {\code export LD\_LIBRARY\_PATH=\$MPP\_DIRECTORY/install/lib64:\$LD\_LIBRARY\_PATH} \\
 
         Can check just in case: \\
-        checkmix air11
+        {\code checkmix air11}
 
     \subsection{TODO: (ignore this)}
     \paragraph{swak4Foam \\}
@@ -300,7 +300,18 @@
 
         \subsubsection{blockMesh}
 
+            \paragraph{Option 1:}
+
             {\code paraFoam -block}
+
+            \paragraph{Option 2:}
+
+            {\code blockMesh -blockTopology}
+
+            {\code objToVTK blockTopology.obj blockTopology.vtk}
+
+            {\code paraview blockTopology.vtk}
+
 
         \subsubsection{axisymmetry}
 
