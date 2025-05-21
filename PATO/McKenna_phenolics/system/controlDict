@@ -15,49 +15,49 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     reactingFoam;
+application       reactingFoam;
 
-startFrom       latestTime;
+startFrom         latestTime;
 /*startFrom       startTime;*/
 
-startTime       0;
+startTime         0;
 
-stopAt          endTime;
+stopAt            endTime;
 /*stopAt          writeNow;*/
 
-endTime         500.0;
+endTime           500.0;
 
-deltaT          1e-7;
+deltaT            1e-7;
 
-writeControl    adjustableRunTime;
-writeInterval   0.25;
+writeControl      adjustableRunTime;
+writeInterval     0.25;
 
-purgeWrite      0;
+purgeWrite        0;
 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid      0.0; // time in seconds
+delaySolid        0.5; // time in seconds
 
 /*writeFormat     binary;*/
-writeFormat     ascii;
+writeFormat       ascii;
 
-writePrecision  15;
+writePrecision    15;
 
-writeCompression off;
+writeCompression  off;
 
-timeFormat      fixed;
+timeFormat        fixed;
 
-timePrecision   6;
+timePrecision     6;
 
 runTimeModifiable true;
 
-adjustTimeStep  yes;
+adjustTimeStep    no;
 
-maxCo           1.0;
+maxCo             1.0;
 
-LTS             1; // everything else down here is ignored
-//LTS             0; // everything else down here is ignored
-
-adjustStartTime 0;
+LTS               1; // everything else down here is ignored
+adjustStartTime   0;
+//LTS             0;
+//adjustStartTime 1;
 
 maxDeltaT       2e-5; // reduce it if the surface temperature starts oscillating
 
@@ -72,7 +72,6 @@ dYtolMax        0.1; // Max
 Ythreshold      0.001; // Species below this mass fraction are ignored for the time step optimization
 /* End adjustable time step */
 
-/*
 functions
 {
     probes_sym
@@ -97,6 +96,7 @@ functions
        ); 
     }
 
+    /*
     volAverage
     {
         libs             ("libfieldFunctionObjects.so");
@@ -107,7 +107,9 @@ functions
         writeFields      false;
         writeControl     timeStep;
         writeInterval    5;
+        enabled          true;
     }
+    */
 
     volIntegrate
     {
@@ -115,12 +117,12 @@ functions
         type             volFieldValue;
         operation        volIntegrate;
         region           porousMat;
-        fields           (rho_s[1] rho_s[2]);
+        fields           (tau rho_s[1] rho_s[2]);
         writeFields      false;
         writeControl     timeStep;
         writeInterval    5;
+        enabled          true;
     }
 }
-*/
 
 // ************************************************************************* //
