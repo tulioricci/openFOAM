@@ -55,6 +55,7 @@ adjustTimeStep  yes;
 maxCo           1.0;
 
 LTS             1; // everything else down here is ignored
+//LTS             0; // everything else down here is ignored
 
 adjustStartTime 0;
 

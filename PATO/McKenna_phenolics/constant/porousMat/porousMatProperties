@@ -16,7 +16,7 @@ FoamFile {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 /****************************** GENERAL ************************************/
-//debug yes;
+//debug           yes;
 movingMesh      yes;
 /****************************** end GENERAL ********************************/
 
@@ -55,14 +55,13 @@ IO {
     specificSurface
 ); // write fields in the time folders
   probingFunctions (); // name of sampling/probing dictionaries in "system/porousMat"  
-  
 }
 /****************************** END IO ************************************/
 
 /****************************** MASS, ENERGY, PYROLYSIS *******************/
 MaterialProperties {
   MaterialPropertiesType Porous; // porous material properties
-  MaterialPropertiesDirectory "$PATO_DIR/data/Materials/Composites/TACOT_newChemistry"; // material properties file
+  MaterialPropertiesDirectory "./constant/porousMat/TACOT_newChemistry"; // material properties file
   detailedSolidEnthalpies yes;
 }
 
@@ -86,9 +85,9 @@ GasProperties {
 /****************************** END GAS PROPERTIES **************************/
 
 /****************************** MaterialChemistry  **********************************/
+// Mutation++ mixture in "$PATO_DIR/data/ThermoTransportChemistry/mutation++/mixtures"
 MaterialChemistry {
   MaterialChemistryType SpeciesConservation;
-  // Mutation++ mixture in "$PATO_DIR/data/ThermoTransportChemistry/mutation++/mixtures"
   //mixture UIUC_7sp_TACOT_oxidation_species;
   mixture UIUC_7sp_TACOT_fastOxidation_species;
 }
@@ -102,7 +101,7 @@ VolumeAblation {
 
 /****************************** TIME CONTROL  **********************************/
 TimeControl {
-  TimeControlType GradP_ChemYEqn; // change the integration time step in function of the gradient of the pressure and the species mass fractions
+  TimeControlType GradP_ChemYEqn; // change the time step based on gradients of pressure and species mass fractions
   chemTransEulerStepLimiter no;
 }
 /****************************** END TIME CONTROL  ******************************/

@@ -36,7 +36,6 @@ Energy {
 MaterialProperties {
   MaterialPropertiesType Fourier; // sub material (Fourier's law)
   //MaterialPropertiesDirectory "$PATO_DIR/data/Materials/Fourier/Alumina"; // sub material file (Fourier's law)
-  //MaterialPropertiesDirectory "/home/tulio/Desktop/postdoc/openFOAM/git/openFOAM/PATO/McKenna_phenolics/constant/alumina"; // sub material file (Fourier's law)
   MaterialPropertiesDirectory "./constant/alumina";
 }
 /****************************** END MATERIAL PROPERTIES ********************/

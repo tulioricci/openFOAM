@@ -36,7 +36,6 @@ Energy {
 MaterialProperties {
   MaterialPropertiesType FourierRadiation; // sub material (Fourier's law)
   //MaterialPropertiesDirectory "$PATO_DIR/data/Materials/Fourier/Graphite"; // sub material file (Fourier's law)
-  //MaterialPropertiesDirectory "/home/tulio/Desktop/postdoc/openFOAM/git/openFOAM/PATO/McKenna_phenolics/constant/graphite/"; // sub material file (Fourier's law)
   MaterialPropertiesDirectory "./constant/graphite/";
 }
 /****************************** END MATERIAL PROPERTIES ********************/
