@@ -30,9 +30,12 @@ endTime         500.0;
 deltaT          1e-7;
 
 writeControl    adjustableRunTime;
-writeInterval   2e-1;
+writeInterval   0.25;
 
 purgeWrite      0;
+
+// For cfd coupled simulation, allow the flow to adjust to the solid temperature
+delaySolid      0.0; // time in seconds
 
 /*writeFormat     binary;*/
 writeFormat     ascii;
@@ -51,25 +54,22 @@ adjustTimeStep  yes;
 
 maxCo           1.0;
 
-
+LTS             1; // everything else down here is ignored
 
 adjustStartTime 0;
 
-maxDeltaT   4e-5; // reduce it if the surface temperature starts oscillating
+maxDeltaT       2e-5; // reduce it if the surface temperature starts oscillating
 
-minDeltaT   1e-7;
+minDeltaT       1e-7;
 
 minChemDeltaT   1e-7; // Minimum time step for species equation
 
-REVlength   1e3;
+REVlength       1e3;
 
-dYtolMin    0.05; // Min variation of mass fractions in species equation
-dYtolMax    0.1; // Max
-Ythreshold  0.001; // Species below this mass fraction are ignored for the time step optimization
+dYtolMin        0.05; // Min variation of mass fractions in species equation
+dYtolMax        0.1; // Max
+Ythreshold      0.001; // Species below this mass fraction are ignored for the time step optimization
 /* End adjustable time step */
-
-// For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid 2; // time in seconds
 
 /*
 functions
@@ -119,32 +119,6 @@ functions
         writeControl     timeStep;
         writeInterval    5;
     }
-
-/*    line*/
-/*    {*/
-/*        type            sets;*/
-/*        functionObjectLibs ("libsampling.so");*/
-/*        enabled         true;*/
-/*        writeControl   timeStep;*/
-/*        writeInterval  10;*/
-
-/*        region flow;*/
-
-/*        interpolationScheme cellPoint;*/
-/*        setFormat       raw;*/
-/*        sets*/
-/*        (*/
-/*            line1*/
-/*            {*/
-/*                type lineUniform;*/
-/*                axis distance;*/
-/*                start ( 1e-5 0.105 0 );*/
-/*                end   ( 0.05 0.105 0 );*/
-/*                nPoints 10;*/
-/*            }*/
-/*        );*/
-/*        fields ( p T );*/
-/*    }*/
 }
 */
 

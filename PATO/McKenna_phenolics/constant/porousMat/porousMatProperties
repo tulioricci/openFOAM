@@ -40,6 +40,7 @@ IO {
     CH4
     A1
     A1OH
+    C2H4
     N2
     rT
     Xsi[2][1]
@@ -88,8 +89,8 @@ GasProperties {
 MaterialChemistry {
   MaterialChemistryType SpeciesConservation;
   // Mutation++ mixture in "$PATO_DIR/data/ThermoTransportChemistry/mutation++/mixtures"
-  mixture UIUC_7sp_TACOT_oxidation_species;
-  //mixture UIUC_7sp_TACOT_fastOxidation_species;
+  //mixture UIUC_7sp_TACOT_oxidation_species;
+  mixture UIUC_7sp_TACOT_fastOxidation_species;
 }
 /****************************** END MaterialChemistry  ******************************/
 

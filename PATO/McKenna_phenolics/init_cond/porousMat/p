@@ -33,9 +33,9 @@ boundaryField
 
     porousMat_to_flow
     {
-        type            fixedValueToNbrValue;
-        nbr             p;
-        //type            fixedValue;
+        //type            fixedValueToNbrValue;
+        //nbr             p;
+        type            fixedValue;
         value 	        $internalField;
     }
 

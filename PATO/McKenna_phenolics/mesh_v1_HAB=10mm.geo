@@ -8,7 +8,7 @@ cl2 = 0.072000;
 
 radius = 1.0;
 
-mesh_type = 4;
+mesh_type = 2;
 
 frac = 90;
 sin = Sin(Pi/frac);
@@ -192,7 +192,7 @@ EndIf
 
 If (mesh_type == 2)
     //10 um
-    Transfinite Line {-24,-79} = 53 Using Progression 1.04;
+    Transfinite Line {22,-79} = 53 Using Progression 1.04;
     Transfinite Line {  6, 16} = 51 Using Progression 1.025;
     Transfinite Line { 13} = 51 Using Progression 1.02;
     Transfinite Line { 10} = 51 Using Progression 1.00;

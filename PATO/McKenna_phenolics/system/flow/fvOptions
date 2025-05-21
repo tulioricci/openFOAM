@@ -21,14 +21,13 @@ radiation
     libs ("libradiationModels.so");
 }
 
-/*
-limitT
+/*limitT
 {
     type            limitTemperature;
     active          yes;
 
     selectionMode   all;
-    min             200;
+    min             200.01;
     max             2499.99;
 }*/
 

@@ -14,7 +14,7 @@ find -name "cellToRegion" -delete
 #~~~ Create IC file
 cp -r init_cond 0.000000
 cd 0.000000/flow
-python3 setup_Neumann.py --phi 1.0 --slpm=25
+python3 setup_Neumann.py --phi 0.7 --slpm=25
 #python3 setup_Cantera.py --phi 0.7 --slpm=25
 cd ../../
 
@@ -70,8 +70,10 @@ splitMeshRegions -cellZones -overwrite
 #~~~ Initial condition
 setFields -region flow
 
+cd myTools
+wmake
+cd ../
+./create_localDT
+
 #~~~ Domain decomposition 
-decomposePar -region alumina
-decomposePar -region graphite
-decomposePar -region porousMat
-decomposePar -region flow
+decomposePar -allRegions
