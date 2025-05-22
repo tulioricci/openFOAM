@@ -30,7 +30,7 @@ endTime           500.0;
 deltaT            1e-7;
 
 writeControl      adjustableRunTime;
-writeInterval     0.25;
+writeInterval     0.5;
 
 purgeWrite        0;
 
@@ -50,14 +50,14 @@ timePrecision     6;
 
 runTimeModifiable true;
 
-adjustTimeStep    no;
-
-maxCo             1.0;
-
-LTS               1; // everything else down here is ignored
+LTS               1; // everything else down here wrt time is ignored
 adjustStartTime   0;
+adjustTimeStep    no;
 //LTS             0;
 //adjustStartTime 1;
+//adjustTimeStep    yes;
+
+maxCo             1.0;
 
 maxDeltaT       2e-5; // reduce it if the surface temperature starts oscillating
 
@@ -74,6 +74,7 @@ Ythreshold      0.001; // Species below this mass fraction are ignored for the t
 
 functions
 {
+    /*
     probes_sym
     {
        // Type of functionObject
@@ -95,6 +96,7 @@ functions
        ( 0.0001 0.105 0.0)
        ); 
     }
+    */
 
     /*
     volAverage
@@ -120,7 +122,7 @@ functions
         fields           (tau rho_s[1] rho_s[2]);
         writeFields      false;
         writeControl     timeStep;
-        writeInterval    5;
+        writeInterval    100;
         enabled          true;
     }
 }

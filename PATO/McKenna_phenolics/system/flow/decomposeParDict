@@ -15,61 +15,14 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains  5;
+numberOfSubdomains  6;
 
-method          scotch;
+//method          scotch;
 
-/*
-scotchCoeffs
-{
-    processorWeights (1 1 10 10 10);
-}
-    geometric
-    {
-        type    geometric;
-
-        grow    false;
-
-        selection
-        {
-            box1
-            {
-                source  box;
-                min     (-1 0.10 -1);
-                max     (0.02 0.105 1);
-            }
-            box2
-            {
-                source  box;
-                min     (0.02 0.10 -1);
-                max     (0.04 0.105 1);
-            }
-}
-}
-*/
-
-/*
-simpleCoeffs
-{
-  n               (6 1 1);
-  delta           0.001;
-}
-  
-hierarchicalCoeffs
-{
-  n               (1 1 1);
-  delta           0.001;
-  order           xyz;
-}
-  
+method      manual;
 manualCoeffs
 {
-  dataFile        "";
+  dataFile        "cellProcIDs";
 }
-  
-distributed     no;
-  
-roots           ( );
-*/
 
 // ************************************************************************* //
