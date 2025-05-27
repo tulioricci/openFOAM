@@ -2,27 +2,20 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  10
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "system/slug";
-    object      fvSolution;
+    class       uniformDimensionedVectorField;
+    object      g;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-solvers {
-  Ta
-  {
-    solver    	     PCG;
-    preconditioner   DIC;
-    tolerance        1e-09;
-    relTol           0;
-  };
-}
+dimensions      [0 1 -2 0 0 0 0];
+
+value           (0 -9.81 0);
 
 // ************************************************************************* //

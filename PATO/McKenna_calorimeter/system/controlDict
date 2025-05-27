@@ -72,10 +72,55 @@ dYtolMax        0.1; // Max
 Ythreshold      0.001; // Species below this mass fraction are ignored for the time step optimization
 /* End adjustable time step */
 
-/*
 functions
 {
+    probes_slug
+    {
+       // Type of functionObject
+       type probes;
+
+       // Where to load it from (if not already in solver)
+       functionObjectLibs ("libsampling.so");
+       writeControl   timeStep;
+       writeInterval  25;
+
+       region slug;
+
+      // Fields to be probed. runTime modifiable!
+       fields (Ta);
+
+       // Locations to be probed. runTime modifiable!
+       probeLocations
+       (
+       ( 0.0038076790509 0.11000 0.0)
+       ( 0.0 0.11000 0.0)
+       ( 0.0 0.12016 0.0)
+       ); 
+    }
+    
+    probes_holder
+    {
+       // Type of functionObject
+       type probes;
+
+       // Where to load it from (if not already in solver)
+       functionObjectLibs ("libsampling.so");
+       writeControl   timeStep;
+       writeInterval  25;
+
+       region holder;
+
+      // Fields to be probed. runTime modifiable!
+       fields (Ta);
+
+       // Locations to be probed. runTime modifiable!
+       probeLocations
+       (
+       ( 0.0038076790510 0.11000 0.0)
+       ( 0.0158653293788 0.11000 0.0)
+       ); 
+    }
+    
 }
-*/
 
 // ************************************************************************* //

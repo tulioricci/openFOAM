@@ -3,3 +3,4 @@ rm -rf postProcessing
 rm -rf processor?
 rm -rf mesh.msh
 rm -rf init_cond/changeDictionaryAux
+rm -rf constant/polyMesh

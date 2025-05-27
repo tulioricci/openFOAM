@@ -8,7 +8,7 @@ cl2 = 0.072000;
 
 radius = 1.0;
 
-mesh_type = 1;
+mesh_type = 0;
 
 frac = 90;
 sin = Sin(Pi/frac);
@@ -141,34 +141,36 @@ Line(80) = {38, 31};
 Line(81) = {39, 44};
 
 /*burner*/
-Transfinite Line {-15} = 21 Using Progression 1.075;
-Transfinite Line {-75} = 21 Using Progression 1.075;
+Transfinite Line {-15} = 25 Using Progression 1.075;
+Transfinite Line {-75} = 25 Using Progression 1.075;
 Transfinite Line { 14} = 11 Using Progression 1.00;
 Transfinite Line { 74} = 11 Using Progression 1.00;
 
 /*horizontal*/
-Transfinite Line {  1} = 5 Using Progression 1.00;
-Transfinite Line { 67} = 5 Using Progression 1.00;
-Transfinite Line {  7} = 17 Using Bump 0.6;
-Transfinite Line { 76} = 17 Using Bump 0.6;
-Transfinite Line {  2} = 33 Using Progression 1.015;
-Transfinite Line { 77} = 33 Using Progression 1.015;
+Transfinite Line {  1} = 7 Using Progression 1.00;
+Transfinite Line { 67} = 7 Using Progression 1.00;
+Transfinite Line {  7} = 23 Using Bump 0.6;
+Transfinite Line { 76} = 23 Using Bump 0.6;
+Transfinite Line {  2} = 53 Using Progression 1.008;
+Transfinite Line { 77} = 53 Using Progression 1.008;
 
-Transfinite Line {  5} = 41 Using Progression 1.002;
-Transfinite Line {-23} = 41 Using Progression 1.002;
-Transfinite Line {-51} = 41 Using Progression 1.010;
+Transfinite Line {  5} = 65 Using Progression 1.004;
+Transfinite Line {-23} = 65 Using Progression 1.004;
+Transfinite Line {-51} = 65 Using Progression 1.010;
 
-If (mesh_type == 1)
-    // 5um
-    Transfinite Line {22,-24,-79,-80} = 59 Using Progression 1.036;
-    Transfinite Line { 3, 4, 6, 16} = 71 Using Progression 1.025;
+If (mesh_type == 0)
+    // 2.5um
+    Transfinite Line {22,-24,-79,-80} = 59 Using Progression 1.04;
+    Transfinite Line { 3, 4, 6, 16} = 99 Using Progression 1.025;
     Transfinite Line { 13} = 53 Using Progression 1.02;
     Transfinite Line { 10} = 53 Using Progression 1.00;
-    Transfinite Line {-78} = 129 Using Progression 1.017;
-    Transfinite Line { 68} = 129 Using Progression 1.010;
-    Point(104) = {0.0, 0.000005 + burner_height, int_radius*sin, 1.0};
-    Point(105) = {0.0, mat_location - 0.000005 , int_radius*sin, 1.0};
-    Transfinite Line {-50,52,53,-58,59,-60} = 49 Using Progression 1.085;
+    Transfinite Line {-78} = 157 Using Progression 1.02;
+    Transfinite Line { 68} = 157 Using Progression 1.0125;
+    Point(104) = {0.0, 0.0000025 + burner_height, int_radius*sin, 1.0};
+    Point(105) = {0.0, mat_location - 0.0000025 , int_radius*sin, 1.0};
+    Transfinite Line {-50,52,53,-58,59,-60} = 58 Using Progression 1.085;
+    
+    
 EndIf
 
 If (mesh_type == 2)
@@ -179,42 +181,16 @@ If (mesh_type == 2)
     Transfinite Line { 10} = 51 Using Progression 1.00;
     Transfinite Line {-78} = 103 Using Progression 1.018;
     Transfinite Line { 68} = 103 Using Progression 1.005;
+    Transfinite Line {-50,52,53,-58,59,-60} = 41 Using Progression 1.085;
     Point(104) = {0.0, 0.000010 + burner_height, int_radius*sin, 1.0};
     Point(105) = {0.0, mat_location - 0.000010 , int_radius*sin, 1.0};
-    Transfinite Line {-50,52,53,-58,59,-60} = 41 Using Progression 1.085;
-EndIf
-
-If (mesh_type == 3)
-    // 20um
-    Transfinite Line {22,-24,-79,-80} = 47 Using Progression 1.04;
-    Transfinite Line { 3, 4, 6, 16} = 34 Using Progression 1.025;
-    Transfinite Line { 13} = 31 Using Progression 1.02;
-    Transfinite Line { 10} = 31 Using Progression 1.00;
-    Transfinite Line {-78} = 80 Using Progression 1.016;
-    Transfinite Line { 68} = 80 Using Progression 1.005;
-    Point(104) = {0.0, 0.000020 + burner_height, int_radius*sin, 1.0};
-    Point(105) = {0.0, mat_location - 0.000020 , int_radius*sin, 1.0};
-    Transfinite Line {-50,52,53,-58,59,-60} = 33 Using Progression 1.085;
-EndIf
-
-If (mesh_type == 4)
-    // 40um
-    Transfinite Line {22,-24,-79,-80} = 41 Using Progression 1.04;
-    Transfinite Line { 3, 4, 6, 16} = 21 Using Progression 1.025;
-    Transfinite Line { 13} = 31 Using Progression 1.02;
-    Transfinite Line { 10} = 31 Using Progression 1.00;
-    Transfinite Line {-78} = 61 Using Progression 1.016;
-    Transfinite Line { 68} = 61 Using Progression 1.005;
-    Point(104) = {0.0, 0.000040 + burner_height, int_radius*sin, 1.0};
-    Point(105) = {0.0, mat_location - 0.000040 , int_radius*sin, 1.0};
-    Transfinite Line {-50,52,53,-58,59,-60} = 25 Using Progression 1.085;
 EndIf
 
 Point(106) = {0.0, 0.001 + burner_height, 0.0*sin, 1.0};
 
 /*material*/
-Transfinite Line { 26} = 29 Using Progression 1.012;
-Transfinite Line { 54} = 29 Using Progression 1.025;
+Transfinite Line { 26} = 37 Using Progression 1.024;
+Transfinite Line { 54} = 37 Using Progression 1.04;
 
 Transfinite Line { 27} = 31 Using Progression 1.02;
 Transfinite Line { 55} = 31 Using Progression 1.02;
@@ -227,10 +203,10 @@ Transfinite Line {-72} = 21 Using Progression 1.02;
 
 Transfinite Line { 30} = 19 Using Progression 1.033;
 
-Transfinite Line { 69} = 59 Using Progression 1.018;
+Transfinite Line { 69} = 67 Using Progression 1.018;
 Transfinite Line {-70} = 81 Using Progression 1.0;
 Transfinite Line {-71} = 31 Using Progression 1.0;
-Transfinite Line {-81} = 83 Using Progression 1.004;
+Transfinite Line {-81} = 115 Using Progression 1.004;
 
 /*#############################################*/
 

@@ -15,16 +15,28 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-divSchemes
-{
+ddtSchemes {
+default            Euler; // backward;
 }
 
-gradSchemes
-{
+gradSchemes {
+default           Gauss linear corrected;
 }
 
-laplacianSchemes
-{
+divSchemes {
+default           Gauss  linear corrected;
+}
+
+laplacianSchemes {
+default           Gauss linear corrected;
+}
+
+interpolationSchemes {
+default         linear;
+}
+
+snGradSchemes {
+default         corrected;
 }
 
 
