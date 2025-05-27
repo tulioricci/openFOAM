@@ -67,10 +67,10 @@ sed -i "${phys_line}s/patch/wedge/" constant/polyMesh/boundary | sed -n "${phys_
 
 splitMeshRegions -cellZones -overwrite
 
-postProcess -func writeCellCentres -region flow -constant -noZero
-mv constant/flow/C constant/flow/cellCenter
-rm constant/flow/C[x,y,z]
-python3 decompose.py
+#postProcess -func writeCellCentres -region flow -constant -noZero
+#mv constant/flow/C constant/flow/cellCenter
+#rm constant/flow/C[x,y,z]
+#python3 decompose.py
 
 #~~~ Initial condition
 setFields -region flow

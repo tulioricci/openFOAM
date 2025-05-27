@@ -17,12 +17,12 @@ FoamFile
 
 numberOfSubdomains  6;
 
-//method          scotch;
+method          scotch;
 
-method      manual;
-manualCoeffs
-{
-  dataFile        "cellProcIDs";
-}
+//method      manual;
+//manualCoeffs
+//{
+//  dataFile        "cellProcIDs";
+//}
 
 // ************************************************************************* //
