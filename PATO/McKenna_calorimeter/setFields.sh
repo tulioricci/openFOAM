@@ -10,10 +10,10 @@ rm -rf processor?
 find -name "cellToRegion" -delete
 
 #~~~ Create IC file
-cp -r init_cond 0.000000
+cp -r init_cond_20sp 0.000000
 cd 0.000000/flow
-#python3 setup_Neumann.py --phi 0.7 --slpm=25
-python3 setup_Cantera.py --phi 0.7 --slpm=25
+#python3 setup_Neumann.py --phi 1.0 --slpm=25
+python3 setup_Cantera.py --phi 1.0
 cd ../../
 
 #~~~

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#SBATCH --job-name=PATO_localDT
+#SBATCH --job-name=McKenna_calorimeter
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=5
-#SBATCH --time=12:00:00
+#SBATCH --ntasks-per-node=6
+#SBATCH --time=24:00:00
 #SBATCH --partition=pbatch
 
 module unload intel-classic/2021.6.0-magic mvapich2/2.3.7
@@ -14,4 +14,4 @@ source /g/g92/tulio/openFOAM/pato-3.1/bashrc
 if [ ! -d 0.000000 ]; then 
   sh setFields.sh
 fi
-srun -N 1 --ntasks 5 PATOx -parallel
+srun -N 1 --ntasks 6 PATOx -parallel

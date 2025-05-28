@@ -44,13 +44,11 @@ boundaryField
         type            fixedValue;
         value           uniform (0 0.15944042672149042 0);
     }
-    flow_to_porousMat
+    flow_to_slug
     {
-        type            fixedValueToNbrValue;
-        nbr             U;
-        value	        uniform ( 0 0 0 );
+        type            noSlip;
     }
-    flow_to_graphite
+    flow_to_holder
     {
         type            noSlip;
     }

@@ -121,6 +121,53 @@ functions
        ); 
     }
     
+    wallHeatFlux1
+    {
+       type            wallHeatFlux;
+       libs            ("libfieldFunctionObjects.so");
+
+       // Optional entries (runtime modifiable)
+       patches         ("flow_to_slug");
+       qr              qr;
+
+       // Optional (inherited) entries
+       writePrecision  8;
+       writeToFile     true;
+       region          flow;
+       log             false;
+       executeControl  timeStep;
+       executeInterval 25;
+       //writeControl    timeStep;
+       //writeInterval      25;
+       writeControl    writeTime;
+    }
+
+   
+    patchProbes
+    {
+       type                patchProbes;
+       functionObjectLibs  ("libsampling.so");
+
+       // Patches to sample (wildcards allowed)
+       patchName           flow_to_slug;
+
+       // Name of the directory for probe data
+       //name               patchProbes;
+
+       //writeControl         writeTime;
+       writeControl       timeStep;
+       writeInterval      25;
+
+       region             flow;
+       fields               (wallHeatFlux);
+
+        // Locations to probe. These get snapped onto the nearest point
+        // on the selected patches
+       probeLocations (
+           ( 0.0 0.11 0.0)
+       );
+    }
+
 }
 
 // ************************************************************************* //
