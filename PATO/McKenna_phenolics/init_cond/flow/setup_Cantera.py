@@ -237,7 +237,8 @@ for spc in gas.species_names:
             os.system("echo '        value           uniform " + str(y_atmosphere[idx]).strip("'") + ";' >> " + spc)
             os.system("echo '        Tnbr 	         " + spc + ";' >> " + spc)
             os.system("echo '        kappaMethod     lookup;' >> " + spc)
-            os.system("echo '        kappa           \"diffY[" + spc + "]\";' >> " + spc)
+            os.system("echo '        \\kappa           \"diffY[" + spc + "]\";' >> " + spc)
+            os.system("echo '        kappa           \"mixDiffY\";' >> " + spc)
             os.system("echo '    }' >> " + spc)
 
         os.system("echo '' >> " + spc)

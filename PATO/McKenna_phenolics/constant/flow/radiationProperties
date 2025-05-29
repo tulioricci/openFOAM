@@ -91,7 +91,7 @@ greyMeanCombustionCoeffs
         );
     }
 
-    C2H4
+    CH4
     {
         Tcommon         200;
         Tlow            200;
