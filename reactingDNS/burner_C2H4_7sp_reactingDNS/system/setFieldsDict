@@ -19,7 +19,7 @@ regions
 (
     boxToCell
     {
-        box (0.0 0.1 -1.0) (0.030226 0.1001 1.0);
+        box (0.0 0.1 -1.0) (0.030226 0.1002 1.0);
         fieldValues
         (
             volScalarFieldValue C2H4 0.06372925403106726
@@ -31,7 +31,7 @@ regions
 
     boxToCell
     {
-        box (0.0 0.1001 -1.0) (0.030226 0.105 1.0);
+        box (0.0 0.1002 -1.0) (0.030226 0.105 1.0);
         fieldValues
         (
             volScalarFieldValue T 1800

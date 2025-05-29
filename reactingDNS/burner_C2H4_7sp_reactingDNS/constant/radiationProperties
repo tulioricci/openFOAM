@@ -16,11 +16,12 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+/*
 radiation off;
 
 radiationModel none;
+*/
 
-/*
 radiation on;
 
 radiationModel  P1;
@@ -91,7 +92,7 @@ greyMeanCombustionCoeffs
         );
     }
 
-    / *CH4
+    /* CH4
     {
         Tcommon         200;
         Tlow            200;
@@ -116,7 +117,8 @@ greyMeanCombustionCoeffs
             -2.6558e-14
             0
         );
-    }* /
+    }
+    */
 
     O2
     {
@@ -144,7 +146,6 @@ greyMeanCombustionCoeffs
             0
         );
     }
-
 
     N2
     {
@@ -177,7 +178,5 @@ greyMeanCombustionCoeffs
 scatterModel    none;
 
 sootModel       none;
-
-*/
 
 // ************************************************************************* //

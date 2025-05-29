@@ -17,7 +17,6 @@ FoamFile
 
 ddtSchemes
 {
-    //default         localEuler;
     default         Euler;
 }
 
