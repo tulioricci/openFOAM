@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile {
+  version     4.0;
+  format      ascii;
+  class       dictionary;
+  location    "constant/graphite";
+  object      graphiteProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+/*debug           yes;*/
+
+/****************************** IO *****************************************/
+IO {
+  writeFields (k cp); // write fields in the time folders
+  probingFunctions
+  (
+  ); // name of sampling/probing dictionaries in "system/porousMat"
+}
+/****************************** END IO ************************************/
+
+/****************************** ENERGY ************************************/
+Energy {
+  EnergyType PureConduction;
+}
+/****************************** END ENERGY ********************************/
+
+/****************************** MATERIAL PROPERTIES ***********************/
+MaterialProperties {
+  MaterialPropertiesType FourierRadiation; // sub material (Fourier's law)
+  //MaterialPropertiesDirectory "$PATO_DIR/data/Materials/Fourier/Graphite"; // sub material file (Fourier's law)
+  //MaterialPropertiesDirectory "/home/tulio/Desktop/postdoc/openFOAM/git/openFOAM/PATO/McKenna_phenolics/constant/graphite/"; // sub material file (Fourier's law)
+  MaterialPropertiesDirectory "./constant/graphite/";
+}
+/****************************** END MATERIAL PROPERTIES ********************/

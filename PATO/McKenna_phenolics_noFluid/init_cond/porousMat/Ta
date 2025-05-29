@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+    class           volScalarField;
+    object          Ta;
+}
+
+dimensions      [ 0 0 0 1 0 0 0 ];
+
+internalField   uniform 300;
+
+boundaryField
+{
+    porousMat_to_flow
+    {  
+      //type            basicWallHeatFluxTemperature;
+      type            externalWallHeatFluxTemperature;
+      value           $internalField;
+      mode            flux;
+      q               100000;
+      kappa           "k_abl_sym";
+      kappaMethod     lookup;
+      qr              Qr;
+      //mode            coefficient;
+      //h               uniform 25;
+      //Tinf            uniform 293;
+      //emissivity      0.9;
+      //qr              Qr;
+      //kappa           5.5;
+    }
+
+    porousMat_to_graphite
+    {  
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr 		Ta;
+        kappaMethod     lookup;
+        kappa		k_abl_sym;
+    }
+
+    porousMat_to_alumina
+    {
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr 		Ta;
+        kappaMethod     lookup;
+        kappa		k_abl_sym;
+    }
+
+    s_back
+    {
+        type            wedge;
+    }
+
+    s_front
+    {
+        type            wedge;
+    }
+}
+
+
+// ************************************************************************* //
