@@ -88,8 +88,8 @@ GasProperties {
 // Mutation++ mixture in "$PATO_DIR/data/ThermoTransportChemistry/mutation++/mixtures"
 MaterialChemistry {
   MaterialChemistryType SpeciesConservation;
-  //mixture UIUC_7sp_TACOT_oxidation_species;
-  mixture UIUC_7sp_TACOT_fastOxidation_species;
+  mixture UIUC_7sp_TACOT_oxidation_species;
+  //mixture UIUC_7sp_TACOT_fastOxidation_species;
 }
 /****************************** END MaterialChemistry  ******************************/
 
