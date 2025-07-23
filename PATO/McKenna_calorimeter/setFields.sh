@@ -10,14 +10,14 @@ rm -rf processor?
 find -name "cellToRegion" -delete
 
 #~~~ Create IC file
-cp -r init_cond_20sp 0.000000
+cp -r init_cond 0.000000
 cd 0.000000/flow
 #python3 setup_Neumann.py --phi 1.0 --slpm=25
 python3 setup_Cantera.py --phi 1.0
 cd ../../
 
 #~~~
-gmsh mesh_v1_HAB=10mm.geo -parse_and_exit
+gmsh mesh_v1_HAB=10mm_TRC_air.geo -parse_and_exit
 gmshToFoam mesh.msh
 line=$(grep -n "f_front" constant/polyMesh/boundary | cut -f1 -d:)
 type_line=$(($line+2))
@@ -52,7 +52,7 @@ sed -i "${type_line}s/patch/wedge/" constant/polyMesh/boundary | sed -n "${type_
 phys_line=$(($line+3))
 sed -i "${phys_line}s/patch/wedge/" constant/polyMesh/boundary | sed -n "${phys_line}p"
 
-splitMeshRegions -cellZones -overwrite
+splitMeshRegions -cellZonesOnly -overwrite
 
 #postProcess -func writeCellCentres -region flow -constant -noZero
 #mv constant/flow/C constant/flow/cellCenter

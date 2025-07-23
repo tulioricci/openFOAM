@@ -25,17 +25,17 @@ startTime         0;
 stopAt            endTime;
 /*stopAt          writeNow;*/
 
-endTime           30.0;
+endTime           2.0;
 
 deltaT            1e-7;
 
 writeControl      adjustableRunTime;
-writeInterval     0.00005;
+writeInterval     0.1;
 
 purgeWrite        0;
 
 // For cfd coupled simulation, allow the flow to adjust to the solid temperature
-delaySolid        0.5; // time in seconds
+delaySolid        5; // time in seconds
 
 /*writeFormat     binary;*/
 writeFormat       ascii;
@@ -177,8 +177,9 @@ functions
         fileToUpdate    "$FOAM_CASE/system/controlDict";
         timeVsFile
         (
+            (0.00000    "$FOAM_CASE/system/controlDict_1")
             (0.00020    "$FOAM_CASE/system/controlDict_2")
-            (0.00500    "$FOAM_CASE/system/controlDict_3")
+            (0.01000    "$FOAM_CASE/system/controlDict_3")
         );
     }
 
