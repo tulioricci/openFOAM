@@ -1,0 +1,99 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      Ydefault;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField  #codeStream
+{
+    codeInclude  // Headers for compilation
+    #{
+      #include "fvCFD.H"
+    #};
+
+    codeOptions // Compilation options
+    #{
+      -I$(FOAM_SRC)/finiteVolume/lnInclude \
+      -I$(FOAM_SRC)/meshTools/lnInclude 
+    #};
+
+    codeLibs  // Libraries for compilation
+    #{
+      -lmeshTools \
+      -lfiniteVolume
+    #};
+
+    code  // User code
+    #{
+      // Access to internal mesh information
+      const IOdictionary& d = static_cast<const IOdictionary&>(dict);
+      const fvMesh& mesh = refCast<const fvMesh>(d.db());
+
+      scalar T1 = 10000;  // Value at x1
+      scalar T2 = 0;  // Value at x2
+      scalar x1 = -0.0060;  // Start of the domain
+      scalar x2 = -0.0041;  // End of the domain
+      scalar gradient = (T2 - T1) / (x2 - x1);
+
+      scalarField T(mesh.nCells(), 0.); // initialization
+
+      forAll(T, i) // Loop on elements
+      {
+        const scalar x = mesh.C()[i].x(); // Access to z component of cell centers coordinates
+        if (x < x1){
+          T[i] = T1;
+        }
+        else if (x > x2){
+          T[i] = T2;
+        }
+        else{
+          T[i] = T1 + gradient * (x - x1); // Compute the temperature
+        }
+      }
+      writeEntry(os, "", T); // Write output in the dictionary
+    #};
+};
+
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+
+    f_side
+    {
+        type            zeroGradient;
+    }
+
+    fluid_to_solid
+    {
+        type            zeroGradient;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
