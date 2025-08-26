@@ -50,6 +50,7 @@ boundaryField
     burner
     {
         type            fixedFluxExtrapolatedPressure;
+        value           101325.0;
     }
 
     f_front
@@ -68,9 +69,16 @@ boundaryField
         value           101325.0;
     }
 
+    flow_to_body
+    {
+        type            fixedFluxExtrapolatedPressure;
+        value           101325.0;
+    }
+
     flow_to_slug
     {
         type            fixedFluxExtrapolatedPressure;
+        value           101325.0;
     }
 }
 

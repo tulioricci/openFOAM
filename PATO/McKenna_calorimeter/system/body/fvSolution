@@ -10,16 +10,19 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    location    "constant";
-    object      regionProperties;
+    location    "system/slug";
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-regions
-(
-    fluid      (flow)
-    solid      (slug holder body graphite)
-);
-
+solvers {
+  Ta
+  {
+    solver    	     PCG;
+    preconditioner   DIC;
+    tolerance        1e-09;
+    relTol           0;
+  };
+}
 
 // ************************************************************************* //

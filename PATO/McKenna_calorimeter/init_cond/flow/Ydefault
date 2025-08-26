@@ -63,12 +63,17 @@ boundaryField
         type            wedge;
     }
 
-    flow_to_porousMat
+    flow_to_body
     {
         type            zeroGradient;
     }
 
-    flow_to_graphite
+    flow_to_slug
+    {
+        type            zeroGradient;
+    }
+
+    flow_to_holder
     {
         type            zeroGradient;
     }

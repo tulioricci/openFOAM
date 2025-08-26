@@ -19,28 +19,35 @@ internalField   uniform 300;
 
 boundaryField
 {
-    slug_to_holder
+    body_to_holder
     {    
         type            zeroGradient;
     }
-
-    slug_to_flow
+    
+    body_to_graphite
     {   
-        //type            compressible::turbulentTemperatureRadCoupledMixed;
-        //qr              Qr;
-        //qrNbr           none; //qr;
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr 		Ta;
+        kappaMethod     lookup;
+        kappa		k_abl_sym;
+    }
+    
+    body_to_flow
+    {   
         type            compressible::turbulentTemperatureCoupledBaffleMixed;
         value           uniform 300;
         Tnbr 		T;
         kappaMethod     lookup;
         kappa		k_abl_sym;
     }
-    s_back
+
+    b_back
     {
         type            wedge;
     }
 
-    s_front
+    b_front
     {
         type            wedge;
     }

@@ -19,10 +19,22 @@ internalField   uniform 300;
 
 boundaryField
 {
+    holder_to_body
+    {    
+        type            zeroGradient;
+    }
     holder_to_slug
     {    
         type            zeroGradient;
     }
+    holder_to_graphite
+    {   
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr 		Ta;
+        kappaMethod     lookup;
+        kappa		k_abl_sym;
+    }    
     holder_to_flow
     {   
         //type            compressible::turbulentTemperatureRadCoupledMixed;
@@ -33,11 +45,6 @@ boundaryField
         Tnbr 		T;
         kappaMethod     lookup;
         kappa		k_abl_sym;
-    }
-
-    h_adiabatic
-    {
-        type            zeroGradient;
     }
 
     h_back

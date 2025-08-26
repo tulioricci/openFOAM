@@ -10,16 +10,34 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    location    "constant";
-    object      regionProperties;
+    location    "system/slug";
+    object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-regions
-(
-    fluid      (flow)
-    solid      (slug holder body graphite)
-);
+ddtSchemes {
+default            Euler; // backward;
+}
+
+gradSchemes {
+default           Gauss linear corrected;
+}
+
+divSchemes {
+default           Gauss  linear corrected;
+}
+
+laplacianSchemes {
+default           Gauss linear corrected;
+}
+
+interpolationSchemes {
+default         linear;
+}
+
+snGradSchemes {
+default         corrected;
+}
 
 
 // ************************************************************************* //

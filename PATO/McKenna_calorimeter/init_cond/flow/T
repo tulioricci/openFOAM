@@ -61,6 +61,16 @@ boundaryField
         value           uniform 300;
     }
 
+    flow_to_body
+    {
+        //type            compressible::turbulentTemperatureRadCoupledMixed;
+        //qrNbr           Qr;
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        Tnbr            Ta;
+        value           uniform 300;
+        kappaMethod     fluidThermo;
+    }
+
     flow_to_holder
     {
         //type            compressible::turbulentTemperatureRadCoupledMixed;

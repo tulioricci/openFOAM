@@ -48,6 +48,10 @@ boundaryField
     {
         type            noSlip;
     }
+    flow_to_body
+    {
+        type            noSlip;
+    }
     flow_to_holder
     {
         type            noSlip;

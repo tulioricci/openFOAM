@@ -200,6 +200,12 @@ for spc in cantera_soln.species_names:
     os.system("echo '    }' >> " + spc)
 
     os.system("echo '' >> " + spc)
+    os.system("echo '    flow_to_body' >> " + spc)
+    os.system("echo '    {' >> " + spc)
+    os.system("echo '        type            zeroGradient;' >> " + spc)
+    os.system("echo '    }' >> " + spc)
+
+    os.system("echo '' >> " + spc)
     os.system("echo '    f_front' >> " + spc)
     os.system("echo '    {' >> " + spc)
     os.system("echo '        type            wedge;' >> " + spc)
